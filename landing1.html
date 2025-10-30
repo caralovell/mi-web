@@ -18,6 +18,7 @@
     }
 
     .logo { margin-top: 20px; }
+
     .logo img { width: 150px; max-width: 80%; height: auto; }
 
     .frase {
@@ -45,7 +46,7 @@
         transition: transform 0.3s, filter 0.3s;
     }
 
-    .imagen-container.active img {
+    .imagen-container.hover img {
         transform: scale(1.05);
         filter: brightness(70%);
     }
@@ -65,7 +66,7 @@
         text-align: center;
     }
 
-    .imagen-container.active span {
+    .imagen-container.hover span {
         opacity: 1;
     }
 
@@ -106,19 +107,11 @@
 </div>
 
 <script>
-    // Scroll reveal con Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.classList.add('active');
-            } else {
-                entry.target.classList.remove('active');
-            }
-        });
-    }, { threshold: 0.3 }); // 30% visible
-
-    document.querySelectorAll('.imagen-container').forEach(img => {
-        observer.observe(img);
+    // Para que funcione en móvil
+    const containers = document.querySelectorAll('.imagen-container');
+    containers.forEach(c => {
+        c.addEventListener('touchstart', () => c.classList.add('hover'));
+        c.addEventListener('touchend', () => c.classList.remove('hover'));
     });
 </script>
 
