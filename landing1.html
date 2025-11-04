@@ -31,8 +31,9 @@
       margin: 0;
     }
 
+    /* Imagen hero */
     .hero {
-      background-image: url('https://digital.ihg.com/is/image/ihg/intercontinental-london-park-lane-5568734845-4x3');
+      background-image: url('./hotel/INT-PL-HR-20-scaled.jpg');
       background-size: cover;
       background-position: center;
       height: 260px;
@@ -46,11 +47,12 @@
     .hero h1 {
       font-size: 1.4rem;
       text-align: center;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.45);
       padding: 0.6rem 1rem;
       border-radius: 0.5rem;
     }
 
+    /* Bloques de contenido */
     .section {
       background-color: white;
       border-radius: 1rem;
@@ -58,6 +60,15 @@
       padding: 1.2rem;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       text-align: center;
+      overflow: hidden;
+    }
+
+    .section img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 0.8rem;
+      margin-bottom: 0.8rem;
     }
 
     .section h2 {
@@ -70,6 +81,7 @@
       font-size: 0.9rem;
       color: #555;
       margin-bottom: 1rem;
+      padding: 0 0.4rem;
     }
 
     .btn {
@@ -103,6 +115,9 @@
       .hero h1 {
         font-size: 1.8rem;
       }
+      .section img {
+        height: 200px;
+      }
     }
   </style>
 </head>
@@ -118,26 +133,30 @@
   </section>
 
   <section class="section">
+    <img src="./hotel/005951-london-executive-room1.jpg" alt="Habitación del hotel">
     <h2>Tipos de Habitaciones</h2>
     <p>Descubre nuestras elegantes habitaciones y suites con vistas al Hyde Park y al centro de Londres.</p>
     <a class="btn" href="https://www.ihg.com/intercontinental/hotels/gb/en/london/lonhb/hoteldetail?qDest=London" target="_blank">Ver y Reservar</a>
   </section>
 
   <section class="section">
+    <img src="./hotel/Situm-Mobile-SDK-for-indoor-navigation-and-indoor-mapping-by-Situm.jpg" alt="Mapa interactivo Situm">
     <h2>Mapa del Hotel</h2>
     <p>Explora las instalaciones y encuentra fácilmente cada espacio del hotel.</p>
     <a class="btn" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">Abrir Mapa</a>
   </section>
 
   <section class="section">
+    <img src="./hotel/brunch-header.jpg" alt="Restauración del hotel">
     <h2>Restauración & Menús</h2>
-    <p>Degusta la cocina de alta gama en nuestros restaurantes premiados.</p>
+    <p>Degusta la cocina de alta gama en nuestros restaurantes premiados y vive una experiencia culinaria inolvidable.</p>
     <a class="btn" href="https://www.ihg.com/intercontinental/hotels/gb/en/london/lonhb/hoteldetail/dining" target="_blank">Ver Restaurantes</a>
   </section>
 
   <section class="section">
+    <img src="./hotel/307713314.jpg" alt="Encuesta de satisfacción">
     <h2>Encuesta de Satisfacción</h2>
-    <p>Queremos conocer tu opinión para mejorar tu próxima experiencia.</p>
+    <p>Queremos conocer tu opinión para seguir mejorando tu experiencia en cada estancia.</p>
     <a class="btn" href="https://forms.gle/" target="_blank">Responder Encuesta</a>
   </section>
 
