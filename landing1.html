@@ -172,12 +172,28 @@
       padding: 1rem 0 1.5rem;
     }
 
+    /* --- MEDIA QUERIES --- */
     @media (min-width: 600px) {
       .hero { height: 500px; }
       .intro-text { font-size: 2rem; }
       .section img { height: 220px; }
       .sections { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
       .section { flex: 0 0 48%; }
+    }
+
+    @media (min-width: 1024px) {
+      .hero { height: 600px; }
+      .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; }
+      .sections {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin: 2rem;
+      }
+      .section img { height: 250px; }
+      .section { padding: 1.5rem; }
+      .hero img { transition: transform 2s ease; }
+      .hero:hover img { transform: scale(1.07); }
     }
   </style>
 </head>
