@@ -11,10 +11,9 @@
       margin: 0;
       background-color: #f8f8f8;
       color: #333;
-      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
-    /* --- NAVBAR SIMPLE --- */
     nav {
       background-color: #ffffff;
       display: flex;
@@ -27,11 +26,8 @@
       z-index: 10;
     }
 
-    nav img {
-      height: 45px;
-    }
+    nav img { height: 45px; }
 
-    /* --- HERO --- */
     .hero {
       position: relative;
       width: 100%;
@@ -39,11 +35,7 @@
       overflow: hidden;
     }
 
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .hero img { width: 100%; height: 100%; object-fit: cover; }
 
     .intro-text {
       position: absolute;
@@ -60,7 +52,6 @@
       text-align: center;
     }
 
-    /* --- BOTONES GRANDES --- */
     .sections {
       display: grid;
       grid-template-columns: 1fr;
@@ -91,9 +82,7 @@
       transition: filter 0.3s ease;
     }
 
-    .section-button:hover img {
-      filter: brightness(55%);
-    }
+    .section-button:hover img { filter: brightness(55%); }
 
     .section-button span {
       position: absolute;
@@ -115,62 +104,70 @@
       padding: 1rem 0 1.5rem;
     }
 
-    /* --- MODALES INTERNOS --- */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 20;
-    }
-
-    .modal-content {
-      background: #fff;
-      border-radius: 1rem;
-      padding: 2rem;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      text-align: center;
-      position: relative;
-    }
-
-    .close {
+    /* --- VISTAS (SPA) --- */
+    .view {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      color: #666;
-    }
-
-    input, textarea, button {
+      top: 0;
+      left: 100%;
       width: 100%;
-      margin: 0.5rem 0;
-      padding: 0.8rem;
-      border-radius: 0.5rem;
-      border: 1px solid #ccc;
-      font-size: 1rem;
+      min-height: 100vh;
+      background: #fff;
+      transition: transform 0.4s ease;
+      overflow-y: auto;
     }
 
-    button {
-      background: #7b2cbf;
-      color: white;
+    .view.active {
+      transform: translateX(-100%);
+    }
+
+    .view.show {
+      left: 0;
+      transform: translateX(0);
+    }
+
+    .back-btn {
       border: none;
+      background: none;
+      font-size: 1.5rem;
+      margin: 15px;
+      cursor: pointer;
+    }
+
+    .form-container {
+      padding: 20px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background-color: #7b2cbf;
+      color: white;
+      font-size: 1.1em;
       cursor: pointer;
       transition: background 0.3s;
     }
 
-    button:hover {
-      background: #5a189a;
-    }
+    .form-container button:hover { background-color: #5a189a; }
 
-    /* --- RESPONSIVE --- */
+    /* RESPONSIVE */
     @media (min-width: 600px) {
       .hero { height: 500px; }
       .intro-text { font-size: 2rem; }
@@ -187,93 +184,87 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <img src="./hotel/IHG-Logo.png" alt="IHG Logo">
-    <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo">
-  </nav>
+  <!-- HOME VIEW -->
+  <div id="home-view" class="view show">
+    <nav>
+      <img src="./hotel/IHG-Logo.png" alt="IHG Logo">
+      <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo">
+    </nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <img src="./hotel/hotel.jpg" alt="Crowne Plaza">
-    <p class="intro-text">Welcome to Riyadh</p>
+    <div class="hero">
+      <img src="./hotel/hotel.jpg" alt="Crowne Plaza">
+      <p class="intro-text">Welcome to Riyadh</p>
+    </div>
+
+    <div class="sections">
+      <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms?cm_mmc=GoogleMaps-_-CP-_-SA-_-RUHIT" target="_blank">
+        <img src="./hotel/room.jpg" alt="Book a room">
+        <span>Book a room</span>
+      </a>
+
+      <div class="section-button" onclick="navigateTo('checkin')">
+        <img src="./hotel/crowne.jpg" alt="Check-in">
+        <span>Check-in</span>
+      </div>
+
+      <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">
+        <img src="./hotel/situm.jpg" alt="Open map">
+        <span>Open map</span>
+      </a>
+
+      <div class="section-button" onclick="openModal('servicesModal')">
+        <img src="./hotel/pool.jpg" alt="Services">
+        <span>Services</span>
+      </div>
+
+      <div class="section-button" onclick="openModal('accessModal')">
+        <img src="./hotel/access.jpg" alt="Accessibility">
+        <span>Accessibility</span>
+      </div>
+
+      <div class="section-button" onclick="openModal('chatModal')">
+        <img src="./hotel/ai virtual.jpg" alt="Virtual assistant">
+        <span>Virtual assistant</span>
+      </div>
+
+      <div class="section-button" onclick="navigateTo('survey')">
+        <img src="./hotel/reception.jpg" alt="Satisfaction survey">
+        <span>Satisfaction survey</span>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts
+    </footer>
   </div>
 
-  <!-- BOTONES -->
-  <div class="sections">
-
-    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms?cm_mmc=GoogleMaps-_-CP-_-SA-_-RUHIT" target="_blank">
-      <img src="./hotel/room.jpg" alt="Book a room">
-      <span>Book a room</span>
-    </a>
-
-    <div class="section-button" onclick="openModal('checkinModal')">
-      <img src="./hotel/crowne.jpg" alt="Check-in">
-      <span>Check-in</span>
-    </div>
-
-    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">
-      <img src="./hotel/situm.jpg" alt="Open map">
-      <span>Open map</span>
-    </a>
-
-    <div class="section-button" onclick="openModal('servicesModal')">
-      <img src="./hotel/pool.jpg" alt="Services">
-      <span>Services</span>
-    </div>
-
-    <div class="section-button" onclick="openModal('accessModal')">
-      <img src="./hotel/access.jpg" alt="Accessibility">
-      <span>Accessibility</span>
-    </div>
-
-    <div class="section-button" onclick="openModal('chatModal')">
-      <img src="./hotel/ai virtual.jpg" alt="Virtual assistant">
-      <span>Virtual assistant</span>
-    </div>
-
-    <div class="section-button" onclick="openModal('surveyModal')">
-      <img src="./hotel/reception.jpg" alt="Satisfaction survey">
-      <span>Satisfaction survey</span>
-    </div>
-
-  </div>
-
-  <footer>
-    © 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts
-  </footer>
-
-  <!-- MODAL: SURVEY -->
-  <div id="surveyModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('surveyModal')">&times;</span>
-      <h2>Satisfaction Survey</h2>
-      <form>
-        <label>How was your stay?</label>
-        <textarea placeholder="Your comments..." required></textarea>
-        <label>Rate us:</label>
-        <input type="number" min="1" max="10" placeholder="1–10" required>
-        <button type="submit" onclick="closeModal('surveyModal')">Send</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: CHECK-IN -->
-  <div id="checkinModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('checkinModal')">&times;</span>
+  <!-- CHECK-IN VIEW -->
+  <div id="checkin-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="form-container">
       <h2>Online Check-in</h2>
       <form>
         <input type="text" placeholder="Full name" required>
         <input type="text" placeholder="Reservation number" required>
         <input type="email" placeholder="Email" required>
-        <button type="submit" onclick="closeModal('checkinModal')">Confirm</button>
+        <button type="submit" onclick="goBack()">Confirm</button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: SERVICES -->
-  <div id="servicesModal" class="modal">
+  <!-- SURVEY VIEW -->
+  <div id="survey-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="form-container">
+      <h2>Satisfaction Survey</h2>
+      <textarea rows="5" placeholder="Your comments..."></textarea>
+      <input type="number" min="1" max="10" placeholder="Rate us 1–10" required>
+      <button onclick="goBack()">Send</button>
+    </div>
+  </div>
+
+  <!-- MODALES ORIGINALES -->
+  <div id="servicesModal" class="modal" style="display:none; justify-content:center; align-items:center;">
     <div class="modal-content">
       <span class="close" onclick="closeModal('servicesModal')">&times;</span>
       <h2>Hotel Services</h2>
@@ -281,8 +272,7 @@
     </div>
   </div>
 
-  <!-- MODAL: ACCESSIBILITY -->
-  <div id="accessModal" class="modal">
+  <div id="accessModal" class="modal" style="display:none; justify-content:center; align-items:center;">
     <div class="modal-content">
       <span class="close" onclick="closeModal('accessModal')">&times;</span>
       <h2>Accessibility</h2>
@@ -290,8 +280,7 @@
     </div>
   </div>
 
-  <!-- MODAL: CHATBOT -->
-  <div id="chatModal" class="modal">
+  <div id="chatModal" class="modal" style="display:none; justify-content:center; align-items:center;">
     <div class="modal-content">
       <span class="close" onclick="closeModal('chatModal')">&times;</span>
       <h2>Virtual Assistant (Demo)</h2>
@@ -307,7 +296,6 @@
     function openModal(id) {
       document.getElementById(id).style.display = "flex";
     }
-
     function closeModal(id) {
       document.getElementById(id).style.display = "none";
     }
@@ -325,7 +313,23 @@
         chatbox.scrollTop = chatbox.scrollHeight;
       }
     }
-  </script>
 
+    function navigateTo(view) {
+      document.querySelector('.view.show').classList.remove('show');
+      const newView = document.getElementById(`${view}-view`);
+      newView.classList.add('show');
+      history.pushState({ view }, '', `#${view}`);
+    }
+
+    function goBack() {
+      history.back();
+    }
+
+    window.onpopstate = function (event) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('show'));
+      const view = event.state?.view || 'home';
+      document.getElementById(`${view}-view`).classList.add('show');
+    };
+  </script>
 </body>
 </html>
