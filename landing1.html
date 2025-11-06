@@ -230,9 +230,9 @@
 
   <!-- CHECK-IN -->
 <div id="checkinPage" class="page">
-  <div class="back-button" onclick="history.back()" style="color: #830051;">
-    <span>←</span> Back
-  </div>
+  <div class="back-button" onclick="showPage('homePage')" style="color: #830051;">
+  <span>←</span> Back
+</div>
   <h2>Online Check-in</h2>
   <form>
     <label for="fullName">Full Name</label>
@@ -250,9 +250,10 @@
 
   <!-- SURVEY -->
 <div id="surveyPage" class="page">
-  <div class="back-button" onclick="history.back()" style="color: #830051;">
-    <span>←</span> Back
-  </div>
+  <!-- Survey back -->
+<div class="back-button" onclick="showPage('homePage')" style="color: #830051;">
+  <span>←</span> Back
+</div>
   <h2>Satisfaction Survey</h2>
   <form id="surveyForm">
 
