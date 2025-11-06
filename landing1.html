@@ -248,6 +248,49 @@
   </form>
 </div>
 
+  <!-- SERVICES -->
+<div id="servicesPage" class="page">
+  <div class="back-button" onclick="showPage('homePage')" style="color: #830051;">
+    <span>←</span> Back
+  </div>
+
+  <h2>Our Services</h2>
+
+  <div class="sections">
+    <div class="section-button">
+      <img src="./hotel/food.jpg" alt="Dining">
+      <span>Dining</span>
+    </div>
+
+    <div class="section-button">
+      <img src="./hotel/pool2.jpg" alt="Pool">
+      <span>Pool</span>
+    </div>
+
+    <div class="section-button">
+      <img src="./hotel/fitness.jpg" alt="Fitness Centre">
+      <span>Fitness Centre</span>
+    </div>
+
+    <div class="section-button">
+      <img src="./hotel/spa.jpg" alt="Spa">
+      <span>Spa</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Navegar a la página de servicios
+  const servicesButton = document.querySelector('.section-button span:text("Services")');
+  // pero mejor usar un selector directo por onclick como en los demás
+  document.querySelectorAll('.section-button span').forEach(span => {
+    if (span.textContent.trim() === 'Services') {
+      span.parentElement.setAttribute('onclick', "navigateTo('servicesPage')");
+    }
+  });
+</script>
+
+
   <!-- SURVEY -->
 <div id="surveyPage" class="page">
   <div class="back-button" onclick="history.back()" style="color: #830051;">
