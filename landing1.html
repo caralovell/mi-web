@@ -1,329 +1,273 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crowne Plaza Riyadh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IHG Digital Wayfinding</title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
       margin: 0;
-      background-color: #f8f8f8;
-      color: #333;
-      scroll-behavior: smooth;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f5f5;
+      overflow-x: hidden;
     }
 
-    /* --- NAVBAR SIMPLE --- */
-    nav {
-      background-color: #ffffff;
+    header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0.6rem 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      position: sticky;
+      padding: 15px;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    /* VISTAS */
+    .view {
+      position: absolute;
       top: 0;
-      z-index: 10;
+      left: 100%;
+      width: 100%;
+      height: 100vh;
+      background-color: #fff;
+      transition: transform 0.4s ease;
+      overflow-y: auto;
     }
 
-    nav img {
-      height: 45px;
+    .view.active {
+      transform: translateX(-100%);
     }
 
-    /* --- HERO --- */
+    .view.show {
+      left: 0;
+      transform: translateX(0);
+    }
+
+    .back-btn {
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      margin: 15px;
+      cursor: pointer;
+    }
+
+    /* HOME VIEW */
+    #home-view {
+      position: relative;
+      left: 0;
+      transform: translateX(0);
+      background-color: #fff;
+    }
+
     .hero {
       position: relative;
-      width: 100%;
-      height: 400px;
-      overflow: hidden;
+      text-align: center;
+      color: white;
     }
 
     .hero img {
       width: 100%;
-      height: 100%;
+      height: 250px;
       object-fit: cover;
+      filter: brightness(0.6);
     }
 
-    .intro-text {
+    .hero-text {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      padding: 1rem 2rem;
-      border-radius: 1rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
-    /* --- BOTONES GRANDES --- */
-    .sections {
+    /* BOTONES */
+    .button-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      padding: 1rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      padding: 20px;
     }
 
-    .section-button {
+    .app-button {
       position: relative;
-      height: 180px;
-      border-radius: 1rem;
+      border: none;
+      border-radius: 20px;
       overflow: hidden;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 150px;
+      background-color: #ddd;
     }
 
-    .section-button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    }
-
-    .section-button img {
+    .app-button img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(65%);
-      transition: filter 0.3s ease;
+      filter: brightness(0.6);
+      transition: transform 0.3s ease;
     }
 
-    .section-button:hover img {
-      filter: brightness(55%);
+    .app-button:hover img {
+      transform: scale(1.05);
     }
 
-    .section-button span {
+    .app-button span {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #fff;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      text-align: center;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #666;
-      padding: 1rem 0 1.5rem;
-    }
-
-    /* --- MODALES INTERNOS --- */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 20;
-    }
-
-    .modal-content {
-      background: #fff;
-      border-radius: 1rem;
-      padding: 2rem;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      text-align: center;
-      position: relative;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      color: #666;
-    }
-
-    input, textarea, button {
-      width: 100%;
-      margin: 0.5rem 0;
-      padding: 0.8rem;
-      border-radius: 0.5rem;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-
-    button {
-      background: #7b2cbf;
       color: white;
+      font-size: 1.2em;
+      font-weight: 600;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    /* FORMULARIOS Y ENCUESTAS */
+    .form-container {
+      padding: 20px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
       border: none;
+      border-radius: 10px;
+      background-color: #d36f1a;
+      color: white;
+      font-size: 1.1em;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
-    button:hover {
-      background: #5a189a;
+    .form-container button:hover {
+      background-color: #b65f15;
     }
 
-    /* --- RESPONSIVE --- */
-    @media (min-width: 600px) {
-      .hero { height: 500px; }
-      .intro-text { font-size: 2rem; }
-      .sections { grid-template-columns: 1fr 1fr; }
-      .section-button { height: 220px; }
-    }
-
-    @media (min-width: 1024px) {
-      .hero { height: 600px; }
-      .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; }
-      .section-button { height: 260px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <img src="./hotel/IHG-Logo.png" alt="IHG Logo">
-    <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo">
-  </nav>
+  <header>
+    <img src="logo.png" alt="Logo IHG">
+  </header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <img src="./hotel/hotel.jpg" alt="Crowne Plaza">
-    <p class="intro-text">Welcome to Riyadh</p>
-  </div>
-
-  <!-- BOTONES -->
-  <div class="sections">
-
-    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms?cm_mmc=GoogleMaps-_-CP-_-SA-_-RUHIT" target="_blank">
-      <img src="./hotel/room.jpg" alt="Book a room">
-      <span>Book a room</span>
-    </a>
-
-    <div class="section-button" onclick="openModal('checkinModal')">
-      <img src="./hotel/crowne.jpg" alt="Check-in">
-      <span>Check-in</span>
+  <!-- HOME VIEW -->
+  <div id="home-view" class="view show">
+    <div class="hero">
+      <img src="intercontinental.jpg" alt="Intercontinental">
+      <div class="hero-text">Bienvenido al InterContinental</div>
     </div>
 
-    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">
-      <img src="./hotel/situm.jpg" alt="Open map">
-      <span>Open map</span>
-    </a>
+    <div class="button-grid">
+      <button class="app-button" onclick="window.open('https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms?cm_mmc=GoogleMaps-_-CP-_-SA-_-RUHIT','_blank')">
+        <img src="reserva.jpg" alt="">
+        <span>Reservar alojamiento</span>
+      </button>
 
-    <div class="section-button" onclick="openModal('servicesModal')">
-      <img src="./hotel/pool.jpg" alt="Services">
-      <span>Services</span>
-    </div>
+      <button class="app-button" onclick="navigateTo('checkin')">
+        <img src="1481889940-O2Intercontinental_122HR-w992.jpg" alt="">
+        <span>Check-in</span>
+      </button>
 
-    <div class="section-button" onclick="openModal('accessModal')">
-      <img src="./hotel/access.jpg" alt="Accessibility">
-      <span>Accessibility</span>
-    </div>
+      <button class="app-button" onclick="openMap()">
+        <img src="mapa.jpg" alt="">
+        <span>Abrir mapa</span>
+      </button>
 
-    <div class="section-button" onclick="openModal('chatModal')">
-      <img src="./hotel/ai virtual.jpg" alt="Virtual assistant">
-      <span>Virtual assistant</span>
-    </div>
+      <button class="app-button" onclick="navigateTo('services')">
+        <img src="leonardo-2411747-169658463-828318.jpg" alt="">
+        <span>Servicios</span>
+      </button>
 
-    <div class="section-button" onclick="openModal('surveyModal')">
-      <img src="./hotel/reception.jpg" alt="Satisfaction survey">
-      <span>Satisfaction survey</span>
-    </div>
+      <button class="app-button" onclick="navigateTo('accessibility')">
+        <img src="criton-and-tlj-mobile-key.jpg" alt="">
+        <span>Accesibilidad</span>
+      </button>
 
-  </div>
+      <button class="app-button" onclick="navigateTo('assistant')">
+        <img src="maxresdefault.jpg" alt="">
+        <span>Asistente virtual</span>
+      </button>
 
-  <footer>
-    © 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts
-  </footer>
-
-  <!-- MODAL: SURVEY -->
-  <div id="surveyModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('surveyModal')">&times;</span>
-      <h2>Satisfaction Survey</h2>
-      <form>
-        <label>How was your stay?</label>
-        <textarea placeholder="Your comments..." required></textarea>
-        <label>Rate us:</label>
-        <input type="number" min="1" max="10" placeholder="1–10" required>
-        <button type="submit" onclick="closeModal('surveyModal')">Send</button>
-      </form>
+      <button class="app-button" onclick="navigateTo('survey')">
+        <img src="encuesta.jpg" alt="">
+        <span>Encuesta de satisfacción</span>
+      </button>
     </div>
   </div>
 
-  <!-- MODAL: CHECK-IN -->
-  <div id="checkinModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('checkinModal')">&times;</span>
-      <h2>Online Check-in</h2>
-      <form>
-        <input type="text" placeholder="Full name" required>
-        <input type="text" placeholder="Reservation number" required>
-        <input type="email" placeholder="Email" required>
-        <button type="submit" onclick="closeModal('checkinModal')">Confirm</button>
-      </form>
+  <!-- CHECK-IN VIEW -->
+  <div id="checkin-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="form-container">
+      <h2>Check-in</h2>
+      <input type="text" placeholder="Nombre completo" required>
+      <input type="text" placeholder="Número de reserva" required>
+      <input type="email" placeholder="Correo electrónico" required>
+      <button type="submit">Enviar</button>
     </div>
   </div>
 
-  <!-- MODAL: SERVICES -->
-  <div id="servicesModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('servicesModal')">&times;</span>
-      <h2>Hotel Services</h2>
-      <p>Here we’ll add individual service buttons (Restaurant, Spa, Gym...)</p>
+  <!-- SURVEY VIEW -->
+  <div id="survey-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="form-container">
+      <h2>Encuesta de satisfacción</h2>
+      <textarea rows="5" placeholder="Cuéntanos tu experiencia..."></textarea>
+      <button>Enviar encuesta</button>
     </div>
   </div>
 
-  <!-- MODAL: ACCESSIBILITY -->
-  <div id="accessModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('accessModal')">&times;</span>
-      <h2>Accessibility</h2>
-      <p>Information about Navilens and Visualfy will be shown here soon.</p>
-    </div>
+  <!-- OTROS apartados futuros -->
+  <div id="services-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="form-container"><h2>Servicios</h2></div>
   </div>
 
-  <!-- MODAL: CHATBOT -->
-  <div id="chatModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('chatModal')">&times;</span>
-      <h2>Virtual Assistant (Demo)</h2>
-      <div id="chatbox" style="text-align:left; border:1px solid #ccc; border-radius:0.5rem; height:200px; overflow-y:auto; padding:0.5rem; margin-bottom:1rem;">
-        <p><strong>Bot:</strong> Hello! How can I assist you today?</p>
-      </div>
-      <input type="text" id="userInput" placeholder="Type your message...">
-      <button onclick="sendMessage()">Send</button>
-    </div>
+  <div id="accessibility-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="form-container"><h2>Accesibilidad</h2></div>
+  </div>
+
+  <div id="assistant-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="form-container"><h2>Asistente virtual</h2></div>
   </div>
 
   <script>
-    function openModal(id) {
-      document.getElementById(id).style.display = "flex";
+    function navigateTo(view) {
+      document.querySelector('.view.show').classList.remove('show');
+      const newView = document.getElementById(`${view}-view`);
+      newView.classList.add('show');
+      history.pushState({ view }, '', `#${view}`);
     }
 
-    function closeModal(id) {
-      document.getElementById(id).style.display = "none";
+    function goBack() {
+      history.back();
     }
 
-    function sendMessage() {
-      const input = document.getElementById("userInput");
-      const chatbox = document.getElementById("chatbox");
-      if (input.value.trim() !== "") {
-        chatbox.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
-        setTimeout(() => {
-          chatbox.innerHTML += `<p><strong>Bot:</strong> I'm just a demo, but I'll answer soon!</p>`;
-          chatbox.scrollTop = chatbox.scrollHeight;
-        }, 600);
-        input.value = "";
-        chatbox.scrollTop = chatbox.scrollHeight;
-      }
+    window.onpopstate = function (event) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('show'));
+      const view = event.state?.view || 'home';
+      document.getElementById(`${view}-view`).classList.add('show');
+    };
+
+    function openMap() {
+      alert('Aquí se abriría el mapa o integración con Google Maps.');
     }
   </script>
 
