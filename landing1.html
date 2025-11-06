@@ -249,19 +249,97 @@
 </div>
 
   <!-- SURVEY -->
-  <div id="surveyPage" class="page">
-    <div class="back-button" onclick="history.back()">
-      <span>←</span> Back
-    </div>
-    <h2>Satisfaction Survey</h2>
-    <form>
-      <label>How was your stay?</label>
-      <textarea placeholder="Your comments..." required></textarea>
-      <label>Rate us (1–10):</label>
-      <input type="number" min="1" max="10" required>
-      <button type="submit">Send</button>
-    </form>
+<div id="surveyPage" class="page">
+  <div class="back-button" onclick="history.back()" style="color: #830051;">
+    <span>←</span> Back
   </div>
+  <h2>Satisfaction Survey</h2>
+  <form>
+
+    <!-- Overall Experience -->
+    <label>Overall Experience</label>
+    <div class="rating">
+      <span title="Very Dissapointed">😡</span>
+      <span title="Dissapointed">😟</span>
+      <span title="Neutral">😐</span>
+      <span title="Satisfied">🙂</span>
+      <span title="Very Satisfied">😃</span>
+    </div>
+
+    <!-- Reservation Process -->
+    <label>Reservation Process</label>
+    <div class="rating">
+      <span title="Very Dissapointed">😡</span>
+      <span title="Dissapointed">😟</span>
+      <span title="Neutral">😐</span>
+      <span title="Satisfied">🙂</span>
+      <span title="Very Satisfied">😃</span>
+    </div>
+
+    <!-- Staff -->
+    <label>Staff</label>
+    <div class="rating">
+      <span title="Very Dissapointed">😡</span>
+      <span title="Dissapointed">😟</span>
+      <span title="Neutral">😐</span>
+      <span title="Satisfied">🙂</span>
+      <span title="Very Satisfied">😃</span>
+    </div>
+
+    <!-- Room -->
+    <label>Room</label>
+    <div class="rating">
+      <span title="Very Dissapointed">😡</span>
+      <span title="Dissapointed">😟</span>
+      <span title="Neutral">😐</span>
+      <span title="Satisfied">🙂</span>
+      <span title="Very Satisfied">😃</span>
+    </div>
+
+    <!-- Comments -->
+    <label>Additional Comments</label>
+    <textarea placeholder="Your comments..." required></textarea>
+
+    <!-- Numeric rating 1-10 -->
+    <label>Rate us (1–10):</label>
+    <select required>
+      <option value="" disabled selected>Select a number</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <!-- Send button -->
+    <button type="submit" style="background-color: #830051;">Send</button>
+  </form>
+</div>
+
+<style>
+  /* Rating faces */
+  .rating {
+    display: flex;
+    gap: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  .rating span:hover {
+    transform: scale(1.3);
+  }
+
+  .rating span:active {
+    transform: scale(1.2);
+  }
+</style>
+
 
   <footer>
     © 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts
