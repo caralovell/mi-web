@@ -6,6 +6,11 @@
   <title>Crowne Plaza Riyadh</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* --- RESET BOX SIZING --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
@@ -107,34 +112,16 @@
     }
 
     /* --- PÁGINAS INTERNAS --- */
-.page {
-  display: none;        /* ocultas por defecto */
-  padding: 1rem;
-  height: auto;         /* altura según el contenido */
-  min-height: 0;        /* evitar heredar altura del hero */
-}
+    .page {
+      display: none;
+      padding: 1rem;
+      height: auto;        /* altura según contenido */
+      min-height: 0;
+    }
 
-.page.active {
-  display: block;       /* mostrar solo la activa */
-}
-
-/* Hero de la página principal */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 400px;        /* base móvil */
-  overflow: hidden;
-}
-
-@media (min-width: 600px) {
-  .hero { height: 500px; }
-}
-
-@media (min-width: 1024px) {
-  .hero { height: 600px; }
-}
-
-
+    .page.active {
+      display: block;
+    }
 
     .back-button {
       display: flex;
@@ -158,6 +145,7 @@
       border-radius: 0.5rem;
       border: 1px solid #ccc;
       font-size: 1rem;
+      box-sizing: border-box; /* para que no sobresalgan */
     }
 
     button {
@@ -195,7 +183,6 @@
 
   <!-- PÁGINA PRINCIPAL -->
   <div id="homePage" class="page active">
-
     <div class="hero">
       <img src="./hotel/hotel.jpg" alt="Crowne Plaza">
       <p class="intro-text">Welcome to Riyadh</p>
@@ -239,7 +226,6 @@
       </div>
 
     </div>
-
   </div>
 
   <!-- CHECK-IN -->
@@ -279,15 +265,9 @@
     const pages = document.querySelectorAll('.page');
 
     function showPage(id) {
-  pages.forEach(p => {
-    p.classList.remove('active');
-    p.style.position = 'absolute';
-  });
-  const page = document.getElementById(id);
-  page.classList.add('active');
-  page.style.position = 'relative';
-}
-
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
 
     function navigateTo(pageId) {
       showPage(pageId);
