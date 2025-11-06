@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InterContinental London Park Lane</title>
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body {
@@ -15,49 +14,23 @@
       scroll-behavior: smooth;
     }
 
-    /* --- NAVBAR ELEGANTE --- */
+    /* --- NAVBAR SIMPLE --- */
     nav {
       background-color: #ffffff;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
       z-index: 10;
-      transition: all 0.3s ease;
     }
 
     nav img {
-  height: 50px; /* más grande */
-  max-width: 150px; /* opcional para no deformar */
-}
-
-    .nav-buttons {
-      display: flex;
-      gap: 0.8rem;
+      height: 45px;
     }
 
-    .nav-buttons a {
-      color: #FF6C00;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
-      transition: all 0.3s ease;
-    }
-
-    .nav-buttons a:hover {
-      border-bottom: 2px solid #FF6C00;
-      color: #e05f00;
-      transform: scale(1.05);
-    }
-
-    /* --- HERO SECTION --- */
+    /* --- HERO --- */
     .hero {
       position: relative;
       width: 100%;
@@ -69,11 +42,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 1.5s ease;
-    }
-
-    .hero:hover img {
-      transform: scale(1.05);
     }
 
     .intro-text {
@@ -89,81 +57,54 @@
       font-size: 1.6rem;
       font-weight: 700;
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translate(-50%, -60%);}
-      to {opacity: 1; transform: translate(-50%, -50%);}
-    }
-
-    /* --- SECCIONES INFERIORES --- */
+    /* --- BOTONES GRANDES --- */
     .sections {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 1rem;
-      margin: 1rem;
+      padding: 1rem;
     }
 
-    .section {
-      background-color: white;
-      border-radius: 1rem;
-      padding: 1.2rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      overflow: hidden;
-      transform: translateY(20px);
-      opacity: 0;
-      transition: all 0.6s ease;
-    }
-
-    .section.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .section img {
-      width: 100%;
+    .section-button {
+      position: relative;
       height: 180px;
+      border-radius: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section-button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+    .section-button img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 0.8rem;
-      margin-bottom: 0.8rem;
-      transition: transform 0.4s ease;
+      filter: brightness(65%);
+      transition: filter 0.3s ease;
     }
 
-    .section:hover img {
-      transform: scale(1.05);
+    .section-button:hover img {
+      filter: brightness(55%);
     }
 
-    .section h2 {
+    .section-button span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
       font-family: 'Playfair Display', serif;
-      color: #002244;
-      font-size: 1.2rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .section p {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 1rem;
-      padding: 0 0.4rem;
-    }
-
-    .btn {
-      background: linear-gradient(45deg, #FF6C00, #FF8C42);
-      color: white;
-      padding: 0.7rem 1.4rem;
-      border: none;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(255,108,0,0.6);
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
     }
 
     footer {
@@ -173,97 +114,60 @@
       padding: 1rem 0 1.5rem;
     }
 
-    /* --- MEDIA QUERIES --- */
+    /* --- RESPONSIVE --- */
     @media (min-width: 600px) {
       .hero { height: 500px; }
       .intro-text { font-size: 2rem; }
-      .section img { height: 220px; }
-      .sections { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
-      .section { flex: 0 0 48%; }
+      .sections { grid-template-columns: 1fr 1fr; }
+      .section-button { height: 220px; }
     }
 
     @media (min-width: 1024px) {
       .hero { height: 600px; }
       .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; }
-      .sections {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        margin: 2rem;
-      }
-      .section img { height: 250px; }
-      .section { padding: 1.5rem; }
-      .hero img { transition: transform 2s ease; }
-      .hero:hover img { transform: scale(1.07); }
+      .section-button { height: 260px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAV -->
   <nav>
     <img src="./hotel/IHG-Logo.png" alt="IHG Logo">
-    <div class="nav-buttons">
-      <a href="#">Home</a>
-      <a href="#">About Us</a>
-      <a href="#">Services</a>
-      <a href="#">Contact</a>
-    </div>
   </nav>
 
-  <!-- HERO IMAGE -->
+  <!-- HERO -->
   <div class="hero">
     <img src="./hotel/INT-PL-HR-20-scaled.jpg" alt="Hotel Londres">
     <p class="intro-text">Lujo y elegancia en el corazón de Londres</p>
   </div>
 
-  <!-- SECCIONES INFERIORES -->
+  <!-- BOTONES -->
   <div class="sections">
-    <section class="section">
-      <img src="./hotel/005951-london-executive-room1.jpg" alt="Habitación del hotel">
-      <h2>Tipos de Habitaciones</h2>
-      <p>Descubre nuestras elegantes habitaciones y suites con vistas al Hyde Park y al centro de Londres.</p>
-      <a class="btn" href="https://www.ihg.com/intercontinental/hotels/gb/en/london/lonhb/hoteldetail?qDest=London" target="_blank">Ver y Reservar</a>
-    </section>
+    <a class="section-button" href="https://www.ihg.com/intercontinental/hotels/gb/en/london/lonhb/hoteldetail?qDest=London" target="_blank">
+      <img src="./hotel/005951-london-executive-room1.jpg" alt="Reservar alojamiento">
+      <span>Reservar alojamiento</span>
+    </a>
 
-    <section class="section">
-      <img src="./hotel/Situm-Mobile-SDK-for-indoor-navigation-and-indoor-mapping-by-Situm.jpg" alt="Mapa interactivo Situm">
-      <h2>Mapa del Hotel</h2>
-      <p>Explora las instalaciones y encuentra fácilmente cada espacio del hotel.</p>
-      <a class="btn" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">Abrir Mapa</a>
-    </section>
+    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">
+      <img src="./hotel/Situm-Mobile-SDK-for-indoor-navigation-and-indoor-mapping-by-Situm.jpg" alt="Abrir mapa">
+      <span>Abrir mapa</span>
+    </a>
 
-    <section class="section">
-      <img src="./hotel/brunch-header.jpg" alt="Restauración del hotel">
-      <h2>Restauración & Menús</h2>
-      <p>Degusta la cocina de alta gama en nuestros restaurantes premiados y vive una experiencia culinaria inolvidable.</p>
-      <a class="btn" href="https://www.ihg.com/intercontinental/hotels/gb/en/london/lonhb/hoteldetail/dining" target="_blank">Ver Restaurantes</a>
-    </section>
+    <a class="section-button" href="https://www.ihg.com/intercontinental/hotels/gb/en/london/lonhb/hoteldetail/dining" target="_blank">
+      <img src="./hotel/brunch-header.jpg" alt="Restauración y menús">
+      <span>Restauración &amp; menús</span>
+    </a>
 
-    <section class="section">
+    <a class="section-button" href="https://forms.gle/" target="_blank">
       <img src="./hotel/307713314.jpg" alt="Encuesta de satisfacción">
-      <h2>Encuesta de Satisfacción</h2>
-      <p>Queremos conocer tu opinión para seguir mejorando tu experiencia en cada estancia.</p>
-      <a class="btn" href="https://forms.gle/" target="_blank">Responder Encuesta</a>
-    </section>
+      <span>Encuesta de satisfacción</span>
+    </a>
   </div>
 
   <footer>
     © 2025 InterContinental London Park Lane – Parte de IHG Hotels & Resorts
   </footer>
-
-  <script>
-    // Animación al hacer scroll
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
-  </script>
 
 </body>
 </html>
