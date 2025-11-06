@@ -7,10 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* --- RESET BOX SIZING --- */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
@@ -29,10 +26,7 @@
       top: 0;
       z-index: 10;
     }
-
-    nav img {
-      height: 45px;
-    }
+    nav img { height: 45px; }
 
     .hero {
       position: relative;
@@ -40,17 +34,14 @@
       height: 400px;
       overflow: hidden;
     }
-
     .hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .intro-text {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(0,0,0,0.5);
       color: #fff;
@@ -78,23 +69,19 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .section-button:hover {
       transform: scale(1.03);
       box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
-
     .section-button img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       filter: brightness(65%);
     }
-
     .section-button span {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       color: #fff;
       font-family: 'Playfair Display', serif;
@@ -118,25 +105,18 @@
       height: auto;
       min-height: 0;
     }
-
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
 
     .back-button {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #5a189a;
+      color: #830051;
       font-weight: 600;
       cursor: pointer;
       margin-bottom: 1rem;
     }
-
-    .back-button span {
-      font-size: 1.5rem;
-      line-height: 1;
-    }
+    .back-button span { font-size: 1.5rem; line-height: 1; }
 
     input, textarea, button {
       width: 100%;
@@ -147,16 +127,77 @@
       font-size: 1rem;
       box-sizing: border-box;
     }
-
     button {
       background: #7b2cbf;
       color: white;
       border: none;
       cursor: pointer;
     }
+    button:hover { background: #5a189a; }
 
-    button:hover {
-      background: #5a189a;
+    /* Burbuja de mensaje */
+    .bubble {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #830051;
+      color: white;
+      padding: 1rem 1.3rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: fadeIn 0.4s ease;
+    }
+    .bubble button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Rating faces */
+    .rating {
+      display: flex;
+      gap: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+    .rating span {
+      transition: transform 0.2s, box-shadow 0.2s;
+      padding: 5px;
+      border-radius: 8px;
+    }
+    .rating span:hover { transform: scale(1.3); }
+    .rating span.selected { box-shadow: 0 0 0 3px #830051 inset; }
+
+    /* Numeric rating buttons */
+    .number-rating {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+    .number-rating button {
+      flex: 1;
+      padding: 0.6rem 0;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background-color: #e0e0e0;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .number-rating button.selected {
+      background-color: #830051;
+      color: #fff;
     }
 
     @media (min-width: 600px) {
@@ -165,7 +206,6 @@
       .sections { grid-template-columns: 1fr 1fr; }
       .section-button { height: 220px; }
     }
-
     @media (min-width: 1024px) {
       .hero { height: 600px; }
       .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; }
@@ -174,14 +214,13 @@
   </style>
 </head>
 <body>
-
   <!-- NAV -->
   <nav>
     <img src="./hotel/IHG-Logo.png" alt="IHG Logo">
     <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo">
   </nav>
 
-  <!-- PÁGINA PRINCIPAL -->
+  <!-- HOME -->
   <div id="homePage" class="page active">
     <div class="hero">
       <img src="./hotel/hotel.jpg" alt="Crowne Plaza">
@@ -189,127 +228,140 @@
     </div>
 
     <div class="sections">
-
-      <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms?cm_mmc=GoogleMaps-_-CP-_-SA-_-RUHIT" target="_blank">
+      <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" target="_blank">
         <img src="./hotel/room.jpg" alt="Book a room">
         <span>Book a room</span>
       </a>
-
       <div class="section-button" onclick="navigateTo('checkinPage')">
         <img src="./hotel/crowne.jpg" alt="Check-in">
         <span>Check-in</span>
       </div>
-
       <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">
         <img src="./hotel/situm.jpg" alt="Open map">
         <span>Open map</span>
       </a>
-
-      <!-- ✅ Services con onclick corregido -->
       <div class="section-button" onclick="navigateTo('servicesPage')">
         <img src="./hotel/pool.jpg" alt="Services">
         <span>Services</span>
       </div>
-
       <div class="section-button">
         <img src="./hotel/access.jpg" alt="Accessibility">
         <span>Accessibility</span>
       </div>
-
       <div class="section-button">
         <img src="./hotel/ai virtual.jpg" alt="Virtual assistant">
         <span>Virtual assistant</span>
       </div>
-
       <div class="section-button" onclick="navigateTo('surveyPage')">
         <img src="./hotel/reception.jpg" alt="Satisfaction survey">
         <span>Satisfaction survey</span>
       </div>
-
     </div>
   </div>
 
   <!-- CHECK-IN -->
   <div id="checkinPage" class="page">
-    <div class="back-button" onclick="showPage('homePage')" style="color: #830051;">
-      <span>←</span> Back
-    </div>
+    <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
     <h2>Online Check-in</h2>
     <form>
-      <label for="fullName">Full Name</label>
-      <input type="text" id="fullName" placeholder="e.g. John Doe" required>
-
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="e.g. john@example.com" required>
-
-      <label for="reservation">Reservation Number</label>
-      <input type="text" id="reservation" placeholder="e.g. 123456" required>
-
+      <label>Full Name</label>
+      <input type="text" placeholder="e.g. John Doe">
+      <label>Email</label>
+      <input type="email" placeholder="e.g. john@example.com">
+      <label>Reservation Number</label>
+      <input type="text" placeholder="e.g. 123456">
       <button type="submit" style="background-color: #830051;">Confirm</button>
     </form>
   </div>
 
-  <!-- ✅ SERVICES -->
+  <!-- SERVICES -->
   <div id="servicesPage" class="page">
-    <div class="back-button" onclick="showPage('homePage')" style="color: #830051;">
-      <span>←</span> Back
-    </div>
-
+    <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
     <h2>Our Services</h2>
-
     <div class="sections">
-      <div class="section-button">
-        <img src="./hotel/food.jpg" alt="Dining">
-        <span>Dining</span>
-      </div>
-
-      <div class="section-button">
-        <img src="./hotel/pool2.jpg" alt="Pool">
-        <span>Pool</span>
-      </div>
-
-      <div class="section-button">
-        <img src="./hotel/fitness.jpg" alt="Fitness Centre">
-        <span>Fitness Centre</span>
-      </div>
-
-      <div class="section-button">
-        <img src="./hotel/spa.jpg" alt="Spa">
-        <span>Spa</span>
-      </div>
+      <div class="section-button"><img src="./hotel/food.jpg" alt="Dining"><span>Dining</span></div>
+      <div class="section-button"><img src="./hotel/pool2.jpg" alt="Pool"><span>Pool</span></div>
+      <div class="section-button"><img src="./hotel/fitness.jpg" alt="Fitness Centre"><span>Fitness Centre</span></div>
+      <div class="section-button"><img src="./hotel/spa.jpg" alt="Spa"><span>Spa</span></div>
     </div>
   </div>
 
   <!-- SURVEY -->
-  <!-- (sin cambios, sigue igual que antes) -->
-  <!-- ... -->
-  <!-- código del survey y scripts finales idénticos a tu versión ... -->
+  <div id="surveyPage" class="page">
+    <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
+    <h2>Satisfaction Survey</h2>
+    <form id="surveyForm">
+      <label>Overall Experience</label>
+      <div class="rating">
+        <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
+      </div>
 
-  <footer>
-    © 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts
-  </footer>
+      <label>Reservation Process</label>
+      <div class="rating">
+        <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
+      </div>
+
+      <label>Staff</label>
+      <div class="rating">
+        <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
+      </div>
+
+      <label>Room</label>
+      <div class="rating">
+        <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
+      </div>
+
+      <label>Additional Comments</label>
+      <textarea placeholder="Your comments..."></textarea>
+
+      <label>Rate us (1–10)</label>
+      <div class="number-rating">
+        <button type="button">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button><button type="button">5</button><button type="button">6</button><button type="button">7</button><button type="button">8</button><button type="button">9</button><button type="button">10</button>
+      </div>
+
+      <button type="submit" style="background-color:#830051;">Send</button>
+    </form>
+  </div>
+
+  <footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
 
   <script>
     const pages = document.querySelectorAll('.page');
-
     function showPage(id) {
       pages.forEach(p => p.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
     function navigateTo(pageId) {
       showPage(pageId);
       history.pushState({ page: pageId }, '', '#' + pageId);
     }
+    window.onpopstate = (e) => showPage(e.state?.page || 'homePage');
 
-    window.onpopstate = (event) => {
-      if (event.state && event.state.page) {
-        showPage(event.state.page);
-      } else {
-        showPage('homePage');
-      }
-    };
+    // RATING INTERACTIVO
+    document.querySelectorAll('.rating span').forEach(span=>{
+      span.addEventListener('click',()=>{
+        const parent=span.parentElement;
+        parent.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
+        span.classList.add('selected');
+      });
+    });
+    document.querySelectorAll('.number-rating button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+
+    // Burbuja mensaje al enviar
+    document.getElementById('surveyForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      const bubble=document.createElement('div');
+      bubble.className='bubble';
+      bubble.innerHTML='Thank you for your feedback! <button onclick="this.parentElement.remove()">×</button>';
+      document.body.appendChild(bubble);
+      setTimeout(()=>bubble.remove(),5000);
+    });
   </script>
-
 </body>
 </html>
