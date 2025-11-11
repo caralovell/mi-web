@@ -1,259 +1,292 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crowne Plaza Riyadh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; color: #333; background-color: #fff; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crowne Plaza Riyadh</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* --- RESET BOX SIZING --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Roboto', sans-serif; margin: 0; background-color: #f8f8f8; color: #333; }
+nav { background-color: #ffffff; display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 10; }
+nav img { height: 45px; }
 
-    /* --- HERO SLIDER --- */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 60vh;
-      max-height: 650px;
-      overflow: hidden;
-    }
+/* --- HERO SLIDER --- */
+.hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
+.slider-track { display: flex; width: 600%; height: 100%; transition: transform 0.4s ease-in-out; }
+.slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
+.intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; }
+.hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
+.hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; }
+.hero-arrow.left { left: 10px; }
+.hero-arrow.right { right: 10px; }
 
-    .slider-track {
-      display: flex;
-      width: 600%;
-      height: 100%;
-      transition: transform 1s ease;
-    }
+.sections { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }
+.section-button { position: relative; height: 180px; border-radius: 1rem; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; touch-action: manipulation; }
+.section-button:hover, .section-button.touching { transform: scale(1.03); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
+.section-button img { width: 100%; height: 100%; object-fit: cover; filter: brightness(65%); }
+.section-button span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
 
-    .slider-track img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* mostrar imagen entera */
-      flex-shrink: 0;
-      background: #000; /* fondo negro para bordes vacíos */
-    }
+footer { text-align: center; font-size: 0.8rem; color: #666; padding: 1rem 0 1.5rem; }
 
-    .intro-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      text-align: center;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-      z-index: 2;
-      white-space: nowrap;
-    }
+/* --- PÁGINAS INTERNAS --- */
+.page { display: none; padding: 1rem; height: auto; min-height: 0; }
+.page.active { display: block; }
+.back-button { display: flex; align-items: center; gap: 8px; color: #830051; font-weight: 600; cursor: pointer; margin-bottom: 1rem; }
+.back-button span { font-size: 1.5rem; line-height: 1; }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.25);
-      z-index: 1;
-    }
+input, textarea, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; }
+button { background: #7b2cbf; color: white; border: none; cursor: pointer; }
+button:hover { background: #5a189a; }
 
-    /* --- ARROWS --- */
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.4);
-      color: #fff;
-      border: none;
-      font-size: 2rem;
-      padding: 10px 15px;
-      cursor: pointer;
-      z-index: 3;
-      border-radius: 50%;
-      transition: background 0.3s;
-    }
-    .arrow:hover {
-      background: rgba(0, 0, 0, 0.7);
-    }
-    .arrow-left { left: 15px; }
-    .arrow-right { right: 15px; }
+.bubble { position: fixed; bottom: 20px; right: 20px; background: #830051; color: white; padding: 1rem 1.3rem; border-radius: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; animation: fadeIn 0.4s ease; }
+.bubble button { background: none; border: none; color: white; font-size: 1.1rem; cursor: pointer; }
 
-    /* --- NAVBAR --- */
-    nav {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: #640E27;
-      padding: 15px;
-      color: white;
-    }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    nav button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: opacity 0.3s;
-    }
+.rating { display: flex; gap: 10px; font-size: 1.8rem; margin-bottom: 1rem; cursor: pointer; }
+.rating span { transition: transform 0.2s, box-shadow 0.2s; padding: 5px; border-radius: 8px; }
+.rating span:hover { transform: scale(1.3); }
+.rating span.selected { box-shadow: 0 0 0 3px #830051 inset; }
 
-    nav button:hover {
-      opacity: 0.7;
-    }
+.number-rating { display: flex; gap: 6px; margin-bottom: 1rem; }
+.number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #e0e0e0; font-weight: 600; transition: background 0.2s, color 0.2s; }
+.number-rating button.selected { background-color: #830051; color: #fff; }
 
-    /* --- MODAL --- */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(3px);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+/* --- MODAL --- */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
+.modal-content { background: white; padding: 1rem 1.5rem; border-radius: 1rem; max-width: 400px; width: 90%; position: relative; }
+.modal-content h3 { margin-top: 0; }
+.modal-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; }
 
-    .modal-content {
-      background: white;
-      padding: 25px 35px;
-      border-radius: 15px;
-      max-width: 400px;
-      width: 90%;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      animation: fadeIn 0.4s ease;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px; right: 15px;
-      font-size: 1.5rem;
-      color: #640E27;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .modal h2 {
-      color: #640E27;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 10px;
-    }
-
-    .modal p {
-      margin-bottom: 6px;
-      line-height: 1.5;
-    }
-
-    @media (min-width: 768px) {
-      .hero { height: 70vh; }
-      .intro-text { font-size: 2.5rem; }
-    }
-  </style>
+/* --- RESPONSIVE --- */
+@media (min-width: 600px) { .hero { height: 500px; } .intro-text { font-size: 2rem; } .sections { grid-template-columns: 1fr 1fr; } .section-button { height: 220px; } }
+@media (min-width: 1024px) { .hero { height: 600px; } .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; } .section-button { height: 260px; } }
+</style>
 </head>
-
 <body>
-  <!-- NAVBAR -->
-  <nav>
-    <button onclick="location.href='#'">Home</button>
-    <button onclick="location.href='#services'">Services</button>
-    <button onclick="location.href='#accessibility'">Accessibility</button>
-    <button onclick="location.href='#comfort'">Room Comfort</button>
-    <button onclick="location.href='#virtual'">Virtual Assistant</button>
-  </nav>
 
-  <!-- HERO -->
-  <section class="hero">
+<nav>
+  <img src="./hotel/IHG-Logo.png" alt="IHG Logo">
+  <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo">
+</nav>
+
+<!-- HOME -->
+<div id="homePage" class="page active">
+  <div class="hero" id="hero">
     <div class="slider-track" id="sliderTrack">
-      <img src="riyadh1.jpg" alt="Riyadh 1">
-      <img src="riyadh2.jpg" alt="Riyadh 2">
-      <img src="riyadh3.jpg" alt="Riyadh 3">
-      <img src="riyadh4.jpg" alt="Riyadh 4">
-      <img src="riyadh5.jpg" alt="Riyadh 5">
-      <img src="riyadh6.jpg" alt="Riyadh 6">
+      <img src="./hotel/hotel1.jpg" alt="Hotel 1">
+      <img src="./hotel/hotel2.jpg" alt="Hotel 2">
+      <img src="./hotel/hotel3.jpg" alt="Hotel 3">
+      <img src="./hotel/hotel4.jpg" alt="Hotel 4">
+      <img src="./hotel/hotel5.jpg" alt="Hotel 5">
+      <img src="./hotel/hotel6.jpg" alt="Hotel 6">
     </div>
-    <div class="intro-text">Welcome to Riyadh</div>
-
-    <!-- Arrows -->
-    <button class="arrow arrow-left" onclick="prevSlide()">&#10094;</button>
-    <button class="arrow arrow-right" onclick="nextSlide()">&#10095;</button>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" style="text-align:center; padding:40px 20px;">
-    <h2 style="font-family:'Playfair Display', serif; color:#640E27; margin-bottom:20px;">Our Services</h2>
-    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">
-      <button onclick="window.open('https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining','_blank')" style="background:#640E27; color:white; padding:15px 25px; border:none; border-radius:8px; cursor:pointer;">Dining</button>
-
-      <button onclick="openModal('pool')" style="background:#640E27; color:white; padding:15px 25px; border:none; border-radius:8px; cursor:pointer;">Pool</button>
-
-      <button onclick="openModal('fitness')" style="background:#640E27; color:white; padding:15px 25px; border:none; border-radius:8px; cursor:pointer;">Fitness Centre</button>
-
-      <button onclick="openModal('spa')" style="background:#640E27; color:white; padding:15px 25px; border:none; border-radius:8px; cursor:pointer;">Spa</button>
-    </div>
-  </section>
-
-  <!-- MODALS -->
-  <div id="poolModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('pool')">&times;</span>
-      <h2>Pool</h2>
-      <p><strong>Location:</strong> Outdoor</p>
-      <p><strong>Daily fee:</strong> 100 SAR</p>
-      <p><strong>Hours:</strong> 7:00 AM – 10:00 PM</p>
-      <p>Children's pool, Heated pool, Poolside lounge chairs, Towel service, Umbrellas</p>
-    </div>
+    <div class="hero-arrow left" id="prevSlide">‹</div>
+    <div class="hero-arrow right" id="nextSlide">›</div>
+    <p class="intro-text">Welcome to Riyadh</p>
   </div>
 
-  <div id="spaModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('spa')">&times;</span>
-      <h2>Spa</h2>
-      <p><strong>Phone:</strong> +966-011-8131313</p>
-      <p><strong>Hours:</strong> 7:00 AM – 10:00 PM</p>
+  <div class="sections">
+    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" target="_blank">
+      <img src="./hotel/room.jpg" alt="Book a room">
+      <span>Book a room</span>
+    </a>
+    <div class="section-button" onclick="navigateTo('checkinPage')">
+      <img src="./hotel/crowne.jpg" alt="Check-in">
+      <span>Check-in</span>
+    </div>
+    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">
+      <img src="./hotel/situm.jpg" alt="Map view">
+      <span>Map view</span>
+    </a>
+    <div class="section-button" onclick="navigateTo('servicesPage')">
+      <img src="./hotel/pool.jpg" alt="Services">
+      <span>Services</span>
+    </div>
+    <a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" target="_blank">
+      <img src="./hotel/comfort.jpg" alt="Room comfort">
+      <span>Room comfort</span>
+    </a>
+    <div class="section-button">
+      <img src="./hotel/access.jpg" alt="Accessibility">
+      <span>Accessibility</span>
+    </div>
+    <div class="section-button">
+      <img src="./hotel/ai virtual.jpg" alt="Virtual assistant">
+      <span>Virtual assistant</span>
+    </div>
+    <div class="section-button" onclick="navigateTo('surveyPage')">
+      <img src="./hotel/reception.jpg" alt="Satisfaction survey">
+      <span>Satisfaction survey</span>
     </div>
   </div>
+</div>
 
-  <div id="fitnessModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('fitness')">&times;</span>
-      <h2>Fitness Centre</h2>
-      <p><strong>Hours:</strong> 7:15 AM – 7:00 AM</p>
-      <p><strong>Average charge:</strong> 200 SAR</p>
-      <p>Elliptical machines, Free weights, Rower, Stationary bicycle, Treadmill, Onsite sports trainer</p>
+<!-- CHECK-IN PAGE -->
+<div id="checkinPage" class="page">
+  <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
+  <h2>Online Check-in</h2>
+  <form>
+    <label>Full Name</label>
+    <input type="text" placeholder="e.g. John Doe">
+    <label>Email</label>
+    <input type="email" placeholder="e.g. john@example.com">
+    <label>Reservation Number</label>
+    <input type="text" placeholder="e.g. 123456">
+    <button type="submit" style="background-color: #830051;">Confirm</button>
+  </form>
+</div>
+
+<!-- SERVICES PAGE -->
+<div id="servicesPage" class="page">
+  <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
+  <h2>Our Services</h2>
+  <div class="sections">
+    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" target="_blank">
+      <img src="./hotel/food.jpg" alt="Dining"><span>Dining</span>
+    </a>
+    <div class="section-button" onclick="openModal('poolModal')">
+      <img src="./hotel/pool2.jpg" alt="Pool"><span>Pool</span>
+    </div>
+    <div class="section-button" onclick="openModal('fitnessModal')">
+      <img src="./hotel/fitness.jpg" alt="Fitness Centre"><span>Fitness Centre</span>
+    </div>
+    <div class="section-button" onclick="openModal('spaModal')">
+      <img src="./hotel/spa.jpg" alt="Spa"><span>Spa</span>
     </div>
   </div>
+</div>
 
-  <script>
-    /* --- SLIDER MANUAL --- */
-    const track = document.getElementById('sliderTrack');
-    const total = track.children.length;
-    let index = 0;
+<!-- MODALS -->
+<div id="poolModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('poolModal')">×</span>
+    <h3>Outdoor Pool</h3>
+    <p>Location: Outdoor<br>
+    Daily fee: 100 SAR<br>
+    Hours: 7:00 AM to 10:00 PM<br>
+    Children's pool<br>
+    Heated pool<br>
+    Pool side lounge chairs<br>
+    Towel service<br>
+    Umbrellas</p>
+  </div>
+</div>
 
-    function updateSlide() {
-      track.style.transform = `translateX(-${index * 100}%)`;
-    }
+<div id="spaModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('spaModal')">×</span>
+    <h3>Spa</h3>
+    <p>Phone number: 966-011-8131313<br>
+    Hours of operation: 7:00 AM - 10:00 PM</p>
+  </div>
+</div>
 
-    function nextSlide() {
-      index = (index + 1) % total;
-      updateSlide();
-    }
+<div id="fitnessModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('fitnessModal')">×</span>
+    <h3>Fitness Center</h3>
+    <p>Hours of operation: 7:15 AM - 7:00 AM<br>
+    Average charge: 200 SAR<br>
+    Elliptical machines<br>
+    Free weights<br>
+    Rower<br>
+    Stationary bicycle<br>
+    Treadmill<br>
+    Onsite sports trainer</p>
+  </div>
+</div>
 
-    function prevSlide() {
-      index = (index - 1 + total) % total;
-      updateSlide();
-    }
+<!-- SURVEY PAGE -->
+<div id="surveyPage" class="page">
+  <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
+  <h2>Satisfaction Survey</h2>
+  <form id="surveyForm">
+    <label>Overall Experience</label>
+    <div class="rating"> <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> </div>
+    <label>Reservation Process</label>
+    <div class="rating"> <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> </div>
+    <label>Staff</label>
+    <div class="rating"> <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> </div>
+    <label>Room</label>
+    <div class="rating"> <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> </div>
+    <label>Additional Comments</label>
+    <textarea placeholder="Your comments..."></textarea>
+    <label>Rate us (1–10)</label>
+    <div class="number-rating">
+      <button type="button">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button><button type="button">5</button>
+      <button type="button">6</button><button type="button">7</button><button type="button">8</button><button type="button">9</button><button type="button">10</button>
+    </div>
+    <button type="submit" style="background-color:#830051;">Send</button>
+  </form>
+</div>
 
-    /* --- MODALS --- */
-    function openModal(type) {
-      document.getElementById(`${type}Modal`).style.display = 'flex';
-    }
-    function closeModal(type) {
-      document.getElementById(`${type}Modal`).style.display = 'none';
-    }
-  </script>
+<footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
+
+<script>
+// Navegación páginas
+const pages = document.querySelectorAll('.page');
+function showPage(id) {
+  pages.forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function navigateTo(pageId) { showPage(pageId); history.pushState({ page: pageId }, '', '#' + pageId); }
+window.onpopstate = (e) => showPage(e.state?.page || 'homePage');
+
+// Rating interactivo
+document.querySelectorAll('.rating span').forEach(span=>{
+  span.addEventListener('click',()=>{
+    const parent=span.parentElement;
+    parent.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
+    span.classList.add('selected');
+  });
+});
+document.querySelectorAll('.number-rating button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+// Burbuja mensaje
+document.getElementById('surveyForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const bubble=document.createElement('div');
+  bubble.className='bubble';
+  bubble.innerHTML='Thank you for your feedback! <button onclick="this.parentElement.remove()">×</button>';
+  document.body.appendChild(bubble);
+  setTimeout(()=>bubble.remove(),5000);
+});
+
+// Efecto táctil
+document.querySelectorAll('.section-button').forEach(btn=>{
+  btn.addEventListener('touchstart',()=>btn.classList.add('touching'));
+  btn.addEventListener('touchend',()=>btn.classList.remove('touching'));
+  btn.addEventListener('touchcancel',()=>btn.classList.remove('touching'));
+});
+
+// --- SLIDER MANUAL ---
+const track = document.getElementById('sliderTrack');
+const total = track.children.length;
+let index = 0;
+
+function updateSlide() {
+  track.style.transform = `translateX(-${index * 100}%)`;
+}
+document.getElementById('prevSlide').addEventListener('click',()=>{
+  if(index>0) index--; updateSlide();
+});
+document.getElementById('nextSlide').addEventListener('click',()=>{
+  if(index<total-1) index++; updateSlide();
+});
+
+// --- MODALES ---
+function openModal(id){ document.getElementById(id).style.display='flex'; }
+function closeModal(id){ document.getElementById(id).style.display='none'; }
+</script>
+
 </body>
 </html>
