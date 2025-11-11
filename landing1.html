@@ -43,14 +43,13 @@
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.5);
       color: #fff;
-      padding: 1rem 2rem;
-      border-radius: 1rem;
       font-family: 'Playfair Display', serif;
       font-size: 1.6rem;
       font-weight: 700;
       text-align: center;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      white-space: nowrap; /* 🔹 evita el salto de línea en móvil */
     }
 
     .sections {
@@ -68,8 +67,10 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      touch-action: manipulation;
     }
-    .section-button:hover {
+    .section-button:hover,
+    .section-button.touching {
       transform: scale(1.03);
       box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
@@ -244,10 +245,11 @@
         <img src="./hotel/pool.jpg" alt="Services">
         <span>Services</span>
       </div>
-      <div class="section-button">
+      <!-- 🔹 ROOM COMFORT (enlace directo) -->
+      <a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" target="_blank">
         <img src="./hotel/comfort.jpg" alt="Room comfort">
         <span>Room comfort</span>
-      </div>
+      </a>
       <div class="section-button">
         <img src="./hotel/access.jpg" alt="Accessibility">
         <span>Accessibility</span>
@@ -365,6 +367,13 @@
       bubble.innerHTML='Thank you for your feedback! <button onclick="this.parentElement.remove()">×</button>';
       document.body.appendChild(bubble);
       setTimeout(()=>bubble.remove(),5000);
+    });
+
+    // 🔹 Efecto táctil (móvil) para botones
+    document.querySelectorAll('.section-button').forEach(btn=>{
+      btn.addEventListener('touchstart',()=>btn.classList.add('touching'));
+      btn.addEventListener('touchend',()=>btn.classList.remove('touching'));
+      btn.addEventListener('touchcancel',()=>btn.classList.remove('touching'));
     });
   </script>
 </body>
