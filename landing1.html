@@ -40,14 +40,16 @@ input, textarea, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border
 button { background: #7b2cbf; color: white; border: none; cursor: pointer; }
 button:hover { background: #5a189a; }
 
-.rating { display: flex; gap: 10px; font-size: 1.8rem; margin-bottom: 1rem; cursor: pointer; }
+.rating { display: flex; gap: 10px; font-size: 1.8rem; margin: 0.5rem 0 1.5rem 0; cursor: pointer; }
 .rating span { transition: transform 0.2s, box-shadow 0.2s; padding: 5px; border-radius: 8px; }
 .rating span:hover { transform: scale(1.3); }
 .rating span.selected { box-shadow: 0 0 0 3px #830051 inset; }
 
-.number-rating { display: flex; gap: 6px; margin-bottom: 1rem; }
-.number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #e0e0e0; font-weight: 600; transition: background 0.2s, color 0.2s; }
+.number-rating { display: flex; gap: 6px; margin: 0.5rem 0 1.5rem 0; }
+.number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #c0c0c0; font-weight: 600; transition: background 0.2s, color 0.2s; color: #444; }
 .number-rating button.selected { background-color: #830051; color: #fff; }
+
+label { display: block; margin-top: 1rem; font-weight: bold; }
 
 /* --- MODALES ESTILIZADAS --- */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
@@ -156,7 +158,6 @@ button:hover { background: #5a189a; }
 </div>
 
 <!-- MODALES -->
-
 <div id="poolModal" class="modal">
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal('poolModal')">×</span>
@@ -208,31 +209,36 @@ button:hover { background: #5a189a; }
   <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
   <h2>Satisfaction Survey</h2>
   <form id="surveyForm">
-    <label>Overall Experience</label>
+    <label><strong>Overall Experience</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-    <label>Reservation Process</label>
+
+    <label><strong>Reservation Process</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-    <label>Staff</label>
+
+    <label><strong>Staff</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-    <label>Room</label>
+
+    <label><strong>Room</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-    <label>Additional Comments</label>
-    <textarea placeholder="Your comments..."></textarea>
-    <label>Rate us (1–10)</label>
+
+    <label><strong>Rate us</strong></label>
     <div class="number-rating">
       <button type="button">1</button><button type="button">2</button><button type="button">3</button>
       <button type="button">4</button><button type="button">5</button><button type="button">6</button>
       <button type="button">7</button><button type="button">8</button><button type="button">9</button>
       <button type="button">10</button>
     </div>
+
+    <label>Additional Comments</label>
+    <textarea placeholder="Your comments..."></textarea>
     <button type="submit" style="background-color:#830051;">Send</button>
   </form>
 </div>
@@ -250,28 +256,36 @@ function showPage(id) {
 function navigateTo(pageId){ showPage(pageId); history.pushState({ page: pageId }, '', '#' + pageId); }
 window.onpopstate = (e) => showPage(e.state?.page || 'homePage');
 
-// --- RATING ---
-document.querySelectorAll('.rating span').forEach(span=>{
-  span.addEventListener('click',()=>{
-    const parent=span.parentElement;
-    parent.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
-    span.classList.add('selected');
+// --- RATING CON DESELECT ---
+document.querySelectorAll('.rating').forEach(div => {
+  div.addEventListener('click', e => {
+    if(e.target.tagName === 'SPAN'){
+      if(e.target.classList.contains('selected')){
+        e.target.classList.remove('selected'); // deselect
+      } else {
+        div.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
+        e.target.classList.add('selected');
+      }
+    }
   });
 });
-document.querySelectorAll('.number-rating button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
-    btn.classList.add('selected');
+
+document.querySelectorAll('.number-rating').forEach(div => {
+  div.addEventListener('click', e => {
+    if(e.target.tagName === 'BUTTON'){
+      if(e.target.classList.contains('selected')){
+        e.target.classList.remove('selected'); // deselect
+      } else {
+        div.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+        e.target.classList.add('selected');
+      }
+    }
   });
 });
 
 // --- MODALES ---
-function openModal(id) {
-  document.getElementById(id).style.display = 'flex';
-}
-function closeModal(id) {
-  document.getElementById(id).style.display = 'none';
-}
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
 // --- SLIDER MANUAL ---
 let currentIndex = 0;
@@ -285,31 +299,23 @@ document.getElementById('prevSlide').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
   updateSlide();
 });
-function updateSlide() {
-  document.getElementById('sliderTrack').style.transform = `translateX(-${currentIndex * 100}%)`;
-}
+function updateSlide() { document.getElementById('sliderTrack').style.transform = `translateX(-${currentIndex * 100}%)`; }
 
-// --- TOUCH SLIDER (opcional, para móvil) ---
-let startX = 0;
-let isDragging = false;
+// --- TOUCH SLIDER ---
+let startX = 0, isDragging = false;
 const track = document.getElementById('sliderTrack');
-track.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-  isDragging = true;
-});
-track.addEventListener('touchmove', e => {
-  if (!isDragging) return;
-  const deltaX = e.touches[0].clientX - startX;
-  track.style.transform = `translateX(calc(-${currentIndex * 100}% + ${deltaX}px))`;
-});
+track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; });
+track.addEventListener('touchmove', e => { if (!isDragging) return; const deltaX = e.touches[0].clientX - startX; track.style.transform = `translateX(calc(-${currentIndex * 100}% + ${deltaX}px))`; });
 track.addEventListener('touchend', e => {
   const deltaX = e.changedTouches[0].clientX - startX;
-  if (Math.abs(deltaX) > 50) {
-    if (deltaX < 0 && currentIndex < totalSlides - 1) currentIndex++;
-    if (deltaX > 0 && currentIndex > 0) currentIndex--;
-  }
-  updateSlide();
-  isDragging = false;
+  if (Math.abs(deltaX) > 50) { if (deltaX < 0 && currentIndex < totalSlides - 1) currentIndex++; if (deltaX > 0 && currentIndex > 0) currentIndex--; }
+  updateSlide(); isDragging = false;
+});
+
+// --- LIMPIAR FORMULARIO AL RECARGAR ---
+window.addEventListener('load', () => {
+  document.querySelectorAll('.rating span, .number-rating button').forEach(el => el.classList.remove('selected'));
+  document.getElementById('surveyForm').reset();
 });
 </script>
 </body>
