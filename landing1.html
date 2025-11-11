@@ -32,42 +32,57 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 400px;
+      height: 55vh;
+      max-height: 600px;
       overflow: hidden;
     }
+
     .slider-track {
       display: flex;
       width: 600%; /* 6 imágenes */
       height: 100%;
-      transition: transform 0.6s ease-in-out;
+      transition: transform 1.2s ease;
     }
+
     .slider-track img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* evita zoom */
       flex-shrink: 0;
+      background-color: #000; /* fondo negro para bandas laterales si hay margen */
     }
+
     .intro-text {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       color: #fff;
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
       text-align: center;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-      white-space: nowrap;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
       z-index: 2;
+      white-space: nowrap;
     }
+
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0,0,0,0.25);
       z-index: 1;
     }
 
+    /* Ajustes responsive */
+    @media (min-width: 768px) {
+      .hero { height: 60vh; }
+    }
+    @media (min-width: 1200px) {
+      .hero { height: 70vh; }
+    }
+
+    /* --- SECCIONES PRINCIPALES --- */
     .sections {
       display: grid;
       grid-template-columns: 1fr;
@@ -215,13 +230,13 @@
     }
 
     @media (min-width: 600px) {
-      .hero { height: 500px; }
+      .hero { height: 60vh; }
       .intro-text { font-size: 2rem; }
       .sections { grid-template-columns: 1fr 1fr; }
       .section-button { height: 220px; }
     }
     @media (min-width: 1024px) {
-      .hero { height: 600px; }
+      .hero { height: 70vh; }
       .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; }
       .section-button { height: 260px; }
     }
@@ -283,7 +298,7 @@
     </div>
   </div>
 
-  <!-- Páginas restantes idénticas -->
+  <!-- CHECK-IN PAGE -->
   <div id="checkinPage" class="page">
     <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
     <h2>Online Check-in</h2>
@@ -298,6 +313,7 @@
     </form>
   </div>
 
+  <!-- SERVICES PAGE -->
   <div id="servicesPage" class="page">
     <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
     <h2>Our Services</h2>
@@ -309,6 +325,7 @@
     </div>
   </div>
 
+  <!-- SURVEY PAGE -->
   <div id="surveyPage" class="page">
     <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
     <h2>Satisfaction Survey</h2>
@@ -392,46 +409,39 @@
       btn.addEventListener('touchcancel',()=>btn.classList.remove('touching'));
     });
 
-    // --- HERO SLIDER AUTOMÁTICO + TOUCH ---
+    // --- HERO SLIDER AUTOMÁTICO + DESLIZAMIENTO SUAVE ---
     const track = document.getElementById('sliderTrack');
     const total = track.children.length;
     let index = 0;
     let startX = 0;
-    let currentTranslate = 0;
     let isDragging = false;
 
     function updateSlide() {
       track.style.transform = `translateX(-${index * 100}%)`;
     }
 
-    // Auto-slide cada 5s
+    // Cambio automático cada 6s
     setInterval(() => {
       if (!isDragging) {
         index = (index + 1) % total;
         updateSlide();
       }
-    }, 5000);
+    }, 6000);
 
-    // Soporte táctil
+    // Deslizamiento táctil
     track.addEventListener('touchstart', e => {
       startX = e.touches[0].clientX;
       isDragging = true;
     });
 
-    track.addEventListener('touchmove', e => {
-      if (!isDragging) return;
-      const deltaX = e.touches[0].clientX - startX;
-      track.style.transform = `translateX(calc(-${index * 100}% + ${deltaX}px))`;
-    });
-
     track.addEventListener('touchend', e => {
       const endX = e.changedTouches[0].clientX;
       const deltaX = endX - startX;
-      if (Math.abs(deltaX) > 50) {
+      if (Math.abs(deltaX) > 60) {
         if (deltaX < 0 && index < total - 1) index++;
-        if (deltaX > 0 && index > 0) index--;
+        else if (deltaX > 0 && index > 0) index--;
+        updateSlide();
       }
-      updateSlide();
       isDragging = false;
     });
   </script>
