@@ -15,7 +15,20 @@ nav img { height: 45px; }
 /* --- HERO SLIDER --- */
 .hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
 .slider-track { display: flex; width: 600%; height: 100%; transition: transform 0.4s ease-in-out; }
-.slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
+
+.slider-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Cambiado de cover a contain */
+  flex-shrink: 0;
+  background-color: #000; /* Para que el espacio vacío se vea negro */
+}
+
+/* --- MODAL DE CONFIRMACIÓN --- */
+.confirm-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
+.confirm-modal-content { background: #fff; padding: 2rem; border-radius: 1rem; max-width: 400px; width: 90%; text-align: center; position: relative; }
+.confirm-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
+
 .intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; }
 .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
 .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; }
@@ -243,6 +256,14 @@ label { display: block; margin-top: 1rem; font-weight: bold; }
   </form>
 </div>
 
+  <div id="confirmModal" class="confirm-modal">
+  <div class="confirm-modal-content">
+    <span class="confirm-close" onclick="closeConfirm()">&times;</span>
+    <p id="confirmMessage"></p>
+  </div>
+</div>
+
+
 <footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
 
 <script>
@@ -311,6 +332,46 @@ track.addEventListener('touchend', e => {
   if (Math.abs(deltaX) > 50) { if (deltaX < 0 && currentIndex < totalSlides - 1) currentIndex++; if (deltaX > 0 && currentIndex > 0) currentIndex--; }
   updateSlide(); isDragging = false;
 });
+
+  // --- MOSTRAR PÁGINAS Y LIMPIAR FORMULARIOS ---
+function showPage(id) {
+  pages.forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Limpiar formularios al entrar a la página
+  const form = document.querySelector(`#${id} form`);
+  if(form) {
+    form.reset();
+    form.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
+  }
+}
+
+// --- MODAL DE CONFIRMACIÓN ---
+function showConfirm(message) {
+  document.getElementById('confirmMessage').textContent = message;
+  document.getElementById('confirmModal').style.display = 'flex';
+}
+function closeConfirm() {
+  document.getElementById('confirmModal').style.display = 'none';
+  showPage('homePage');
+}
+
+// --- CHECK-IN FORM ---
+const checkinForm = document.querySelector('#checkinPage form');
+checkinForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const fullName = checkinForm.querySelector('input[type="text"]').value || '';
+  showConfirm(`You have checked in successfully, ${fullName}`);
+});
+
+// --- SURVEY FORM ---
+const surveyForm = document.querySelector('#surveyPage form');
+surveyForm.addEventListener('submit', e => {
+  e.preventDefault();
+  showConfirm("Thank you for completing our survey, we appreciate it. We hope to see you soon.");
+});
+
 
 // --- LIMPIAR FORMULARIO AL RECARGAR ---
 window.addEventListener('load', () => {
