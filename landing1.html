@@ -6,7 +6,6 @@
   <title>Crowne Plaza Riyadh</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* --- RESET --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Roboto', sans-serif; color: #333; background-color: #fff; }
 
@@ -23,14 +22,15 @@
       display: flex;
       width: 600%;
       height: 100%;
-      transition: transform 1.2s ease;
+      transition: transform 1s ease;
     }
 
     .slider-track img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: contain; /* mostrar imagen entera */
       flex-shrink: 0;
+      background: #000; /* fondo negro para bordes vacíos */
     }
 
     .intro-text {
@@ -54,6 +54,27 @@
       background: rgba(0,0,0,0.25);
       z-index: 1;
     }
+
+    /* --- ARROWS --- */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: none;
+      font-size: 2rem;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 3;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    .arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .arrow-left { left: 15px; }
+    .arrow-right { right: 15px; }
 
     /* --- NAVBAR --- */
     nav {
@@ -155,6 +176,10 @@
       <img src="riyadh6.jpg" alt="Riyadh 6">
     </div>
     <div class="intro-text">Welcome to Riyadh</div>
+
+    <!-- Arrows -->
+    <button class="arrow arrow-left" onclick="prevSlide()">&#10094;</button>
+    <button class="arrow arrow-right" onclick="nextSlide()">&#10095;</button>
   </section>
 
   <!-- SERVICES -->
@@ -203,39 +228,24 @@
   </div>
 
   <script>
-    /* --- HERO SLIDER --- */
+    /* --- SLIDER MANUAL --- */
     const track = document.getElementById('sliderTrack');
     const total = track.children.length;
     let index = 0;
-    let startX = 0;
-    let isDragging = false;
 
     function updateSlide() {
       track.style.transform = `translateX(-${index * 100}%)`;
     }
 
-    setInterval(() => {
-      if (!isDragging) {
-        index = (index + 1) % total;
-        updateSlide();
-      }
-    }, 6000);
+    function nextSlide() {
+      index = (index + 1) % total;
+      updateSlide();
+    }
 
-    track.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-      isDragging = true;
-    });
-
-    track.addEventListener('touchend', e => {
-      const endX = e.changedTouches[0].clientX;
-      const deltaX = endX - startX;
-      if (Math.abs(deltaX) > 60) {
-        if (deltaX < 0 && index < total - 1) index++;
-        else if (deltaX > 0 && index > 0) index--;
-        updateSlide();
-      }
-      isDragging = false;
-    });
+    function prevSlide() {
+      index = (index - 1 + total) % total;
+      updateSlide();
+    }
 
     /* --- MODALS --- */
     function openModal(type) {
