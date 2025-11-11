@@ -15,26 +15,15 @@ nav img { height: 45px; }
 /* --- HERO SLIDER --- */
 .hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
 .slider-track { display: flex; width: 600%; height: 100%; transition: transform 0.4s ease-in-out; }
+.slider-track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; background-color: #000; }
 
-.slider-track img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Cambiado de cover a contain */
-  flex-shrink: 0;
-  background-color: #000; /* Para que el espacio vacío se vea negro */
-}
-
-/* --- MODAL DE CONFIRMACIÓN --- */
-.confirm-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
-.confirm-modal-content { background: #fff; padding: 2rem; border-radius: 1rem; max-width: 400px; width: 90%; text-align: center; position: relative; }
-.confirm-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
-
-.intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; }
 .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
+.intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; }
 .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; }
 .hero-arrow.left { left: 10px; }
 .hero-arrow.right { right: 10px; }
 
+/* --- SECTIONS --- */
 .sections { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }
 .section-button { position: relative; height: 180px; border-radius: 1rem; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; touch-action: manipulation; }
 .section-button:hover, .section-button.touching { transform: scale(1.03); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
@@ -62,14 +51,18 @@ button:hover { background: #5a189a; }
 .number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #c0c0c0; font-weight: 600; transition: background 0.2s, color 0.2s; color: #444; }
 .number-rating button.selected { background-color: #830051; color: #fff; }
 
-label { display: block; margin-top: 1rem; font-weight: bold; }
+label { display: block; margin-top: 1rem; }
 
-/* --- MODALES ESTILIZADAS --- */
+/* --- MODALES --- */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
 .modal-content { background: white; padding: 2rem 1.5rem 1.5rem; border-radius: 1rem; max-width: 450px; width: 90%; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-height: 80vh; overflow-y: auto; }
 .modal-content h3 { margin-top: 0; margin-bottom: 1rem; color: #830051; font-family: 'Playfair Display', serif; text-align: center; }
 .modal-content ul { padding-left: 20px; margin: 0 0 1rem 0; }
 .modal-close { position: absolute; top: 15px; left: 15px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
+
+.confirm-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
+.confirm-modal-content { background: #fff; padding: 2rem; border-radius: 1rem; max-width: 400px; width: 90%; text-align: center; position: relative; }
+.confirm-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
 
 /* --- RESPONSIVE --- */
 @media (min-width: 600px) { .hero { height: 500px; } .intro-text { font-size: 2rem; } .sections { grid-template-columns: 1fr 1fr; } .section-button { height: 220px; } }
@@ -193,7 +186,7 @@ label { display: block; margin-top: 1rem; font-weight: bold; }
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal('fitnessModal')">×</span>
     <h3>Fitness Center</h3>
-    <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 AM</p>
+    <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p>
     <p><strong>Average charge:</strong> 200 SAR</p>
     <p><strong>Features:</strong></p>
     <ul>
@@ -256,13 +249,12 @@ label { display: block; margin-top: 1rem; font-weight: bold; }
   </form>
 </div>
 
-  <div id="confirmModal" class="confirm-modal">
+<div id="confirmModal" class="confirm-modal">
   <div class="confirm-modal-content">
     <span class="confirm-close" onclick="closeConfirm()">&times;</span>
     <p id="confirmMessage"></p>
   </div>
 </div>
-
 
 <footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
 
@@ -274,109 +266,55 @@ function showPage(id) {
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function navigateTo(pageId){ showPage(pageId); history.pushState({ page: pageId }, '', '#' + pageId); }
-window.onpopstate = (e) => showPage(e.state?.page || 'homePage');
-
-// --- RATING CON DESELECT ---
-document.querySelectorAll('.rating').forEach(div => {
-  div.addEventListener('click', e => {
-    if(e.target.tagName === 'SPAN'){
-      if(e.target.classList.contains('selected')){
-        e.target.classList.remove('selected'); // deselect
-      } else {
-        div.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
-        e.target.classList.add('selected');
-      }
-    }
-  });
-});
-
-document.querySelectorAll('.number-rating').forEach(div => {
-  div.addEventListener('click', e => {
-    if(e.target.tagName === 'BUTTON'){
-      if(e.target.classList.contains('selected')){
-        e.target.classList.remove('selected'); // deselect
-      } else {
-        div.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
-        e.target.classList.add('selected');
-      }
-    }
-  });
-});
 
 // --- MODALES ---
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function openModal(id){ document.getElementById(id).style.display='flex'; }
+function closeModal(id){ document.getElementById(id).style.display='none'; }
+function showConfirm(msg){ document.getElementById('confirmMessage').textContent=msg; document.getElementById('confirmModal').style.display='flex'; }
+function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; }
 
-// --- SLIDER MANUAL ---
-let currentIndex = 0;
-const slides = document.querySelectorAll('#sliderTrack img');
-const totalSlides = slides.length;
-document.getElementById('nextSlide').addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % totalSlides;
+// --- SLIDER HERO ---
+const sliderTrack = document.getElementById('sliderTrack');
+let currentSlide = 0;
+const slides = sliderTrack.children.length;
+function updateSlide() { sliderTrack.style.transform = `translateX(-${(100/slides)*currentSlide}%)`; }
+document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
+document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); }
+
+// --- TOUCH SWIPE ---
+let startX=0, moveX=0;
+sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX);
+sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; });
+sliderTrack.addEventListener('touchend', e=>{
+  if(startX-moveX>40) currentSlide=(currentSlide+1)%slides;
+  else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides;
   updateSlide();
 });
-document.getElementById('prevSlide').addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-  updateSlide();
-});
-function updateSlide() { document.getElementById('sliderTrack').style.transform = `translateX(-${currentIndex * 100}%)`; }
 
-// --- TOUCH SLIDER ---
-let startX = 0, isDragging = false;
-const track = document.getElementById('sliderTrack');
-track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; });
-track.addEventListener('touchmove', e => { if (!isDragging) return; const deltaX = e.touches[0].clientX - startX; track.style.transform = `translateX(calc(-${currentIndex * 100}% + ${deltaX}px))`; });
-track.addEventListener('touchend', e => {
-  const deltaX = e.changedTouches[0].clientX - startX;
-  if (Math.abs(deltaX) > 50) { if (deltaX < 0 && currentIndex < totalSlides - 1) currentIndex++; if (deltaX > 0 && currentIndex > 0) currentIndex--; }
-  updateSlide(); isDragging = false;
+// --- SURVEY RATINGS ---
+document.querySelectorAll('.rating').forEach(rating=>{
+  rating.querySelectorAll('span').forEach((star,i)=>{
+    star.addEventListener('click', ()=> {
+      rating.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
+      star.classList.add('selected');
+    });
+  });
 });
 
-  // --- MOSTRAR PÁGINAS Y LIMPIAR FORMULARIOS ---
-function showPage(id) {
-  pages.forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+// --- NUMBER RATING ---
+document.querySelectorAll('.number-rating button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
 
-  // Limpiar formularios al entrar a la página
-  const form = document.querySelector(`#${id} form`);
-  if(form) {
-    form.reset();
-    form.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
-  }
-}
-
-// --- MODAL DE CONFIRMACIÓN ---
-function showConfirm(message) {
-  document.getElementById('confirmMessage').textContent = message;
-  document.getElementById('confirmModal').style.display = 'flex';
-}
-function closeConfirm() {
-  document.getElementById('confirmModal').style.display = 'none';
-  showPage('homePage');
-}
-
-// --- CHECK-IN FORM ---
-const checkinForm = document.querySelector('#checkinPage form');
-checkinForm.addEventListener('submit', e => {
+// --- SURVEY FORM SUBMIT ---
+document.getElementById('surveyForm').addEventListener('submit', e=>{
   e.preventDefault();
-  const fullName = checkinForm.querySelector('input[type="text"]').value || '';
-  showConfirm(`You have checked in successfully, ${fullName}`);
-});
-
-// --- SURVEY FORM ---
-const surveyForm = document.querySelector('#surveyPage form');
-surveyForm.addEventListener('submit', e => {
-  e.preventDefault();
-  showConfirm("Thank you for completing our survey, we appreciate it. We hope to see you soon.");
-});
-
-
-// --- LIMPIAR FORMULARIO AL RECARGAR ---
-window.addEventListener('load', () => {
-  document.querySelectorAll('.rating span, .number-rating button').forEach(el => el.classList.remove('selected'));
-  document.getElementById('surveyForm').reset();
+  showConfirm('Survey submitted! Thank you.');
+  e.target.reset();
+  document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
 });
 </script>
 </body>
