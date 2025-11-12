@@ -304,18 +304,25 @@ label { display: block; margin-top: 1rem; }
 // --- PAGINAS ---
 const pages = document.querySelectorAll('.page');
 function showPage(id) {
-  // Limpiar todos los formularios antes de cambiar de página
+  // Limpiar formularios y selecciones
   document.querySelectorAll('form').forEach(f => {
     f.reset();
-    // Quitar selección visual de emojis y números
     f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
   });
 
-  // Cambiar la página visible
+  // Cambiar visibilidad de páginas
   pages.forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Guardar en historial
+  if (id !== 'homePage') {
+    history.pushState({ page: id }, "", "#" + id);
+  } else {
+    history.replaceState({ page: 'homePage' }, "", "#homePage");
+  }
 }
+
 
 
 // --- MODALES ---
@@ -385,10 +392,23 @@ document.getElementById('navbar').addEventListener('click', () => {
 });
 
   // --- CONTROL DE HISTORIAL (para volver atrás siempre al home) ---
-window.addEventListener('popstate', () => {
-  // Siempre volver a la página principal
-  showPage('homePage');
+window.addEventListener('popstate', (event) => {
+  if (event.state) {
+    if (event.state.external) {
+      // Página externa
+      if (window.location.href.indexOf(event.state.externalUrl) === -1) {
+        window.location.href = event.state.externalUrl;
+      }
+    } else if (event.state.page) {
+      // Página interna
+      showPage(event.state.page);
+    }
+  } else {
+    // Si no hay estado, mostrar home
+    showPage('homePage');
+  }
 });
+
 
 // Cada vez que cambias de página, añade una entrada al historial
 function showPage(id) {
