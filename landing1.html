@@ -325,21 +325,45 @@ document.getElementById('surveyForm').addEventListener('submit', e=>{
 });
 
 // --- CHECK-IN FORM CONFIRM ---
+// --- CHECK-IN FORM CONFIRM CON MENSAJES INLINE ---
 const checkinForm = document.querySelector('#checkinPage form');
+const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
+
+function validateCheckin() {
+  let allFilled = true;
+  const inputs = checkinForm.querySelectorAll('input');
+
+  inputs.forEach(input => {
+    // elimina mensaje previo
+    let next = input.nextElementSibling;
+    if(next && next.classList.contains('error-msg')) next.remove();
+
+    if(input.value.trim() === "") {
+      allFilled = false;
+      // crea mensaje de error
+      const error = document.createElement('div');
+      error.textContent = "Ha de rellenar este campo";
+      error.classList.add('error-msg');
+      error.style.color = 'red';
+      error.style.fontSize = '0.85rem';
+      error.style.marginTop = '2px';
+      input.after(error);
+    }
+  });
+
+  checkinSubmit.disabled = !allFilled;
+  return allFilled;
+}
 
 checkinForm.addEventListener('submit', e => {
   e.preventDefault();
-  const inputs = Array.from(checkinForm.querySelectorAll('input'));
-  const allFilled = inputs.every(input => input.value.trim() !== "");
-  
-  if (!allFilled) {
-    showConfirm("Please fill in all fields before confirming your check-in.");
-    return;
-  }
-  
-  showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
+  if(!validateCheckin()) return; // si hay campos vacíos, no enviamos
+
+  // si todo está relleno, hacemos submit y reseteamos
   checkinForm.reset();
+  checkinSubmit.disabled = true;
 });
+
 
 
 // --- NAVBAR CLICK SCROLL TOP ---
