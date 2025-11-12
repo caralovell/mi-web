@@ -18,11 +18,10 @@ nav img { height: 45px; }
 .slider-track img { 
   width: 100%; 
   height: 100%; 
-  object-fit: cover; /* cambio de contain a cover */
+  object-fit: cover; 
   flex-shrink: 0; 
   background-color: #000; 
 }
-
 .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
 .intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; }
 .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; }
@@ -66,12 +65,12 @@ label { display: block; margin-top: 1rem; }
   top: 0; 
   left: 0; 
   width: 100%; 
-  min-height: 100vh; /* asegura que el fondo cubra toda la pantalla */
-  background: rgba(0,0,0,0.5); /* fondo semi-transparente */
+  min-height: 100vh; 
+  background: rgba(0,0,0,0.5); 
   align-items: center; 
   justify-content: center; 
   z-index: 100; 
-  overflow-y: auto; /* permite scroll si el contenido es más alto que la pantalla */
+  overflow-y: auto; 
 }
 
 .modal-content { 
@@ -82,8 +81,8 @@ label { display: block; margin-top: 1rem; }
   width: 90%; 
   position: relative; 
   box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
-  max-height: 90vh; /* limita altura para que no desborde */
-  overflow-y: auto; /* scroll interno si el contenido es muy alto */
+  max-height: 90vh; 
+  overflow-y: auto; 
 }
 
 .modal-content h3 { 
@@ -111,38 +110,14 @@ label { display: block; margin-top: 1rem; }
 
 /* --- MODALES RESPONSIVE PARA MÓVIL --- */
 @media (max-width: 600px) {
-  .modal {
-    align-items: flex-start;  /* modal pegado arriba */
-    padding-top: 2rem;        /* espacio superior */
-    min-height: 100vh;        /* fondo cubre toda la pantalla */
-  }
-  .modal-content {
-    width: 95%;               /* ocupa casi todo el ancho */
-    border-radius: 0.8rem;    
-    max-height: 85vh;         /* altura máxima visible */
-  }
+  .modal { align-items: flex-start; padding-top: 2rem; min-height: 100vh; }
+  .modal-content { width: 95%; border-radius: 0.8rem; max-height: 85vh; }
 }
-
 
 /* --- Confirm modal --- */
 .confirm-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
 .confirm-modal-content { background: #fff; padding: 2rem; border-radius: 1rem; max-width: 400px; width: 90%; text-align: center; position: relative; }
 .confirm-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
-
-/* --- MODALES RESPONSIVE PARA MÓVIL --- */
-@media (max-width: 600px) {
-  .modal {
-    align-items: flex-start;  /* Se pega al top */
-    padding-top: 2rem;        /* Espacio superior */
-    overflow-y: auto;          /* Scroll si contenido es más alto que pantalla */
-  }
-  .modal-content {
-    max-height: none;          /* Sin límite de altura */
-    width: 95%;                /* Se adapta al ancho del móvil */
-    border-radius: 0.8rem;
-  }
-}
-
 
 /* --- RESPONSIVE --- */
 @media (min-width: 600px) { .hero { height: 500px; } .intro-text { font-size: 2rem; } .sections { grid-template-columns: 1fr 1fr; } .section-button { height: 220px; } }
@@ -156,7 +131,7 @@ label { display: block; margin-top: 1rem; }
   <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo" id="crowneLogo">
 </nav>
 
-<!-- HOME -->
+<!-- HOME PAGE -->
 <div id="homePage" class="page active">
   <div class="hero" id="hero">
     <div class="slider-track" id="sliderTrack">
@@ -171,25 +146,24 @@ label { display: block; margin-top: 1rem; }
     <div class="hero-arrow right" id="nextSlide">›</div>
     <p class="intro-text">Welcome to Riyadh</p>
   </div>
-
   <div class="sections">
-    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" data-external">
+    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" data-external>
       <img src="./hotel/room.jpg" alt="Book a room">
       <span>Book a room</span>
     </a>
-    <div class="section-button" onclick="showPage('checkinPage')">
+    <div class="section-button" onclick="navigateTo('checkinPage')">
       <img src="./hotel/crowne.jpg" alt="Check-in">
       <span>Check-in</span>
     </div>
-    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" data-external">
+    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" data-external>
       <img src="./hotel/situm.jpg" alt="Map view">
       <span>Map view</span>
     </a>
-    <div class="section-button" onclick="showPage('servicesPage')">
+    <div class="section-button" onclick="navigateTo('servicesPage')">
       <img src="./hotel/pool.jpg" alt="Services">
       <span>Services</span>
     </div>
-    <a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" data-external">
+    <a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" data-external>
       <img src="./hotel/comfort.jpg" alt="Room comfort">
       <span>Room comfort</span>
     </a>
@@ -201,7 +175,7 @@ label { display: block; margin-top: 1rem; }
       <img src="./hotel/ai virtual.jpg" alt="Virtual assistant">
       <span>Virtual assistant</span>
     </div>
-    <div class="section-button" onclick="showPage('surveyPage')">
+    <div class="section-button" onclick="navigateTo('surveyPage')">
       <img src="./hotel/reception.jpg" alt="Satisfaction survey">
       <span>Satisfaction survey</span>
     </div>
@@ -210,7 +184,7 @@ label { display: block; margin-top: 1rem; }
 
 <!-- CHECK-IN PAGE -->
 <div id="checkinPage" class="page">
-  <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
+  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div>
   <h2>Online Check-in</h2>
   <form>
     <label>Full Name</label>
@@ -225,7 +199,7 @@ label { display: block; margin-top: 1rem; }
 
 <!-- SERVICES PAGE -->
 <div id="servicesPage" class="page">
-  <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
+  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div>
   <h2>Our Services</h2>
   <div class="sections">
     <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external>
@@ -292,29 +266,25 @@ label { display: block; margin-top: 1rem; }
 
 <!-- SURVEY PAGE -->
 <div id="surveyPage" class="page">
-  <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
+  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div>
   <h2>Satisfaction Survey</h2>
   <form id="surveyForm">
     <label><strong>Overall Experience</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-
     <label><strong>Reservation Process</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-
     <label><strong>Staff</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-
     <label><strong>Room</strong></label>
     <div class="rating">
       <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
     </div>
-
     <label><strong>Rate us</strong></label>
     <div class="number-rating">
       <button type="button">1</button><button type="button">2</button><button type="button">3</button>
@@ -322,7 +292,6 @@ label { display: block; margin-top: 1rem; }
       <button type="button">7</button><button type="button">8</button><button type="button">9</button>
       <button type="button">10</button>
     </div>
-
     <label>Additional Comments</label>
     <textarea placeholder="Your comments..."></textarea>
     <button type="submit" style="background-color:#830051;">Send</button>
@@ -339,31 +308,20 @@ label { display: block; margin-top: 1rem; }
 <footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
 
 <script>
-// --- PAGINAS ---
+// --- PAGES ---
 const pages = document.querySelectorAll('.page');
-function showPage(id) {
-  // Limpiar formularios y selecciones
+function navigateTo(id) {
+  pages.forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  history.pushState({ page: id }, "", "#" + id);
   document.querySelectorAll('form').forEach(f => {
     f.reset();
     f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
   });
-
-  // Cambiar visibilidad de páginas
-  pages.forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Guardar en historial
-  if (id !== 'homePage') {
-    history.pushState({ page: id }, "", "#" + id);
-  } else {
-    history.replaceState({ page: 'homePage' }, "", "#homePage");
-  }
 }
 
-
-
-// --- MODALES ---
+// --- MODALS ---
 function openModal(id){ document.getElementById(id).style.display='flex'; }
 function closeModal(id){ document.getElementById(id).style.display='none'; }
 function showConfirm(msg){ document.getElementById('confirmMessage').textContent=msg; document.getElementById('confirmModal').style.display='flex'; }
@@ -377,8 +335,6 @@ function updateSlide() { sliderTrack.style.transform = `translateX(-${(100/slide
 document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
 document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); }
 
-// --- TOUCH SWIPE ---
-let startX=0, moveX=0;
 sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX);
 sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; });
 sliderTrack.addEventListener('touchend', e=>{
@@ -387,27 +343,23 @@ sliderTrack.addEventListener('touchend', e=>{
   updateSlide();
 });
 
-// --- SURVEY RATINGS (con opción de deseleccionar) ---
+// --- SURVEY RATINGS ---
 document.querySelectorAll('.rating').forEach(rating => {
   rating.querySelectorAll('span').forEach((emoji) => {
     emoji.addEventListener('click', () => {
       const alreadySelected = emoji.classList.contains('selected');
       rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
-      if (!alreadySelected) emoji.classList.add('selected'); // solo marca si no estaba marcada
+      if (!alreadySelected) emoji.classList.add('selected');
     });
   });
 });
-
-// --- NUMBER RATING (con opción de deseleccionar) ---
 document.querySelectorAll('.number-rating button').forEach(btn => {
   btn.addEventListener('click', () => {
     const alreadySelected = btn.classList.contains('selected');
     btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-    if (!alreadySelected) btn.classList.add('selected'); // solo marca si no estaba marcada
+    if (!alreadySelected) btn.classList.add('selected');
   });
 });
-
-// --- SURVEY FORM SUBMIT ---
 document.getElementById('surveyForm').addEventListener('submit', e=>{
   e.preventDefault();
   showConfirm('Survey submitted! Thank you.');
@@ -415,96 +367,57 @@ document.getElementById('surveyForm').addEventListener('submit', e=>{
   document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
 });
 
-  // --- Cerrar modales al hacer clic fuera ---
+// --- CLOSE MODALS ON OUTSIDE CLICK ---
 document.querySelectorAll('.modal').forEach(modal=>{
   modal.addEventListener('click', e=>{
-    if(e.target === modal){ // solo si clicas fuera del contenido
-      modal.style.display = 'none';
-    }
+    if(e.target === modal){ modal.style.display = 'none'; }
   });
 });
 
-  // --- SCROLL AL TOPE AL HACER CLIC EN LA BARRA SUPERIOR ---
+// --- NAVBAR CLICK SCROLL TOP ---
 document.getElementById('navbar').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-  // --- CONTROL DE HISTORIAL (para volver atrás siempre al home) ---
-window.addEventListener('popstate', (event) => {
-  if (event.state) {
-    if (event.state.external) {
-      // Página externa
-      if (window.location.href.indexOf(event.state.externalUrl) === -1) {
-        window.location.href = event.state.externalUrl;
-      }
-    } else if (event.state.page) {
-      // Página interna
-      showPage(event.state.page);
-    }
-  } else {
-    // Si no hay estado, mostrar home
-    showPage('homePage');
-  }
-});
-
-
-// Cada vez que cambias de página, añade una entrada al historial
-function showPage(id) {
-  document.querySelectorAll('form').forEach(f => {
-    f.reset();
-    f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
-  });
-  pages.forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Solo añadimos al historial si no es home (para evitar bucles)
-  if (id !== 'homePage') {
-    history.pushState({ page: id }, "", "#" + id);
-  }
-}
-// --- ABRIR ENLACES EXTERNOS EN LA MISMA PESTAÑA PERO PODER VOLVER ATRÁS Y ADELANTE ---
+// --- EXTERNAL LINKS ---
 document.querySelectorAll('a[data-external]').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const url = link.getAttribute('href');
-
-    // Guardamos en el historial que salimos a una web externa
     history.pushState({ external: true, externalUrl: url }, "", "#external");
-
-    // Vamos a la página externa en la misma pestaña
     window.location.href = url;
   });
 });
 
-// Al volver atrás o adelante, controlamos el flujo
+// --- HANDLE BACK/FORWARD ---
 window.addEventListener('popstate', (event) => {
-  if (event.state && event.state.external) {
-    // Si el estado tiene una URL externa, vamos a ella (flecha adelante)
-    if (window.location.href.indexOf(event.state.externalUrl) === -1) {
-      window.location.href = event.state.externalUrl;
+  if(event.state){
+    if(event.state.external){
+      if(window.location.href.indexOf(event.state.externalUrl)===-1){
+        window.location.href = event.state.externalUrl;
+      }
+    } else if(event.state.page){
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(event.state.page).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   } else {
-    // Si no hay estado externo (flecha atrás), volvemos al home
-    showPage('homePage');
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById('homePage').classList.add('active');
+    history.replaceState({ page:'homePage' },"","#homePage");
   }
 });
 
-
-
-// --- Al volver atrás desde una página externa, vuelve al home ---
+// --- PAGESHOW: fix back/forward cache ---
 window.addEventListener('pageshow', (event) => {
-  const navType = performance.getEntriesByType("navigation")[0].type;
-  if (event.persisted || navType === "back_forward") {
-    // Si vienes del historial y no estás ya en home, mostrar home
-    if (!location.hash || location.hash === "#external") {
-      showPage('homePage');
-      history.replaceState({}, "", "#homePage");
+  if(event.persisted){
+    if(!location.hash || location.hash==="#external"){
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById('homePage').classList.add('active');
+      history.replaceState({ page:'homePage' },"","#homePage");
     }
   }
 });
-
-
 </script>
 </body>
 </html>
