@@ -99,7 +99,7 @@ label { display: block; margin-top: 1rem; }
   </div>
 
   <div class="sections">
-    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" target="_blank">
+    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" data-external">
       <img src="./hotel/room.jpg" alt="Book a room">
       <span>Book a room</span>
     </a>
@@ -107,7 +107,7 @@ label { display: block; margin-top: 1rem; }
       <img src="./hotel/crowne.jpg" alt="Check-in">
       <span>Check-in</span>
     </div>
-    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" target="_blank">
+    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" data-external">
       <img src="./hotel/situm.jpg" alt="Map view">
       <span>Map view</span>
     </a>
@@ -115,7 +115,7 @@ label { display: block; margin-top: 1rem; }
       <img src="./hotel/pool.jpg" alt="Services">
       <span>Services</span>
     </div>
-    <a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" target="_blank">
+    <a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" data-external">
       <img src="./hotel/comfort.jpg" alt="Room comfort">
       <span>Room comfort</span>
     </a>
@@ -154,7 +154,7 @@ label { display: block; margin-top: 1rem; }
   <div class="back-button" onclick="showPage('homePage')"><span>←</span> Back</div>
   <h2>Our Services</h2>
   <div class="sections">
-    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" target="_blank">
+    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external>
       <img src="./hotel/food.jpg" alt="Dining"><span>Dining</span>
     </a>
     <div class="section-button" onclick="openModal('poolModal')">
@@ -369,6 +369,40 @@ function showPage(id) {
     history.pushState({ page: id }, "", "#" + id);
   }
 }
+// --- ABRIR ENLACES EXTERNOS EN LA MISMA PESTAÑA PERO PODER VOLVER A HOME ---
+document.querySelectorAll('a[data-external]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault(); // evita la navegación inmediata
+    const url = link.getAttribute('href');
+
+    // Guardamos la URL actual para saber que debemos volver aquí al ir atrás
+    history.pushState({ external: true }, "", window.location.href);
+
+    // Navegamos a la URL externa en la misma pestaña
+    window.location.href = url;
+  });
+});
+
+// Cuando el usuario le da a “Atrás” tras visitar una página externa,
+// el navegador volverá aquí, y este código asegura que muestres el home.
+window.addEventListener('popstate', (event) => {
+  if (event.state && event.state.external) {
+    showPage('homePage');
+  }
+});
+
+
+// --- Al volver atrás desde una página externa, vuelve al home ---
+window.addEventListener('pageshow', (event) => {
+  const navType = performance.getEntriesByType("navigation")[0].type;
+  if (event.persisted || navType === "back_forward") {
+    // Si vienes del historial y no estás ya en home, mostrar home
+    if (!location.hash || location.hash === "#external") {
+      showPage('homePage');
+      history.replaceState({}, "", "#homePage");
+    }
+  }
+});
 
 
 </script>
