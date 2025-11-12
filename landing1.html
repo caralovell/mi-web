@@ -356,7 +356,10 @@ function closeConfirm(){ document.getElementById('confirmModal').style.display='
 const sliderTrack = document.getElementById('sliderTrack');
 let currentSlide = 0;
 const slides = sliderTrack.children.length;
-function updateSlide() { sliderTrack.style.transform = `translateX(-${(100/slides)*currentSlide}%)`; }
+function updateSlide() {
+  sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
 document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
 document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); }
 
