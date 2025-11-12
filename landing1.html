@@ -199,7 +199,7 @@ label { display: block; margin-top: 1rem; }
     <input type="email" placeholder="e.g. john@example.com">
     <label>Reservation Number</label>
     <input type="text" placeholder="e.g. 123456">
-    <button type="submit" style="background-color: #830051;">Confirm</button>
+    <button type="submit" style="background-color: #830051;" disabled>Confirm</button>
   </form>
 </div>
 
@@ -300,7 +300,7 @@ label { display: block; margin-top: 1rem; }
     </div>
     <label>Additional Comments</label>
     <textarea placeholder="Your comments..."></textarea>
-    <button type="submit" style="background-color:#830051;">Send</button>
+    <button type="submit" style="background-color:#830051;" disabled>Send</button>
   </form>
 </div>
 
@@ -461,6 +461,43 @@ document.querySelectorAll('.section-button').forEach(btn => {
   btn.addEventListener('touchend', () => btn.classList.remove('touching'));
   btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
 });
+
+  // --- CHECK-IN VALIDATION ---
+const checkinForm = document.querySelector('#checkinPage form');
+const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
+
+function validateCheckin() {
+  const inputs = checkinForm.querySelectorAll('input');
+  const isValid = Array.from(inputs).every(input => input.value.trim() !== "");
+  checkinSubmit.disabled = !isValid;
+}
+
+checkinForm.querySelectorAll('input').forEach(input => {
+  input.addEventListener('input', validateCheckin);
+});
+
+
+  // --- SURVEY VALIDATION ---
+const surveyForm = document.getElementById('surveyForm');
+const surveySubmit = surveyForm.querySelector('button[type="submit"]');
+
+function validateSurvey() {
+  const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating')).every(r =>
+    r.querySelector('span.selected') !== null
+  );
+  const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
+
+  surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
+}
+
+// Escuchar clicks en emojis y número, y input en textarea (por si acaso)
+surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => {
+  el.addEventListener('click', () => setTimeout(validateSurvey, 50));
+});
+
+// Inicializamos el botón deshabilitado
+surveySubmit.disabled = true;
+
 
 </script>
 </body>
