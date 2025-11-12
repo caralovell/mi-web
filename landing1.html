@@ -360,8 +360,45 @@ function updateSlide() {
   sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
-document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
-document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); }
+function updateSlide() {
+  sliderTrack.style.transition = "transform 0.4s ease-in-out";
+  sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+// NEXT SLIDE
+document.getElementById('nextSlide').onclick = () => {
+  currentSlide++;
+  if (currentSlide >= slides) {
+    currentSlide = 0; // volvemos a 0 instantáneamente
+    sliderTrack.style.transition = "none"; // quitar transición
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    setTimeout(() => {
+      sliderTrack.style.transition = "transform 0.4s ease-in-out"; // restauramos transición
+      currentSlide++; // avanzamos al siguiente
+      sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }, 20); // pequeño delay para que el navegador aplique el cambio
+  } else {
+    updateSlide();
+  }
+}
+
+// PREV SLIDE
+document.getElementById('prevSlide').onclick = () => {
+  currentSlide--;
+  if (currentSlide < 0) {
+    currentSlide = slides - 1; // volvemos al final instantáneo
+    sliderTrack.style.transition = "none";
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    setTimeout(() => {
+      sliderTrack.style.transition = "transform 0.4s ease-in-out";
+      currentSlide--;
+      sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }, 20);
+  } else {
+    updateSlide();
+  }
+};
+
 
 sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX);
 sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; });
