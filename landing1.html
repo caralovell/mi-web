@@ -268,10 +268,19 @@ label { display: block; margin-top: 1rem; }
 // --- PAGINAS ---
 const pages = document.querySelectorAll('.page');
 function showPage(id) {
+  // Limpiar todos los formularios antes de cambiar de página
+  document.querySelectorAll('form').forEach(f => {
+    f.reset();
+    // Quitar selección visual de emojis y números
+    f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+  });
+
+  // Cambiar la página visible
   pages.forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
 
 // --- MODALES ---
 function openModal(id){ document.getElementById(id).style.display='flex'; }
