@@ -77,9 +77,9 @@ label { display: block; margin-top: 1rem; }
 </head>
 <body>
 
-<nav>
-  <img src="./hotel/IHG-Logo.png" alt="IHG Logo">
-  <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo">
+<nav id="navbar">
+  <img src="./hotel/IHG-Logo.png" alt="IHG Logo" id="ihgLogo">
+  <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo" id="crowneLogo">
 </nav>
 
 <!-- HOME -->
@@ -331,6 +331,12 @@ document.querySelectorAll('.modal').forEach(modal=>{
     }
   });
 });
+
+  // --- SCROLL AL TOPE AL HACER CLIC EN LA BARRA SUPERIOR ---
+document.getElementById('navbar').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 </script>
 </body>
 </html>
