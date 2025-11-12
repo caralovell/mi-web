@@ -391,6 +391,14 @@ document.getElementById('surveyForm').addEventListener('submit', e=>{
   e.target.reset();
   document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
 });
+  // --- CHECK-IN FORM CONFIRM ---
+const checkinForm = document.querySelector('#checkinPage form');
+checkinForm.addEventListener('submit', e => {
+  e.preventDefault(); // evitar envío real
+  showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
+  e.target.reset(); // resetear formulario
+});
+
 
 // --- CLOSE MODALS ON OUTSIDE CLICK ---
 document.querySelectorAll('.modal').forEach(modal=>{
