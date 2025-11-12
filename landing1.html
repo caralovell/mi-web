@@ -437,6 +437,14 @@ window.addEventListener('pageshow', (event) => {
     }
   }
 });
+
+  // --- HOVER EFFECT PARA TOUCH EN MÓVIL ---
+document.querySelectorAll('.section-button').forEach(btn => {
+  btn.addEventListener('touchstart', () => btn.classList.add('touching'));
+  btn.addEventListener('touchend', () => btn.classList.remove('touching'));
+  btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
+});
+
 </script>
 </body>
 </html>
