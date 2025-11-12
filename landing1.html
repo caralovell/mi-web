@@ -276,7 +276,17 @@ function showConfirm(msg){
   document.getElementById('confirmMessage').textContent=msg;
   document.getElementById('confirmModal').style.display='flex';
 }
-function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; }
+function closeConfirm() {
+  const confirmModal = document.getElementById('confirmModal');
+  confirmModal.style.display = 'none';
+
+  // Si la página activa era checkinPage, volvemos a homePage
+  const activePage = document.querySelector('.page.active');
+  if (activePage && activePage.id === 'checkinPage') {
+    navigateTo('homePage');
+  }
+}
+
 
 // --- SLIDER HERO ---
 const sliderTrack = document.getElementById('sliderTrack');
@@ -316,11 +326,21 @@ document.getElementById('surveyForm').addEventListener('submit', e=>{
 
 // --- CHECK-IN FORM CONFIRM ---
 const checkinForm = document.querySelector('#checkinPage form');
+
 checkinForm.addEventListener('submit', e => {
   e.preventDefault();
+  const inputs = Array.from(checkinForm.querySelectorAll('input'));
+  const allFilled = inputs.every(input => input.value.trim() !== "");
+  
+  if (!allFilled) {
+    showConfirm("Please fill in all fields before confirming your check-in.");
+    return;
+  }
+  
   showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
-  e.target.reset();
+  checkinForm.reset();
 });
+
 
 // --- NAVBAR CLICK SCROLL TOP ---
 document.getElementById('navbar').addEventListener('click', () => {
