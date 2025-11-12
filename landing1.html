@@ -60,15 +60,51 @@ button:hover { background: #5a189a; }
 label { display: block; margin-top: 1rem; }
 
 /* --- MODALES --- */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
-.modal-content { background: white; padding: 2rem 1.5rem 1.5rem; border-radius: 1rem; max-width: 450px; width: 90%; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-height: 80vh; overflow-y: auto; }
+.modal { 
+  display: none; 
+  position: fixed; 
+  top: 0; left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: rgba(0,0,0,0.5); 
+  align-items: center; 
+  justify-content: center; 
+  z-index: 100; 
+}
+.modal-content { 
+  background: white; 
+  padding: 2rem 1.5rem 1.5rem; 
+  border-radius: 1rem; 
+  max-width: 450px; 
+  width: 90%; 
+  position: relative; 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+  max-height: 80vh; 
+  overflow-y: auto; 
+}
 .modal-content h3 { margin-top: 0; margin-bottom: 1rem; color: #830051; font-family: 'Playfair Display', serif; text-align: center; }
 .modal-content ul { padding-left: 20px; margin: 0 0 1rem 0; }
 .modal-close { position: absolute; top: 15px; left: 15px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
 
+/* --- Confirm modal --- */
 .confirm-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
 .confirm-modal-content { background: #fff; padding: 2rem; border-radius: 1rem; max-width: 400px; width: 90%; text-align: center; position: relative; }
 .confirm-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
+
+/* --- MODALES RESPONSIVE PARA MÓVIL --- */
+@media (max-width: 600px) {
+  .modal {
+    align-items: flex-start;  /* Se pega al top */
+    padding-top: 2rem;        /* Espacio superior */
+    overflow-y: auto;          /* Scroll si contenido es más alto que pantalla */
+  }
+  .modal-content {
+    max-height: none;          /* Sin límite de altura */
+    width: 95%;                /* Se adapta al ancho del móvil */
+    border-radius: 0.8rem;
+  }
+}
+
 
 /* --- RESPONSIVE --- */
 @media (min-width: 600px) { .hero { height: 500px; } .intro-text { font-size: 2rem; } .sections { grid-template-columns: 1fr 1fr; } .section-button { height: 220px; } }
