@@ -306,21 +306,23 @@ sliderTrack.addEventListener('touchend', e=>{
   updateSlide();
 });
 
-// --- SURVEY RATINGS ---
-document.querySelectorAll('.rating').forEach(rating=>{
-  rating.querySelectorAll('span').forEach((star,i)=>{
-    star.addEventListener('click', ()=> {
-      rating.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
-      star.classList.add('selected');
+// --- SURVEY RATINGS (con opción de deseleccionar) ---
+document.querySelectorAll('.rating').forEach(rating => {
+  rating.querySelectorAll('span').forEach((emoji) => {
+    emoji.addEventListener('click', () => {
+      const alreadySelected = emoji.classList.contains('selected');
+      rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
+      if (!alreadySelected) emoji.classList.add('selected'); // solo marca si no estaba marcada
     });
   });
 });
 
-// --- NUMBER RATING ---
-document.querySelectorAll('.number-rating button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
-    btn.classList.add('selected');
+// --- NUMBER RATING (con opción de deseleccionar) ---
+document.querySelectorAll('.number-rating button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const alreadySelected = btn.classList.contains('selected');
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+    if (!alreadySelected) btn.classList.add('selected'); // solo marca si no estaba marcada
   });
 });
 
