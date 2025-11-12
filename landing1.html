@@ -369,27 +369,33 @@ function showPage(id) {
     history.pushState({ page: id }, "", "#" + id);
   }
 }
-// --- ABRIR ENLACES EXTERNOS EN LA MISMA PESTAÑA PERO PODER VOLVER A HOME ---
+// --- ABRIR ENLACES EXTERNOS EN LA MISMA PESTAÑA PERO PODER VOLVER ATRÁS Y ADELANTE ---
 document.querySelectorAll('a[data-external]').forEach(link => {
   link.addEventListener('click', (e) => {
-    e.preventDefault(); // evita la navegación inmediata
+    e.preventDefault();
     const url = link.getAttribute('href');
 
-    // Guardamos la URL actual para saber que debemos volver aquí al ir atrás
-    history.pushState({ external: true }, "", window.location.href);
+    // Guardamos en el historial que salimos a una web externa
+    history.pushState({ external: true, externalUrl: url }, "", "#external");
 
-    // Navegamos a la URL externa en la misma pestaña
+    // Vamos a la página externa en la misma pestaña
     window.location.href = url;
   });
 });
 
-// Cuando el usuario le da a “Atrás” tras visitar una página externa,
-// el navegador volverá aquí, y este código asegura que muestres el home.
+// Al volver atrás o adelante, controlamos el flujo
 window.addEventListener('popstate', (event) => {
   if (event.state && event.state.external) {
+    // Si el estado tiene una URL externa, vamos a ella (flecha adelante)
+    if (window.location.href.indexOf(event.state.externalUrl) === -1) {
+      window.location.href = event.state.externalUrl;
+    }
+  } else {
+    // Si no hay estado externo (flecha atrás), volvemos al home
     showPage('homePage');
   }
 });
+
 
 
 // --- Al volver atrás desde una página externa, vuelve al home ---
