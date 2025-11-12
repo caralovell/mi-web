@@ -69,6 +69,29 @@ label { display: block; margin-top: 1rem; }
 /* --- RESPONSIVE --- */
 @media (min-width: 600px) { .hero { height: 500px; } .intro-text { font-size: 2rem; } .sections { grid-template-columns: 1fr 1fr; } .section-button { height: 220px; } }
 @media (min-width: 1024px) { .hero { height: 600px; } .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; } .section-button { height: 260px; } }
+
+  /* --- FLIP CARD --- */
+.flip-card {
+  perspective: 1000px;
+  position: relative;
+}
+.flip-card > div {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.flip-card .flip-front { transform: rotateY(0deg); }
+.flip-card .flip-back { transform: rotateY(180deg); background: #fff; color: #333; padding: 1rem; overflow-y: auto; }
+.flip-card.flipped .flip-front { transform: rotateY(-180deg); }
+.flip-card.flipped .flip-back { transform: rotateY(0deg); }
+
 </style>
 </head>
 <body>
@@ -392,6 +415,71 @@ function validateSurvey() {
 }
 surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => { el.addEventListener('click', () => setTimeout(validateSurvey, 50)); });
 surveySubmit.disabled = true;
+
+// --- CARD FLIP PARA SERVICES (Pool, Fitness, Spa) ---
+document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
+  const imgAlt = btn.querySelector('img')?.alt || '';
+  if(['Pool','Fitness Center','Spa'].includes(imgAlt)){
+    // Convertimos la sección en flip-card
+    btn.classList.add('flip-card');
+
+    // Creamos contenedor front/back
+    const front = document.createElement('div');
+    front.className = 'flip-front';
+    front.innerHTML = btn.innerHTML;
+
+    const back = document.createElement('div');
+    back.className = 'flip-back';
+
+    // Contenido del back según el servicio
+    if(imgAlt==='Pool'){
+      back.innerHTML = `
+        <h3>Pool</h3>
+        <p><strong>Location:</strong> Outdoor</p>
+        <p><strong>Daily fee:</strong> 100 SAR</p>
+        <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Children's pool</li>
+          <li>Heated pool</li>
+          <li>Pool side lounge chairs</li>
+          <li>Towel service</li>
+          <li>Umbrellas</li>
+        </ul>`;
+    } else if(imgAlt==='Fitness Center'){
+      back.innerHTML = `
+        <h3>Fitness Center</h3>
+        <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p>
+        <p><strong>Average charge:</strong> 200 SAR</p>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Elliptical machines</li>
+          <li>Free weights</li>
+          <li>Rower</li>
+          <li>Stationary bicycle</li>
+          <li>Treadmill</li>
+          <li>Onsite sports trainer</li>
+        </ul>`;
+    } else if(imgAlt==='Spa'){
+      back.innerHTML = `
+        <h3>Spa</h3>
+        <p><strong>Phone number:</strong> 966-011-8131313</p>
+        <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p>
+        <p>Relax and enjoy our services in a calm environment.</p>`;
+    }
+
+    // Limpiamos contenido original y añadimos front/back
+    btn.innerHTML = '';
+    btn.appendChild(front);
+    btn.appendChild(back);
+
+    // Evento click para flip
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('flipped');
+    });
+  }
+});
+
 </script>
 </body>
 </html>
