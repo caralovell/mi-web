@@ -14,18 +14,8 @@ nav img { height: 45px; }
 
 /* --- HERO SLIDER --- */
 .hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
-.slider-track {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.4s ease-in-out;
-}
-.slider-track img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  flex-shrink: 0;
-}
+.slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
+.slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
 .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
 .intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; }
 .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; }
@@ -46,71 +36,24 @@ footer { text-align: center; font-size: 0.8rem; color: #666; padding: 1rem 0 1.5
 .page.active { display: block; }
 .back-button { display: flex; align-items: center; gap: 8px; color: #830051; font-weight: 600; cursor: pointer; margin-bottom: 1rem; }
 .back-button span { font-size: 1.5rem; line-height: 1; }
-
 input, textarea, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; }
 button { background: #7b2cbf; color: white; border: none; cursor: pointer; }
 button:hover { background: #5a189a; }
-
 .rating { display: flex; gap: 10px; font-size: 1.8rem; margin: 0.5rem 0 1.5rem 0; cursor: pointer; }
 .rating span { transition: transform 0.2s, box-shadow 0.2s; padding: 5px; border-radius: 8px; }
 .rating span:hover { transform: scale(1.3); }
 .rating span.selected { box-shadow: 0 0 0 3px #830051 inset; }
-
 .number-rating { display: flex; gap: 6px; margin: 0.5rem 0 1.5rem 0; }
 .number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #c0c0c0; font-weight: 600; transition: background 0.2s, color 0.2s; color: #444; }
 .number-rating button.selected { background-color: #830051; color: #fff; }
-
 label { display: block; margin-top: 1rem; }
 
 /* --- MODALES --- */
-.modal { 
-  display: none; 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  min-height: 100vh; 
-  background: rgba(0,0,0,0.5); 
-  align-items: center; 
-  justify-content: center; 
-  z-index: 100; 
-  overflow-y: auto; 
-}
-
-.modal-content { 
-  background: white; 
-  padding: 2rem 1.5rem 1.5rem; 
-  border-radius: 1rem; 
-  max-width: 450px; 
-  width: 90%; 
-  position: relative; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
-  max-height: 90vh; 
-  overflow-y: auto; 
-}
-
-.modal-content h3 { 
-  margin-top: 0; 
-  margin-bottom: 1rem; 
-  color: #830051; 
-  font-family: 'Playfair Display', serif; 
-  text-align: center; 
-}
-
-.modal-content ul { 
-  padding-left: 20px; 
-  margin: 0 0 1rem 0; 
-}
-
-.modal-close { 
-  position: absolute; 
-  top: 15px; 
-  left: 15px; 
-  font-size: 1.5rem; 
-  cursor: pointer; 
-  color: #830051; 
-  font-weight: bold; 
-}
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; min-height: 100vh; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; overflow-y: auto; }
+.modal-content { background: white; padding: 2rem 1.5rem 1.5rem; border-radius: 1rem; max-width: 450px; width: 90%; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
+.modal-content h3 { margin-top: 0; margin-bottom: 1rem; color: #830051; font-family: 'Playfair Display', serif; text-align: center; }
+.modal-content ul { padding-left: 20px; margin: 0 0 1rem 0; }
+.modal-close { position: absolute; top: 15px; left: 15px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
 
 /* --- MODALES RESPONSIVE PARA MÓVIL --- */
 @media (max-width: 600px) {
@@ -129,7 +72,6 @@ label { display: block; margin-top: 1rem; }
 </style>
 </head>
 <body>
-
 <nav id="navbar">
   <img src="./hotel/IHG-Logo.png" alt="IHG Logo" id="ihgLogo">
   <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo" id="crowneLogo">
@@ -296,100 +238,161 @@ label { display: block; margin-top: 1rem; }
       <button type="button">7</button><button type="button">8</button><button type="button">9</button>
       <button type="button">10</button>
     </div>
-    <label>Comments</label>
-    <textarea placeholder="Write your comments here"></textarea>
-    <button type="submit" style="background-color: #830051;" disabled>Submit</button>
+    <label>Additional Comments</label>
+    <textarea placeholder="Your comments..."></textarea>
+    <button type="submit" style="background-color:#830051;" disabled>Send</button>
   </form>
 </div>
 
-<footer>© 2025 Crowne Plaza Riyadh</footer>
+<div id="confirmModal" class="confirm-modal">
+  <div class="confirm-modal-content">
+    <span class="confirm-close" onclick="closeConfirm()">&times;</span>
+    <p id="confirmMessage"></p>
+  </div>
+</div>
+
+<footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  /* --- NAVIGATE BETWEEN PAGES --- */
-  function navigateTo(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-  }
-  window.navigateTo = navigateTo;
-
-  /* --- SLIDER --- */
-  const sliderTrack = document.getElementById('sliderTrack');
-  const slides = sliderTrack.children.length;
-  let currentSlide = 0;
-
-  function updateSlide() {
-    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }
-
-  document.getElementById('prevSlide').addEventListener('click', () => {
-    currentSlide = (currentSlide - 1 + slides) % slides;
-    updateSlide();
+// --- PAGES ---
+const pages = document.querySelectorAll('.page');
+function navigateTo(id) {
+  pages.forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  history.pushState({ page: id }, "", "#" + id);
+  document.querySelectorAll('form').forEach(f => {
+    f.reset();
+    f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
   });
+}
 
-  document.getElementById('nextSlide').addEventListener('click', () => {
-    currentSlide = (currentSlide + 1) % slides;
-    updateSlide();
-  });
+// --- MODALS ---
+function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; }
+document.querySelectorAll('.modal').forEach(modal => { modal.addEventListener('click', e => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } }); });
 
-  /* --- TOUCH SLIDER --- */
-  let startX = 0;
-  sliderTrack.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-  sliderTrack.addEventListener('touchend', e => {
-    const endX = e.changedTouches[0].clientX;
-    if (endX - startX > 50) currentSlide = (currentSlide - 1 + slides) % slides;
-    else if (startX - endX > 50) currentSlide = (currentSlide + 1) % slides;
-    updateSlide();
-  });
+function showConfirm(msg){
+  document.getElementById('confirmMessage').textContent=msg;
+  document.getElementById('confirmModal').style.display='flex';
+}
+function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; }
 
-  /* --- MODALS --- */
-  window.openModal = id => document.getElementById(id).style.display = 'flex';
-  window.closeModal = id => document.getElementById(id).style.display = 'none';
-  document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.style.display='none'; }));
+// --- SLIDER HERO ---
+const sliderTrack = document.getElementById('sliderTrack');
+let currentSlide = 0;
+const slides = sliderTrack.children.length;
+function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; }
+document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
+document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); }
+let startX, moveX;
+sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX);
+sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; });
+sliderTrack.addEventListener('touchend', e=>{ if(startX-moveX>40) currentSlide=(currentSlide+1)%slides; else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides; updateSlide(); });
 
-  /* --- CHECK-IN FORM --- */
-  const checkinForm = document.querySelector('#checkinPage form');
-  const checkinButton = checkinForm.querySelector('button');
-  checkinForm.addEventListener('input', () => {
-    const filled = [...checkinForm.querySelectorAll('input')].every(i => i.value.trim() !== '');
-    checkinButton.disabled = !filled;
-  });
-
-  /* --- SURVEY FORM --- */
-  const surveyForm = document.getElementById('surveyForm');
-  const surveyButton = surveyForm.querySelector('button');
-  const ratingGroups = surveyForm.querySelectorAll('.rating');
-  const numberButtons = surveyForm.querySelectorAll('.number-rating button');
-
-  // Rating stars
-  ratingGroups.forEach(group => {
-    const stars = group.querySelectorAll('span');
-    stars.forEach((star,i) => {
-      star.addEventListener('click', () => {
-        stars.forEach(s => s.classList.remove('selected'));
-        for(let j=0;j<=i;j++) stars[j].classList.add('selected');
-        checkSurveyValid();
-      });
+// --- SURVEY RATINGS ---
+document.querySelectorAll('.rating').forEach(rating => {
+  rating.querySelectorAll('span').forEach((emoji) => {
+    emoji.addEventListener('click', () => {
+      const alreadySelected = emoji.classList.contains('selected');
+      rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
+      if (!alreadySelected) emoji.classList.add('selected');
     });
   });
-
-  // Number rating
-  numberButtons.forEach(btn => btn.addEventListener('click', () => {
-    numberButtons.forEach(b=>b.classList.remove('selected'));
-    btn.classList.add('selected');
-    checkSurveyValid();
-  }));
-
-  function checkSurveyValid() {
-    const ratingsFilled = Array.from(ratingGroups).every(group => group.querySelector('span.selected'));
-    const numberFilled = surveyForm.querySelector('.number-rating button.selected');
-    surveyButton.disabled = !(ratingsFilled && numberFilled);
-  }
-
-  surveyForm.addEventListener('input', checkSurveyValid);
 });
-</script>
+document.querySelectorAll('.number-rating button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const alreadySelected = btn.classList.contains('selected');
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+    if (!alreadySelected) btn.classList.add('selected');
+  });
+});
+document.getElementById('surveyForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  showConfirm('Survey submitted! Thank you.');
+  e.target.reset();
+  document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
+});
 
+// --- CHECK-IN FORM CONFIRM ---
+const checkinForm = document.querySelector('#checkinPage form');
+checkinForm.addEventListener('submit', e => {
+  e.preventDefault();
+  showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
+  e.target.reset();
+});
+
+// --- NAVBAR CLICK SCROLL TOP ---
+document.getElementById('navbar').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// --- EXTERNAL LINKS ---
+document.querySelectorAll('a[data-external]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const url = link.getAttribute('href');
+    history.pushState({ external: true, externalUrl: url }, "", "#external");
+    window.location.href = url;
+  });
+});
+
+// --- HANDLE BACK/FORWARD ---
+window.addEventListener('popstate', (event) => {
+  if(event.state){
+    if(event.state.external){
+      if(window.location.href.indexOf(event.state.externalUrl)===-1){
+        window.location.href = event.state.externalUrl;
+      }
+    } else if(event.state.page){
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(event.state.page).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  } else {
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById('homePage').classList.add('active');
+    history.replaceState({ page:'homePage' },"","#homePage");
+  }
+});
+
+// --- PAGESHOW: fix back/forward cache ---
+window.addEventListener('pageshow', (event) => {
+  if(event.persisted){
+    if(!location.hash || location.hash==="#external"){
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById('homePage').classList.add('active');
+      history.replaceState({ page:'homePage' },"","#homePage");
+    }
+  }
+});
+
+// --- HOVER EFFECT PARA TOUCH EN MÓVIL ---
+document.querySelectorAll('.section-button').forEach(btn => {
+  btn.addEventListener('touchstart', () => btn.classList.add('touching'));
+  btn.addEventListener('touchend', () => btn.classList.remove('touching'));
+  btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
+});
+
+// --- CHECK-IN VALIDATION ---
+const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
+function validateCheckin() {
+  const inputs = checkinForm.querySelectorAll('input');
+  const isValid = Array.from(inputs).every(input => input.value.trim() !== "");
+  checkinSubmit.disabled = !isValid;
+}
+checkinForm.querySelectorAll('input').forEach(input => { input.addEventListener('input', validateCheckin); });
+
+// --- SURVEY VALIDATION ---
+const surveySubmit = surveyForm.querySelector('button[type="submit"]');
+function validateSurvey() {
+  const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating')).every(r => r.querySelector('span.selected') !== null );
+  const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
+  surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
+}
+surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => { el.addEventListener('click', () => setTimeout(validateSurvey, 50)); });
+surveySubmit.disabled = true;
+</script>
 </body>
 </html>
+
