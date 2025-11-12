@@ -346,6 +346,29 @@ document.getElementById('navbar').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+  // --- CONTROL DE HISTORIAL (para volver atrás siempre al home) ---
+window.addEventListener('popstate', () => {
+  // Siempre volver a la página principal
+  showPage('homePage');
+});
+
+// Cada vez que cambias de página, añade una entrada al historial
+function showPage(id) {
+  document.querySelectorAll('form').forEach(f => {
+    f.reset();
+    f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+  });
+  pages.forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Solo añadimos al historial si no es home (para evitar bucles)
+  if (id !== 'homePage') {
+    history.pushState({ page: id }, "", "#" + id);
+  }
+}
+
+
 </script>
 </body>
 </html>
