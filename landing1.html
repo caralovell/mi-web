@@ -432,6 +432,8 @@ document.querySelectorAll('.section-button').forEach(btn => {
 document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
     const imgAlt = btn.querySelector('img')?.alt || '';
     if(['Pool','Fitness Center','Spa'].includes(imgAlt)){
+        const originalContent = btn.innerHTML; // <--- guardar antes de vaciar
+
         btn.classList.add('flip-card');
         btn.style.position = 'relative';
         btn.style.height = '100%';
@@ -441,14 +443,13 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
         front.className = 'flip-front';
         front.style.width = '100%';
         front.style.height = '100%';
-        front.innerHTML = btn.innerHTML;
+        front.innerHTML = originalContent; // <--- usar contenido guardado
 
         // Back
         const back = document.createElement('div');
         back.className = 'flip-back';
         back.style.width = '100%';
         back.style.height = '100%';
-
         if(imgAlt==='Pool'){
             back.innerHTML = `<h3>Pool</h3><p><strong>Location:</strong> Outdoor</p>
             <p><strong>Daily fee:</strong> 100 SAR</p>
@@ -463,15 +464,14 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
             <p>Relax and enjoy our services in a calm environment.</p>`;
         }
 
-        // Limpiar y añadir front/back
         btn.innerHTML = '';
         btn.appendChild(front);
         btn.appendChild(back);
 
-        // Click para voltear
         btn.addEventListener('click', () => btn.classList.toggle('flipped'));
     }
 });
+
 
 // --- LOGOS: IR A PÁGINA PRINCIPAL ---
 const ihgLogo = document.getElementById('ihgLogo');
