@@ -414,9 +414,18 @@ document.querySelectorAll('.section-button').forEach(btn => {
 document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
     const imgAlt = btn.querySelector('img')?.alt || '';
     if(['Pool','Fitness Center','Spa'].includes(imgAlt)){
+        // Aseguramos que btn tenga flip-card
         btn.classList.add('flip-card');
-        const front = document.createElement('div'); front.className = 'flip-front'; front.innerHTML = btn.innerHTML;
-        const back = document.createElement('div'); back.className = 'flip-back';
+
+        // Guardamos contenido frontal
+        const front = document.createElement('div');
+        front.className = 'flip-front';
+        front.innerHTML = btn.innerHTML;
+
+        // Creamos contenido trasero
+        const back = document.createElement('div');
+        back.className = 'flip-back';
+
         if(imgAlt==='Pool'){
             back.innerHTML = `<h3>Pool</h3><p><strong>Location:</strong> Outdoor</p>
             <p><strong>Daily fee:</strong> 100 SAR</p>
@@ -430,12 +439,17 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
             <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p>
             <p>Relax and enjoy our services in a calm environment.</p>`;
         }
-        btn.innerHTML = ''; 
-        btn.appendChild(front); 
-        btn.appendChild(back); 
+
+        // Limpiamos el contenido original y añadimos front/back
+        btn.innerHTML = '';
+        btn.appendChild(front);
+        btn.appendChild(back);
+
+        // Listener de click
         btn.addEventListener('click', () => btn.classList.toggle('flipped'));
     }
 });
+
 
     // --- FLIP CARD HANDLER ---
 document.querySelectorAll('.flip-card').forEach(card => {
