@@ -442,6 +442,17 @@ document.querySelectorAll('.flip-card').forEach(card => {
     card.addEventListener('click', () => card.classList.toggle('flipped'));
 });
 
+  // --- LOGOS: IR A PÁGINA PRINCIPAL ---
+const ihgLogo = document.getElementById('ihgLogo');
+const crowneLogo = document.getElementById('crowneLogo');
+
+[ihgLogo, crowneLogo].forEach(logo => {
+    logo.addEventListener('click', () => {
+        navigateTo('homePage');
+    });
+});
+
+
 </script>
 
 </body> 
