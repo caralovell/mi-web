@@ -110,6 +110,24 @@ label { display: block; margin-top: 1rem; }
 #surveyButton { order: 99; } 
 @media(min-width:1024px){ #surveyButton { order: initial; } }
 
+    /* Botones deshabilitados */
+button:disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+/* Mensaje de validación */
+.validation-message {
+    color: #d62828;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+
 </style> 
 </head> 
 <body> 
@@ -201,7 +219,8 @@ label { display: block; margin-top: 1rem; }
 <input type="email" placeholder="e.g. john@example.com"> 
 <label>Reservation Number</label> 
 <input type="text" placeholder="e.g. 123456"> 
-<button type="submit" style="background-color: #830051;" disabled>Confirm</button> 
+<p class="validation-message" id="checkinValidation">You have to complete all the fields.</p>
+<button type="submit" style="background-color: #830051;" disabled>Confirm</button>
 </form> 
 </div> 
 
@@ -253,7 +272,8 @@ label { display: block; margin-top: 1rem; }
 </div> 
 <label>Additional Comments</label> 
 <textarea placeholder="Your comments..."></textarea> 
-<button type="submit" style="background-color:#830051;" disabled>Send</button> 
+<p class="validation-message" id="surveyValidation">You have to complete all the fields.</p>
+<button type="submit" style="background-color:#830051;" disabled>Send</button>
 </form> 
 </div> 
 
@@ -365,17 +385,28 @@ function validateSurvey(){
     const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
                                   .every(r => r.querySelector('span.selected'));
     const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
-    surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
+    const isValid = allRatingsSelected && numberRatingSelected;
+
+    surveySubmit.disabled = !isValid;
+
+    // Mostrar u ocultar mensaje
+    document.getElementById('surveyValidation').style.display = isValid ? 'none' : 'block';
 }
+
 
 // --- CHECK-IN FORM ---
 const checkinForm = document.querySelector('#checkinPage form');
 const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
 checkinSubmit.disabled = true;
 checkinForm.addEventListener('input', () => {
-    const isValid = Array.from(checkinForm.querySelectorAll('input')).every(i => i.value.trim() !== '');
+    const isValid = Array.from(checkinForm.querySelectorAll('input'))
+                          .every(i => i.value.trim() !== '');
     checkinSubmit.disabled = !isValid;
+
+    // Mostrar u ocultar mensaje
+    document.getElementById('checkinValidation').style.display = isValid ? 'none' : 'block';
 });
+
 checkinForm.addEventListener('submit', e => {
     e.preventDefault();
     showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
