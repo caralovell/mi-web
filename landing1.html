@@ -237,131 +237,223 @@ label { display: block; margin-top: 1rem; }
 
 <footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer> 
 
-<script> 
-// --- PAGES --- 
-const pages = document.querySelectorAll('.page'); 
-function navigateTo(id) { 
-pages.forEach(p => p.classList.remove('active')); 
-document.getElementById(id).classList.add('active'); 
-window.scrollTo({ top: 0, behavior: 'smooth' }); 
-history.pushState({ page: id }, "", "#" + id); 
-document.querySelectorAll('form').forEach(f => { f.reset(); f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected')); }); 
-} 
+<script>
+// --- PAGES NAVIGATION ---
+const pages = document.querySelectorAll('.page');
+function navigateTo(id) {
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.pushState({ page: id }, "", "#" + id);
 
-// --- MODALS --- 
-function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; } 
-function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; } 
-document.querySelectorAll('.modal').forEach(modal => { 
-modal.addEventListener('click', e => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } }); 
-}); 
-function showConfirm(msg){ document.getElementById('confirmMessage').textContent=msg; document.getElementById('confirmModal').style.display='flex'; } 
-function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; } 
+    // Reset forms and ratings
+    document.querySelectorAll('form').forEach(f => {
+        f.reset();
+        f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+    });
 
-// --- SLIDER HERO --- 
-const sliderTrack = document.getElementById('sliderTrack'); 
-let currentSlide = 0; 
-const slides = sliderTrack.children.length; 
-function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; } 
-document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); } 
-document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); } 
-let startX, moveX; 
-sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX); 
-sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; }); 
-sliderTrack.addEventListener('touchend', e=>{ if(startX-moveX>40) currentSlide=(currentSlide+1)%slides; else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides; updateSlide(); }); 
-
-// --- SURVEY RATINGS --- 
-document.querySelectorAll('.rating').forEach(rating => { rating.querySelectorAll('span').forEach((emoji) => { emoji.addEventListener('click', () => { const alreadySelected = emoji.classList.contains('selected'); rating.querySelectorAll('span').forEach(e => e.classList.remove('selected')); if (!alreadySelected) emoji.classList.add('selected'); }); }); }); 
-document.querySelectorAll('.number-rating button').forEach(btn => { btn.addEventListener('click', () => { const alreadySelected = btn.classList.contains('selected'); btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected')); if (!alreadySelected) btn.classList.add('selected'); }); }); 
-document.getElementById('surveyForm').addEventListener('submit', e=>{ e.preventDefault(); showConfirm('Survey submitted! Thank you.'); e.target.reset(); document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected')); }); 
-
-// --- CHECK-IN FORM CONFIRM --- 
-const checkinForm = document.querySelector('#checkinPage form'); 
-checkinForm.addEventListener('submit', e => { e.preventDefault(); showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay."); e.target.reset(); }); 
-
-// --- NAVBAR CLICK SCROLL TOP --- 
-document.getElementById('navbar').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); 
-
-// --- EXTERNAL LINKS --- 
-document.querySelectorAll('a[data-external]').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); const url = link.getAttribute('href'); history.pushState({ external: true, externalUrl: url }, "", "#external"); window.location.href = url; }); }); 
-
-// --- HANDLE BACK/FORWARD --- 
-window.addEventListener('popstate', (event) => { 
-if(event.state){ 
-if(event.state.external){ if(window.location.href.indexOf(event.state.externalUrl)===-1){ window.location.href = event.state.externalUrl; } } 
-else if(event.state.page){ pages.forEach(p => p.classList.remove('active')); document.getElementById(event.state.page).classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); } } 
-else { pages.forEach(p => p.classList.remove('active')); document.getElementById('homePage').classList.add('active'); history.replaceState({ page:'homePage' },"","#homePage"); } 
-}); 
-
-// --- PAGESHOW: fix back/forward cache --- 
-window.addEventListener('pageshow', (event) => { if(event.persisted){ if(!location.hash || location.hash==="#external"){ pages.forEach(p => p.classList.remove('active')); document.getElementById('homePage').classList.add('active'); history.replaceState({ page:'homePage' },"","#homePage"); } } }); 
-
-// --- HOVER EFFECT PARA TOUCH EN MÓVIL --- 
-document.querySelectorAll('.section-button').forEach(btn => { btn.addEventListener('touchstart', () => btn.classList.add('touching')); btn.addEventListener('touchend', () => btn.classList.remove('touching')); btn.addEventListener('touchcancel', () => btn.classList.remove('touching')); }); 
-
-// --- CHECK-IN VALIDATION --- 
-const checkinSubmit = checkinForm.querySelector('button[type="submit"]'); 
-function validateCheckin() { const inputs = checkinForm.querySelectorAll('input'); const isValid = Array.from(inputs).every(input => input.value.trim() !== ""); checkinSubmit.disabled = !isValid; } 
-checkinForm.querySelectorAll('input').forEach(input => { input.addEventListener('input', validateCheckin); }); 
-
-// --- SURVEY VALIDATION --- 
-const surveySubmit = surveyForm.querySelector('button[type="submit"]'); 
-function validateSurvey() { const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating')).every(r => r.querySelector('span.selected') !== null ); const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null; surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected); } 
-surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => { el.addEventListener('click', () => setTimeout(validateSurvey, 50)); }); 
-surveySubmit.disabled = true; 
-
-// --- CARD FLIP PARA SERVICES (Pool, Fitness, Spa) --- 
-document.querySelectorAll('#servicesPage .section-button').forEach(btn => { 
-const imgAlt = btn.querySelector('img')?.alt || ''; 
-if(['Pool','Fitness Center','Spa'].includes(imgAlt)){ 
-btn.classList.add('flip-card'); 
-const front = document.createElement('div'); front.className = 'flip-front'; front.innerHTML = btn.innerHTML; 
-const back = document.createElement('div'); back.className = 'flip-back'; 
-if(imgAlt==='Pool'){
-    back.innerHTML = `
-    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-        <div style="flex:1; min-width:150px;">
-            <p><strong>Location:</strong> Outdoor</p>
-            <p><strong>Daily fee:</strong> 100 SAR</p>
-            <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>
-        </div>
-        <div style="flex:1; min-width:150px;">
-            <p><strong>Features:</strong></p>
-            <ul>
-                <li>Children's pool</li>
-                <li>Heated pool</li>
-                <li>Pool side lounge chairs</li>
-                <li>Towel service</li>
-                <li>Umbrellas</li>
-            </ul>
-        </div>
-    </div>`;
-else if(imgAlt==='Fitness Center'){
-    back.innerHTML = `
-    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-        <div style="flex:1; min-width:150px;">
-            <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p>
-            <p><strong>Average charge:</strong> 200 SAR</p>
-        </div>
-        <div style="flex:1; min-width:150px;">
-            <p><strong>Features:</strong></p>
-            <ul>
-                <li>Elliptical machines</li>
-                <li>Free weights</li>
-                <li>Rower</li>
-                <li>Stationary bicycle</li>
-                <li>Treadmill</li>
-                <li>Onsite sports trainer</li>
-            </ul>
-        </div>
-    </div>`;
+    // Disable submit buttons again
+    const checkinSubmit = document.querySelector('#checkinPage form button[type="submit"]');
+    if(checkinSubmit) checkinSubmit.disabled = true;
+    const surveySubmit = document.querySelector('#surveyForm button[type="submit"]');
+    if(surveySubmit) surveySubmit.disabled = true;
 }
-else if(imgAlt==='Spa'){ back.innerHTML = `<h3>Spa</h3> <p><strong>Phone number:</strong> 966-011-8131313</p> <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p> <p>Relax and enjoy our services in a calm environment.</p>`; } 
-btn.innerHTML = ''; 
-btn.appendChild(front); 
-btn.appendChild(back); 
-btn.addEventListener('click', () => { btn.classList.toggle('flipped'); }); 
-} 
-}); 
-</script> 
+
+// --- MODALS ---
+function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', e => {
+        if(e.target === modal) closeModal(modal.id);
+    });
+});
+function showConfirm(msg){
+    document.getElementById('confirmMessage').textContent = msg;
+    document.getElementById('confirmModal').style.display = 'flex';
+}
+function closeConfirm(){
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+// --- HERO SLIDER ---
+const sliderTrack = document.getElementById('sliderTrack');
+let currentSlide = 0;
+const slides = sliderTrack.children.length;
+function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; }
+document.getElementById('prevSlide').onclick = () => { currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
+document.getElementById('nextSlide').onclick = () => { currentSlide = (currentSlide+1)%slides; updateSlide(); }
+let startX, moveX;
+sliderTrack.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+sliderTrack.addEventListener('touchmove', e => moveX = e.touches[0].clientX);
+sliderTrack.addEventListener('touchend', e => {
+    if(startX-moveX>40) currentSlide=(currentSlide+1)%slides;
+    else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides;
+    updateSlide();
+});
+
+// --- SURVEY RATINGS ---
+const surveyForm = document.getElementById('surveyForm');
+surveyForm.querySelectorAll('.rating').forEach(rating => {
+    rating.querySelectorAll('span').forEach(emoji => {
+        emoji.addEventListener('click', () => {
+            const alreadySelected = emoji.classList.contains('selected');
+            rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
+            if(!alreadySelected) emoji.classList.add('selected');
+            validateSurvey();
+        });
+    });
+});
+surveyForm.querySelectorAll('.number-rating button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const alreadySelected = btn.classList.contains('selected');
+        btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+        if(!alreadySelected) btn.classList.add('selected');
+        validateSurvey();
+    });
+});
+const surveySubmit = surveyForm.querySelector('button[type="submit"]');
+surveySubmit.disabled = true;
+surveyForm.addEventListener('submit', e => {
+    e.preventDefault();
+    showConfirm('Survey submitted! Thank you.');
+    surveyForm.reset();
+    surveyForm.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+    surveySubmit.disabled = true;
+});
+function validateSurvey(){
+    const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
+                                  .every(r => r.querySelector('span.selected'));
+    const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
+    surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
+}
+
+// --- CHECK-IN FORM ---
+const checkinForm = document.querySelector('#checkinPage form');
+const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
+checkinSubmit.disabled = true;
+checkinForm.addEventListener('input', () => {
+    const isValid = Array.from(checkinForm.querySelectorAll('input')).every(i => i.value.trim() !== '');
+    checkinSubmit.disabled = !isValid;
+});
+checkinForm.addEventListener('submit', e => {
+    e.preventDefault();
+    showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
+    checkinForm.reset();
+    checkinSubmit.disabled = true;
+});
+
+// --- NAVBAR CLICK SCROLL TOP ---
+document.getElementById('navbar').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// --- EXTERNAL LINKS ---
+document.querySelectorAll('a[data-external]').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const url = link.getAttribute('href');
+        history.pushState({ external: true, externalUrl: url }, "", "#external");
+        window.location.href = url;
+    });
+});
+
+// --- HANDLE BACK/FORWARD ---
+window.addEventListener('popstate', event => {
+    if(event.state){
+        if(event.state.external){
+            if(window.location.href.indexOf(event.state.externalUrl) === -1)
+                window.location.href = event.state.externalUrl;
+        } else if(event.state.page){
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById(event.state.page).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    } else {
+        pages.forEach(p => p.classList.remove('active'));
+        document.getElementById('homePage').classList.add('active');
+        history.replaceState({ page:'homePage' },"","#homePage");
+    }
+});
+
+// --- PAGESHOW: fix back/forward cache ---
+window.addEventListener('pageshow', event => {
+    if(event.persisted){
+        if(!location.hash || location.hash==="#external"){
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            history.replaceState({ page:'homePage' },"","#homePage");
+        }
+    }
+});
+
+// --- HOVER EFFECT FOR TOUCH DEVICES ---
+document.querySelectorAll('.section-button').forEach(btn => {
+    btn.addEventListener('touchstart', () => btn.classList.add('touching'));
+    btn.addEventListener('touchend', () => btn.classList.remove('touching'));
+    btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
+});
+
+// --- CARD FLIP FOR SERVICES ---
+document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
+    const imgAlt = btn.querySelector('img')?.alt || '';
+    if(['Pool','Fitness Center','Spa'].includes(imgAlt)){
+        btn.classList.add('flip-card');
+        const front = document.createElement('div'); front.className = 'flip-front'; front.innerHTML = btn.innerHTML;
+        const back = document.createElement('div'); back.className = 'flip-back';
+        if(imgAlt==='Pool'){
+            back.innerHTML = `<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <div style="flex:1; min-width:150px;">
+                    <p><strong>Location:</strong> Outdoor</p>
+                    <p><strong>Daily fee:</strong> 100 SAR</p>
+                    <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>
+                </div>
+                <div style="flex:1; min-width:150px;">
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Children's pool</li>
+                        <li>Heated pool</li>
+                        <li>Pool side lounge chairs</li>
+                        <li>Towel service</li>
+                        <li>Umbrellas</li>
+                    </ul>
+                </div>
+            </div>`;
+        } else if(imgAlt==='Fitness Center'){
+            back.innerHTML = `<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <div style="flex:1; min-width:150px;">
+                    <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p>
+                    <p><strong>Average charge:</strong> 200 SAR</p>
+                </div>
+                <div style="flex:1; min-width:150px;">
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Elliptical machines</li>
+                        <li>Free weights</li>
+                        <li>Rower</li>
+                        <li>Stationary bicycle</li>
+                        <li>Treadmill</li>
+                        <li>Onsite sports trainer</li>
+                    </ul>
+                </div>
+            </div>`;
+        } else if(imgAlt==='Spa'){
+            back.innerHTML = `<h3>Spa</h3><p><strong>Phone number:</strong> 966-011-8131313</p>
+            <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p>
+            <p>Relax and enjoy our services in a calm environment.</p>`;
+        }
+        btn.innerHTML = ''; 
+        btn.appendChild(front); 
+        btn.appendChild(back); 
+        btn.addEventListener('click', () => btn.classList.toggle('flipped'));
+    }
+});
+</script>
+
 </body> 
 </html>
