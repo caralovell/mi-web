@@ -316,8 +316,45 @@ if(['Pool','Fitness Center','Spa'].includes(imgAlt)){
 btn.classList.add('flip-card'); 
 const front = document.createElement('div'); front.className = 'flip-front'; front.innerHTML = btn.innerHTML; 
 const back = document.createElement('div'); back.className = 'flip-back'; 
-if(imgAlt==='Pool'){ back.innerHTML = `<h3>Pool</h3> <p><strong>Location:</strong> Outdoor</p> <p><strong>Daily fee:</strong> 100 SAR</p> <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p> <p><strong>Features:</strong></p> <ul> <li>Children's pool</li> <li>Heated pool</li> <li>Pool side lounge chairs</li> <li>Towel service</li> <li>Umbrellas</li> </ul>`; } 
-else if(imgAlt==='Fitness Center'){ back.innerHTML = `<h3>Fitness Center</h3> <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p> <p><strong>Average charge:</strong> 200 SAR</p> <p><strong>Features:</strong></p> <ul> <li>Elliptical machines</li> <li>Free weights</li> <li>Rower</li> <li>Stationary bicycle</li> <li>Treadmill</li> <li>Onsite sports trainer</li> </ul>`; } 
+if(imgAlt==='Pool'){
+    back.innerHTML = `
+    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <div style="flex:1; min-width:150px;">
+            <p><strong>Location:</strong> Outdoor</p>
+            <p><strong>Daily fee:</strong> 100 SAR</p>
+            <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>
+        </div>
+        <div style="flex:1; min-width:150px;">
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Children's pool</li>
+                <li>Heated pool</li>
+                <li>Pool side lounge chairs</li>
+                <li>Towel service</li>
+                <li>Umbrellas</li>
+            </ul>
+        </div>
+    </div>`;
+else if(imgAlt==='Fitness Center'){
+    back.innerHTML = `
+    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <div style="flex:1; min-width:150px;">
+            <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p>
+            <p><strong>Average charge:</strong> 200 SAR</p>
+        </div>
+        <div style="flex:1; min-width:150px;">
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Elliptical machines</li>
+                <li>Free weights</li>
+                <li>Rower</li>
+                <li>Stationary bicycle</li>
+                <li>Treadmill</li>
+                <li>Onsite sports trainer</li>
+            </ul>
+        </div>
+    </div>`;
+}
 else if(imgAlt==='Spa'){ back.innerHTML = `<h3>Spa</h3> <p><strong>Phone number:</strong> 966-011-8131313</p> <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p> <p>Relax and enjoy our services in a calm environment.</p>`; } 
 btn.innerHTML = ''; 
 btn.appendChild(front); 
