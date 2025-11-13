@@ -213,11 +213,11 @@ button:disabled {
 <div id="checkinPage" class="page"> 
 <h2>Online Check-in</h2> 
 <form> 
-<label>Full Name</label> 
+<label>Full Name *</label> 
 <input type="text" placeholder="e.g. John Doe"> 
-<label>Email</label> 
+<label>Email *</label> 
 <input type="email" placeholder="e.g. john@example.com"> 
-<label>Reservation Number</label> 
+<label>Reservation Number *</label> 
 <input type="text" placeholder="e.g. 123456"> 
 <p class="validation-message" id="checkinValidation">You have to complete all the fields.</p>
 <button type="submit" style="background-color: #830051;" disabled>Confirm</button>
@@ -247,23 +247,23 @@ button:disabled {
 <div id="surveyPage" class="page"> 
 <h2>Satisfaction Survey</h2> 
 <form id="surveyForm"> 
-<label><strong>Overall Experience</strong></label> 
+<label><strong>Overall Experience *</strong></label> 
 <div class="rating"> 
 <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
 </div> 
-<label><strong>Reservation Process</strong></label> 
+<label><strong>Reservation Process *</strong></label> 
 <div class="rating"> 
 <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
 </div> 
-<label><strong>Staff</strong></label> 
+<label><strong>Staff *</strong></label> 
 <div class="rating"> 
 <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
 </div> 
-<label><strong>Room</strong></label> 
+<label><strong>Room *</strong></label> 
 <div class="rating"> 
 <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
 </div> 
-<label><strong>Rate us</strong></label> 
+<label><strong>Rate us *</strong></label> 
 <div class="number-rating"> 
 <button type="button">1</button><button type="button">2</button><button type="button">3</button> 
 <button type="button">4</button><button type="button">5</button><button type="button">6</button> 
@@ -381,17 +381,13 @@ surveyForm.addEventListener('submit', e => {
     surveyForm.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
     surveySubmit.disabled = true;
 });
-function validateSurvey(){
+    function validateSurvey(){
     const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
                                   .every(r => r.querySelector('span.selected'));
     const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
-    const isValid = allRatingsSelected && numberRatingSelected;
-
-    surveySubmit.disabled = !isValid;
-
-    // Mostrar u ocultar mensaje
-    document.getElementById('surveyValidation').style.display = isValid ? 'none' : 'block';
+    surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
 }
+
 
 
 // --- CHECK-IN FORM ---
@@ -399,13 +395,11 @@ const checkinForm = document.querySelector('#checkinPage form');
 const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
 checkinSubmit.disabled = true;
 checkinForm.addEventListener('input', () => {
-    const isValid = Array.from(checkinForm.querySelectorAll('input'))
+    const isValid = Array.from(checkinForm.querySelectorAll('input[required]'))
                           .every(i => i.value.trim() !== '');
     checkinSubmit.disabled = !isValid;
-
-    // Mostrar u ocultar mensaje
-    document.getElementById('checkinValidation').style.display = isValid ? 'none' : 'block';
 });
+
 
 checkinForm.addEventListener('submit', e => {
     e.preventDefault();
