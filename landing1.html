@@ -125,6 +125,79 @@ button:disabled {
     display: none;
 }
 
+    /* --- FLIPCARD STYLES --- */
+.flipcard {
+  background: transparent;
+  width: 100%;
+  height: 220px;
+  perspective: 1000px;
+  border-radius: 1rem;
+}
+
+.flipcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.flipcard.flipped .flipcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flipcard-front, .flipcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flipcard-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(65%);
+}
+
+.flipcard-front span {
+  position: absolute;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+.flipcard-back {
+  background-color: #fff;
+  transform: rotateY(180deg);
+  color: #333;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.flipcard-back h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.flipcard-back p {
+  margin: 0.3rem 0;
+}
+
+
 
 </style> 
 </head> 
@@ -221,24 +294,62 @@ button:disabled {
 </form> 
 </div> 
 
-<!-- SERVICES PAGE --> 
-<div id="servicesPage" class="page"> 
-<h2>Our Services</h2> 
-<div class="sections"> 
-<a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external> 
-<img src="./hotel/food.jpg" alt="Dining"><span>Dining</span> 
-</a> 
-<div class="section-button"> 
-<img src="./hotel/pool2.jpg" alt="Pool"><span>Pool</span> 
-</div> 
-<div class="section-button"> 
-<img src="./hotel/fitness.jpg" alt="Fitness Center"><span>Fitness Center</span> 
-</div> 
-<div class="section-button"> 
-<img src="./hotel/spa.jpg" alt="Spa"><span>Spa</span> 
-</div> 
-</div> 
-</div> 
+<!-- SERVICES PAGE -->
+<div id="servicesPage" class="page">
+  <h2>Our Services</h2>
+  <div class="sections">
+    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external>
+      <img src="./hotel/food.jpg" alt="Dining"><span>Dining</span>
+    </a>
+
+    <!-- Flipcard: Pool -->
+    <div class="flipcard">
+      <div class="flipcard-inner">
+        <div class="flipcard-front">
+          <img src="./hotel/pool2.jpg" alt="Pool">
+          <span>Pool</span>
+        </div>
+        <div class="flipcard-back">
+          <h3 style="color:#830051;">Pool</h3>
+          <p><strong>Location:</strong> Outdoor</p>
+          <p><strong>Daily fee:</strong> 100 SAR</p>
+          <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flipcard: Fitness Center -->
+    <div class="flipcard">
+      <div class="flipcard-inner">
+        <div class="flipcard-front">
+          <img src="./hotel/fitness.jpg" alt="Fitness Center">
+          <span>Fitness Center</span>
+        </div>
+        <div class="flipcard-back">
+          <h3 style="color:#830051;">Fitness Center</h3>
+          <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 AM</p>
+          <p><strong>Average charge:</strong> 200 SAR</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flipcard: Spa -->
+    <div class="flipcard">
+      <div class="flipcard-inner">
+        <div class="flipcard-front">
+          <img src="./hotel/spa.jpg" alt="Spa">
+          <span>Spa</span>
+        </div>
+        <div class="flipcard-back">
+          <h3 style="color:#830051;">Spa</h3>
+          <p><strong>Phone number:</strong> 966-011-8131313</p>
+          <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- SURVEY PAGE --> 
 <div id="surveyPage" class="page"> 
@@ -464,6 +575,14 @@ const crowneLogo = document.getElementById('crowneLogo');
 [ihgLogo, crowneLogo].forEach(logo => {
     if(logo) logo.addEventListener('click', () => navigateTo('homePage'));
 });
+
+    // --- FLIPCARD INTERACTION ---
+document.querySelectorAll('.flipcard').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+});
+
 
 </script>
 
