@@ -88,7 +88,32 @@ label { display: block; margin-top: 1rem; }
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .flip-card .flip-front { transform: rotateY(0deg); }
-.flip-card .flip-back { transform: rotateY(180deg); background: #fff; color: #333; padding: 1rem; overflow-y: auto; }
+.flip-card .flip-back {
+  transform: rotateY(180deg);
+  background: #fff;
+  color: #333;
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: 80vh; /* evita scroll total en móvil */
+  display: flex;
+  flex-direction: column;
+}
+.flip-card .flip-back h3 {
+  color: #830051; /* título morado Crowne Plaza */
+  margin-top: 0;
+  text-align: center;
+  flex-shrink: 0; /* que el título no se comprima */
+}
+.flip-card .flip-back ul {
+  padding-left: 20px;
+  margin: 0.5rem 0 0 0;
+  flex-shrink: 0;
+}
+.flip-card .flip-back p {
+  margin: 0.3rem 0;
+  flex-shrink: 0;
+}
+
 .flip-card.flipped .flip-front { transform: rotateY(-180deg); }
 .flip-card.flipped .flip-back { transform: rotateY(0deg); }
 
@@ -363,12 +388,16 @@ checkinForm.querySelectorAll('input').forEach(input => { input.addEventListener(
 // --- SURVEY VALIDATION ---
 const surveySubmit = surveyForm.querySelector('button[type="submit"]');
 function validateSurvey() {
-  const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating')).every(r => r.querySelector('span.selected') !== null );
-  const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
-  surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
+  const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
+    .every(rating => rating.querySelector('.selected'));
+  const numberSelected = surveyForm.querySelector('.number-rating .selected');
+  surveySubmit.disabled = !(allRatingsSelected && numberSelected);
 }
-surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => { el.addEventListener('click', () => setTimeout(validateSurvey, 50)); });
-surveySubmit.disabled = true;
+
+surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => {
+  el.addEventListener('click', validateSurvey);
+});
+
 
 // --- CARD FLIP PARA SERVICES (Pool, Fitness, Spa) ---
 document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
@@ -425,7 +454,17 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
     // Limpiamos contenido original y añadimos front/back
     btn.innerHTML = '';
     btn.appendChild(front);
-    btn.appendChild(back);
+btn.appendChild(back);
+
+// Ajustar altura del flip-back según la altura del botón y viewport
+function adjustFlipBackHeight() {
+  const vh = window.innerHeight;
+  const back = btn.querySelector('.flip-back');
+  back.style.maxHeight = Math.min(vh * 0.8, 400) + 'px'; // máximo 80% del viewport o 400px
+}
+adjustFlipBackHeight();
+window.addEventListener('resize', adjustFlipBackHeight);
+
 
     // Evento click para flip
     btn.addEventListener('click', () => {
