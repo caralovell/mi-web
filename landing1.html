@@ -1,251 +1,317 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Crowne Plaza</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* --- RESET BOX SIZING --- */
-*, *::before, *::after { box-sizing: border-box; }
-body { font-family: 'Roboto', sans-serif; margin: 0; background-color: #f8f8f8; color: #333; }
-nav { background-color: #ffffff; display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 10; }
-nav img { height: 45px; }
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+<meta charset="UTF-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<title>Crowne Plaza</title> 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+<style> 
+/* --- RESET BOX SIZING --- */ 
+*, *::before, *::after { box-sizing: border-box; } 
+body { font-family: 'Roboto', sans-serif; margin: 0; background-color: #f8f8f8; color: #333; } 
+nav { background-color: #ffffff; display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 10; } 
+nav img { height: 45px; } 
 
-/* --- HERO SLIDER --- */
-.hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
-.slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
-.slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
-.hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
-.intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; }
-.hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; }
-.hero-arrow.left { left: 10px; }
-.hero-arrow.right { right: 10px; }
+/* --- HERO SLIDER --- */ 
+.hero { position: relative; width: 100%; height: 400px; overflow: hidden; } 
+.slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; } 
+.slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; } 
+.hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; } 
+.intro-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap; z-index: 2; } 
+.hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; } 
+.hero-arrow.left { left: 10px; } 
+.hero-arrow.right { right: 10px; } 
 
-/* --- SECTIONS --- */
-.sections { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }
-.section-button { position: relative; height: 180px; border-radius: 1rem; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; touch-action: manipulation; }
-.section-button:hover, .section-button.touching { transform: scale(1.03); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
-.section-button img { width: 100%; height: 100%; object-fit: cover; filter: brightness(65%); }
-.section-button span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+/* --- SECTIONS --- */ 
+.sections { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 1rem; } 
+.section-button { position: relative; height: 180px; border-radius: 1rem; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; touch-action: manipulation; } 
+.section-button:hover, .section-button.touching { transform: scale(1.03); box-shadow: 0 6px 16px rgba(0,0,0,0.2); } 
+.section-button img { width: 100%; height: 100%; object-fit: cover; filter: brightness(65%); } 
+.section-button span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.6); } 
 
-/* --- FOOTER --- */
-footer { text-align: center; font-size: 0.8rem; color: #666; padding: 1rem 0 1.5rem; }
+footer { text-align: center; font-size: 0.8rem; color: #666; padding: 1rem 0 1.5rem; } 
 
-/* --- PÁGINAS INTERNAS --- */
-.page { display: none; padding: 1rem; height: auto; min-height: 0; }
-.page.active { display: block; }
-.back-button { display: flex; align-items: center; gap: 8px; color: #830051; font-weight: 600; cursor: pointer; margin-bottom: 1rem; }
-.back-button span { font-size: 1.5rem; line-height: 1; }
-input, textarea, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; }
-button { background: #7b2cbf; color: white; border: none; cursor: pointer; }
-button:hover { background: #5a189a; }
-.rating { display: flex; gap: 10px; font-size: 1.8rem; margin: 0.5rem 0 1.5rem 0; cursor: pointer; }
-.rating span { transition: transform 0.2s, box-shadow 0.2s; padding: 5px; border-radius: 8px; }
-.rating span:hover { transform: scale(1.3); }
-.rating span.selected { box-shadow: 0 0 0 3px #830051 inset; }
-.number-rating { display: flex; gap: 6px; margin: 0.5rem 0 1.5rem 0; }
-.number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #c0c0c0; font-weight: 600; transition: background 0.2s, color 0.2s; color: #444; }
-.number-rating button.selected { background-color: #830051; color: #fff; }
-label { display: block; margin-top: 1rem; }
+/* --- PÁGINAS INTERNAS --- */ 
+.page { display: none; padding: 1rem; height: auto; min-height: 0; } 
+.page.active { display: block; } 
+.back-button { display: flex; align-items: center; gap: 8px; color: #830051; font-weight: 600; cursor: pointer; margin-bottom: 1rem; } 
+.back-button span { font-size: 1.5rem; line-height: 1; } 
+input, textarea, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; } 
+button { background: #7b2cbf; color: white; border: none; cursor: pointer; } 
+button:hover { background: #5a189a; } 
+.rating { display: flex; gap: 10px; font-size: 1.8rem; margin: 0.5rem 0 1.5rem 0; cursor: pointer; } 
+.rating span { transition: transform 0.2s, box-shadow 0.2s; padding: 5px; border-radius: 8px; } 
+.rating span:hover { transform: scale(1.3); } 
+.rating span.selected { box-shadow: 0 0 0 3px #830051 inset; } 
+.number-rating { display: flex; gap: 6px; margin: 0.5rem 0 1.5rem 0; } 
+.number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #c0c0c0; font-weight: 600; transition: background 0.2s, color 0.2s; color: #444; } 
+.number-rating button.selected { background-color: #830051; color: #fff; } 
+label { display: block; margin-top: 1rem; } 
 
-/* --- MODALES --- */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; min-height: 100vh; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; overflow-y: auto; }
-.modal-content { background: white; padding: 2rem 1.5rem 1.5rem; border-radius: 1rem; max-width: 450px; width: 90%; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
-.modal-content h3 { margin-top: 0; margin-bottom: 1rem; color: #830051; font-family: 'Playfair Display', serif; text-align: center; }
-.modal-content ul { padding-left: 20px; margin: 0 0 1rem 0; }
-.modal-close { position: absolute; top: 15px; left: 15px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
+/* --- MODALES --- */ 
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; min-height: 100vh; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; overflow-y: auto; } 
+.modal-content { background: white; padding: 2rem 1.5rem 1.5rem; border-radius: 1rem; max-width: 450px; width: 90%; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; } 
+.modal-content h3 { margin-top: 0; margin-bottom: 1rem; color: #830051; font-family: 'Playfair Display', serif; text-align: center; } 
+.modal-content ul { padding-left: 20px; margin: 0 0 1rem 0; } 
+.modal-close { position: absolute; top: 15px; left: 15px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; } 
 
-/* --- MODALES RESPONSIVE PARA MÓVIL --- */
-@media (max-width: 600px) {
-  .modal { align-items: flex-start; padding-top: 2rem; min-height: 100vh; }
-  .modal-content { width: 95%; border-radius: 0.8rem; max-height: 85vh; }
-}
+/* --- MODALES RESPONSIVE PARA MÓVIL --- */ 
+@media (max-width: 600px) { 
+.modal { align-items: flex-start; padding-top: 2rem; min-height: 100vh; } 
+.modal-content { width: 95%; border-radius: 0.8rem; max-height: 85vh; } 
+} 
 
-/* --- Confirm modal --- */
-.confirm-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
-.confirm-modal-content { background: #fff; padding: 2rem; border-radius: 1rem; max-width: 400px; width: 90%; text-align: center; position: relative; }
-.confirm-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
+/* --- Confirm modal --- */ 
+.confirm-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; } 
+.confirm-modal-content { background: #fff; padding: 2rem; border-radius: 1rem; max-width: 400px; width: 90%; text-align: center; position: relative; } 
+.confirm-close { position: absolute; top: 10px; left: 10px; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; } 
 
-/* --- RESPONSIVE --- */
-@media (min-width: 600px) { .hero { height: 500px; } .intro-text { font-size: 2rem; } .sections { grid-template-columns: 1fr 1fr; } .section-button { height: 220px; } }
-@media (min-width: 1024px) { .hero { height: 600px; } .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; } .section-button { height: 260px; } }
+/* --- RESPONSIVE --- */ 
+@media (min-width: 600px) { 
+.hero { height: 500px; } 
+.intro-text { font-size: 2rem; } 
+.sections { grid-template-columns: 1fr 1fr; } 
+.section-button { height: 220px; } 
+} 
+@media (min-width: 1024px) { 
+.hero { height: 600px; } 
+.intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; } 
+.section-button { height: 260px; } 
+} 
 
-/* --- FLIP CARD --- */
-.flip-card { perspective: 1000px; position: relative; }
-.flip-card > div { width: 100%; height: 100%; backface-visibility: hidden; transition: transform 0.6s; position: absolute; top: 0; left: 0; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-.flip-card .flip-front { transform: rotateY(0deg); }
-.flip-card .flip-back { transform: rotateY(180deg); background: #fff; color: #333; padding: 1rem; overflow-y: auto; max-height: 80vh; display: flex; flex-direction: column; }
-.flip-card .flip-back h3 { color: #830051; margin-top: 0; text-align: center; flex-shrink: 0; }
-.flip-card .flip-back ul { padding-left: 20px; margin: 0.5rem 0 0 0; flex-shrink: 0; }
-.flip-card .flip-back p { margin: 0.3rem 0; flex-shrink: 0; }
-.flip-card.flipped .flip-front { transform: rotateY(-180deg); }
-.flip-card.flipped .flip-back { transform: rotateY(0deg); }
+/* --- FLIP CARD --- */ 
+.flip-card { perspective: 1000px; position: relative; } 
+.flip-card > div { width: 100%; height: 100%; backface-visibility: hidden; transition: transform 0.6s; position: absolute; top: 0; left: 0; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); } 
+.flip-card .flip-front { transform: rotateY(0deg); } 
+.flip-card .flip-back { transform: rotateY(180deg); background: #fff; color: #333; padding: 1rem; overflow-y: auto; } 
+.flip-card.flipped .flip-front { transform: rotateY(-180deg); } 
+.flip-card.flipped .flip-back { transform: rotateY(0deg); } 
+</style> 
+</head> 
+<body> 
+<nav id="navbar"> 
+<img src="./hotel/IHG-Logo.png" alt="IHG Logo" id="ihgLogo"> 
+<img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo" id="crowneLogo"> 
+</nav> 
 
-</style>
-</head>
-<body>
+<!-- HOME PAGE --> 
+<div id="homePage" class="page active"> 
+<div class="hero" id="hero"> 
+<div class="slider-track" id="sliderTrack"> 
+<img src="./hotel/hotel1.jpg" alt="Hotel 1"> 
+<img src="./hotel/hotel2.jpg" alt="Hotel 2"> 
+<img src="./hotel/hotel3.jpg" alt="Hotel 3"> 
+<img src="./hotel/hotel4.jpg" alt="Hotel 4"> 
+<img src="./hotel/hotel5.jpg" alt="Hotel 5"> 
+<img src="./hotel/hotel6.jpg" alt="Hotel 6"> 
+</div> 
+<div class="hero-arrow left" id="prevSlide">‹</div> 
+<div class="hero-arrow right" id="nextSlide">›</div> 
+<p class="intro-text">Welcome to Riyadh</p> 
+</div> 
 
-<!-- Tu contenido HTML aquí igual que lo tenías (nav, homePage, checkinPage, servicesPage, surveyPage, footer, modales) -->
+<div class="sections"> 
+<a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" data-external> 
+<img src="./hotel/room.jpg" alt="Book a room"> 
+<span>Book a room</span> 
+</a> 
+<div class="section-button" onclick="navigateTo('checkinPage')"> 
+<img src="./hotel/crowne.jpg" alt="Check-in"> 
+<span>Check-in</span> 
+</div> 
+<a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" data-external> 
+<img src="./hotel/situm.jpg" alt="Map view"> 
+<span>Map view</span> 
+</a> 
+<div class="section-button" onclick="navigateTo('servicesPage')"> 
+<img src="./hotel/pool.jpg" alt="Services"> 
+<span>Services</span> 
+</div> 
+<a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" data-external> 
+<img src="./hotel/comfort.jpg" alt="Room comfort"> 
+<span>Room comfort</span> 
+</a> 
+<div class="section-button"> 
+<img src="./hotel/access.jpg" alt="Accessibility"> 
+<span>Accessibility</span> 
+</div> 
+<div class="section-button"> 
+<img src="./hotel/ai virtual.jpg" alt="Virtual assistant"> 
+<span>Virtual assistant</span> 
+</div> 
+<div class="section-button" onclick="navigateTo('surveyPage')"> 
+<img src="./hotel/reception.jpg" alt="Satisfaction survey"> 
+<span>Satisfaction survey</span> 
+</div> 
+</div> 
+</div> 
 
-<script>
-// --- PAGES ---
-const pages = document.querySelectorAll('.page');
-function navigateTo(id) {
-  pages.forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  history.pushState({ page: id }, "", "#" + id);
-  document.querySelectorAll('form').forEach(f => {
-    f.reset();
-    f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
-  });
-}
+<!-- CHECK-IN PAGE --> 
+<div id="checkinPage" class="page"> 
+<div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
+<h2>Online Check-in</h2> 
+<form> 
+<label>Full Name</label> 
+<input type="text" placeholder="e.g. John Doe"> 
+<label>Email</label> 
+<input type="email" placeholder="e.g. john@example.com"> 
+<label>Reservation Number</label> 
+<input type="text" placeholder="e.g. 123456"> 
+<button type="submit" style="background-color: #830051;" disabled>Confirm</button> 
+</form> 
+</div> 
 
-// --- MODALS ---
-function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; }
-document.querySelectorAll('.modal').forEach(modal => { modal.addEventListener('click', e => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } }); });
-function showConfirm(msg){ document.getElementById('confirmMessage').textContent=msg; document.getElementById('confirmModal').style.display='flex'; }
-function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; }
+<!-- SERVICES PAGE --> 
+<div id="servicesPage" class="page"> 
+<div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
+<h2>Our Services</h2> 
+<div class="sections"> 
+<a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external> 
+<img src="./hotel/food.jpg" alt="Dining"><span>Dining</span> 
+</a> 
+<div class="section-button"> 
+<img src="./hotel/pool2.jpg" alt="Pool"><span>Pool</span> 
+</div> 
+<div class="section-button"> 
+<img src="./hotel/fitness.jpg" alt="Fitness Center"><span>Fitness Center</span> 
+</div> 
+<div class="section-button"> 
+<img src="./hotel/spa.jpg" alt="Spa"><span>Spa</span> 
+</div> 
+</div> 
+</div> 
 
-// --- SLIDER HERO ---
-const sliderTrack = document.getElementById('sliderTrack');
-let currentSlide = 0;
-const slides = sliderTrack.children.length;
-function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; }
-document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
-document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); }
-let startX, moveX;
-sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX);
-sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; });
-sliderTrack.addEventListener('touchend', e=>{
-  if(startX-moveX>40) currentSlide=(currentSlide+1)%slides;
-  else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides;
-  updateSlide();
-});
+<!-- SURVEY PAGE --> 
+<div id="surveyPage" class="page"> 
+<div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
+<h2>Satisfaction Survey</h2> 
+<form id="surveyForm"> 
+<label><strong>Overall Experience</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Reservation Process</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Staff</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Room</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Rate us</strong></label> 
+<div class="number-rating"> 
+<button type="button">1</button><button type="button">2</button><button type="button">3</button> 
+<button type="button">4</button><button type="button">5</button><button type="button">6</button> 
+<button type="button">7</button><button type="button">8</button><button type="button">9</button> 
+<button type="button">10</button> 
+</div> 
+<label>Additional Comments</label> 
+<textarea placeholder="Your comments..."></textarea> 
+<button type="submit" style="background-color:#830051;" disabled>Send</button> 
+</form> 
+</div> 
 
-// --- SURVEY RATINGS ---
-document.querySelectorAll('.rating').forEach(rating => {
-  rating.querySelectorAll('span').forEach((emoji) => {
-    emoji.addEventListener('click', () => {
-      const alreadySelected = emoji.classList.contains('selected');
-      rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
-      if (!alreadySelected) emoji.classList.add('selected');
-    });
-  });
-});
-document.querySelectorAll('.number-rating button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const alreadySelected = btn.classList.contains('selected');
-    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-    if (!alreadySelected) btn.classList.add('selected');
-  });
-});
-const surveyForm = document.getElementById('surveyForm');
-surveyForm.addEventListener('submit', e=>{
-  e.preventDefault();
-  showConfirm('Survey submitted! Thank you.');
-  e.target.reset();
-  document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
-});
+<div id="confirmModal" class="confirm-modal"> 
+<div class="confirm-modal-content"> 
+<span class="confirm-close" onclick="closeConfirm()">&times;</span> 
+<p id="confirmMessage"></p> 
+</div> 
+</div> 
 
-// --- CHECK-IN FORM ---
-const checkinForm = document.querySelector('#checkinPage form');
-checkinForm.addEventListener('submit', e => {
-  e.preventDefault();
-  showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
-  e.target.reset();
-});
-const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
-function validateCheckin() {
-  const inputs = checkinForm.querySelectorAll('input');
-  const isValid = Array.from(inputs).every(input => input.value.trim() !== "");
-  checkinSubmit.disabled = !isValid;
-}
-checkinForm.querySelectorAll('input').forEach(input => { input.addEventListener('input', validateCheckin); });
+<footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer> 
 
-// --- SURVEY VALIDATION ---
-const surveySubmit = surveyForm.querySelector('button[type="submit"]');
-function validateSurvey() {
-  const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
-    .every(rating => rating.querySelector('.selected'));
-  const numberSelected = surveyForm.querySelector('.number-rating .selected');
-  surveySubmit.disabled = !(allRatingsSelected && numberSelected);
-}
-surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => { el.addEventListener('click', validateSurvey); });
+<script> 
+// --- PAGES --- 
+const pages = document.querySelectorAll('.page'); 
+function navigateTo(id) { 
+pages.forEach(p => p.classList.remove('active')); 
+document.getElementById(id).classList.add('active'); 
+window.scrollTo({ top: 0, behavior: 'smooth' }); 
+history.pushState({ page: id }, "", "#" + id); 
+document.querySelectorAll('form').forEach(f => { f.reset(); f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected')); }); 
+} 
 
-// --- NAVBAR CLICK SCROLL TOP ---
-document.getElementById('navbar').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+// --- MODALS --- 
+function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; } 
+function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; } 
+document.querySelectorAll('.modal').forEach(modal => { 
+modal.addEventListener('click', e => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } }); 
+}); 
+function showConfirm(msg){ document.getElementById('confirmMessage').textContent=msg; document.getElementById('confirmModal').style.display='flex'; } 
+function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; } 
 
-// --- EXTERNAL LINKS ---
-document.querySelectorAll('a[data-external]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const url = link.getAttribute('href');
-    history.pushState({ external: true, externalUrl: url }, "", "#external");
-    window.location.href = url;
-  });
-});
+// --- SLIDER HERO --- 
+const sliderTrack = document.getElementById('sliderTrack'); 
+let currentSlide = 0; 
+const slides = sliderTrack.children.length; 
+function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; } 
+document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); } 
+document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); } 
+let startX, moveX; 
+sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX); 
+sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; }); 
+sliderTrack.addEventListener('touchend', e=>{ if(startX-moveX>40) currentSlide=(currentSlide+1)%slides; else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides; updateSlide(); }); 
 
-// --- HANDLE BACK/FORWARD ---
-window.addEventListener('popstate', (event) => {
-  if(event.state){
-    if(event.state.external){
-      if(window.location.href.indexOf(event.state.externalUrl)===-1){
-        window.location.href = event.state.externalUrl;
-      }
-    } else if(event.state.page){
-      pages.forEach(p => p.classList.remove('active'));
-      document.getElementById(event.state.page).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  } else {
-    pages.forEach(p => p.classList.remove('active'));
-    document.getElementById('homePage').classList.add('active');
-    history.replaceState({ page:'homePage' },"","#homePage");
-  }
-});
+// --- SURVEY RATINGS --- 
+document.querySelectorAll('.rating').forEach(rating => { rating.querySelectorAll('span').forEach((emoji) => { emoji.addEventListener('click', () => { const alreadySelected = emoji.classList.contains('selected'); rating.querySelectorAll('span').forEach(e => e.classList.remove('selected')); if (!alreadySelected) emoji.classList.add('selected'); }); }); }); 
+document.querySelectorAll('.number-rating button').forEach(btn => { btn.addEventListener('click', () => { const alreadySelected = btn.classList.contains('selected'); btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected')); if (!alreadySelected) btn.classList.add('selected'); }); }); 
+document.getElementById('surveyForm').addEventListener('submit', e=>{ e.preventDefault(); showConfirm('Survey submitted! Thank you.'); e.target.reset(); document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected')); }); 
 
-// --- PAGESHOW CACHE FIX ---
-window.addEventListener('pageshow', (event) => {
-  if(event.persisted){
-    if(!location.hash || location.hash==="#external"){
-      pages.forEach(p => p.classList.remove('active'));
-      document.getElementById('homePage').classList.add('active');
-      history.replaceState({ page:'homePage' },"","#homePage");
-    }
-  }
-});
+// --- CHECK-IN FORM CONFIRM --- 
+const checkinForm = document.querySelector('#checkinPage form'); 
+checkinForm.addEventListener('submit', e => { e.preventDefault(); showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay."); e.target.reset(); }); 
 
-// --- HOVER TOUCH MÓVIL ---
-document.querySelectorAll('.section-button').forEach(btn => {
-  btn.addEventListener('touchstart', () => btn.classList.add('touching'));
-  btn.addEventListener('touchend', () => btn.classList.remove('touching'));
-  btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
-});
+// --- NAVBAR CLICK SCROLL TOP --- 
+document.getElementById('navbar').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); 
 
-// --- FLIP CARDS SERVICES ---
-document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
-  const imgAlt = btn.querySelector('img')?.alt || '';
-  if(['Pool','Fitness Center','Spa'].includes(imgAlt)){
-    btn.classList.add('flip-card');
-    const front = document.createElement('div'); front.className='flip-front'; front.innerHTML=btn.innerHTML;
-    const back = document.createElement('div'); back.className='flip-back';
-    if(imgAlt==='Pool'){
-      back.innerHTML=`<h3>Pool</h3><p><strong>Location:</strong> Outdoor</p><p><strong>Daily fee:</strong> 100 SAR</p><p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p><p><strong>Features:</strong></p><ul><li>Children's pool</li><li>Heated pool</li><li>Pool side lounge chairs</li><li>Towel service</li><li>Umbrellas</li></ul>`;
-    } else if(imgAlt==='Fitness Center'){
-      back.innerHTML=`<h3>Fitness Center</h3><p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p><p><strong>Average charge:</strong> 200 SAR</p><p><strong>Features:</strong></p><ul><li>Elliptical machines</li><li>Free weights</li><li>Rower</li><li>Stationary bicycle</li><li>Treadmill</li><li>Onsite sports trainer</li></ul>`;
-    } else if(imgAlt==='Spa'){
-      back.innerHTML=`<h3>Spa</h3><p><strong>Phone number:</strong> 966-011-8131313</p><p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p><p>Relax and enjoy our services in a calm environment.</p>`;
-    }
-    btn.innerHTML=''; btn.appendChild(front); btn.appendChild(back);
-    function adjustFlipBackHeight(){ const vh=window.innerHeight; back.style.maxHeight=Math.min(vh*0.8,400)+'px'; }
-    adjustFlipBackHeight(); window.addEventListener('resize', adjustFlipBackHeight);
-    btn.addEventListener('click', e=>{ if(e.target.tagName.toLowerCase()!=='a') btn.classList.toggle('flipped'); });
-  }
-});
+// --- EXTERNAL LINKS --- 
+document.querySelectorAll('a[data-external]').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); const url = link.getAttribute('href'); history.pushState({ external: true, externalUrl: url }, "", "#external"); window.location.href = url; }); }); 
 
-</script>
-</body>
+// --- HANDLE BACK/FORWARD --- 
+window.addEventListener('popstate', (event) => { 
+if(event.state){ 
+if(event.state.external){ if(window.location.href.indexOf(event.state.externalUrl)===-1){ window.location.href = event.state.externalUrl; } } 
+else if(event.state.page){ pages.forEach(p => p.classList.remove('active')); document.getElementById(event.state.page).classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); } } 
+else { pages.forEach(p => p.classList.remove('active')); document.getElementById('homePage').classList.add('active'); history.replaceState({ page:'homePage' },"","#homePage"); } 
+}); 
+
+// --- PAGESHOW: fix back/forward cache --- 
+window.addEventListener('pageshow', (event) => { if(event.persisted){ if(!location.hash || location.hash==="#external"){ pages.forEach(p => p.classList.remove('active')); document.getElementById('homePage').classList.add('active'); history.replaceState({ page:'homePage' },"","#homePage"); } } }); 
+
+// --- HOVER EFFECT PARA TOUCH EN MÓVIL --- 
+document.querySelectorAll('.section-button').forEach(btn => { btn.addEventListener('touchstart', () => btn.classList.add('touching')); btn.addEventListener('touchend', () => btn.classList.remove('touching')); btn.addEventListener('touchcancel', () => btn.classList.remove('touching')); }); 
+
+// --- CHECK-IN VALIDATION --- 
+const checkinSubmit = checkinForm.querySelector('button[type="submit"]'); 
+function validateCheckin() { const inputs = checkinForm.querySelectorAll('input'); const isValid = Array.from(inputs).every(input => input.value.trim() !== ""); checkinSubmit.disabled = !isValid; } 
+checkinForm.querySelectorAll('input').forEach(input => { input.addEventListener('input', validateCheckin); }); 
+
+// --- SURVEY VALIDATION --- 
+const surveySubmit = surveyForm.querySelector('button[type="submit"]'); 
+function validateSurvey() { const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating')).every(r => r.querySelector('span.selected') !== null ); const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null; surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected); } 
+surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => { el.addEventListener('click', () => setTimeout(validateSurvey, 50)); }); 
+surveySubmit.disabled = true; 
+
+// --- CARD FLIP PARA SERVICES (Pool, Fitness, Spa) --- 
+document.querySelectorAll('#servicesPage .section-button').forEach(btn => { 
+const imgAlt = btn.querySelector('img')?.alt || ''; 
+if(['Pool','Fitness Center','Spa'].includes(imgAlt)){ 
+btn.classList.add('flip-card'); 
+const front = document.createElement('div'); front.className = 'flip-front'; front.innerHTML = btn.innerHTML; 
+const back = document.createElement('div'); back.className = 'flip-back'; 
+if(imgAlt==='Pool'){ back.innerHTML = `<h3>Pool</h3> <p><strong>Location:</strong> Outdoor</p> <p><strong>Daily fee:</strong> 100 SAR</p> <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p> <p><strong>Features:</strong></p> <ul> <li>Children's pool</li> <li>Heated pool</li> <li>Pool side lounge chairs</li> <li>Towel service</li> <li>Umbrellas</li> </ul>`; } 
+else if(imgAlt==='Fitness Center'){ back.innerHTML = `<h3>Fitness Center</h3> <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p> <p><strong>Average charge:</strong> 200 SAR</p> <p><strong>Features:</strong></p> <ul> <li>Elliptical machines</li> <li>Free weights</li> <li>Rower</li> <li>Stationary bicycle</li> <li>Treadmill</li> <li>Onsite sports trainer</li> </ul>`; } 
+else if(imgAlt==='Spa'){ back.innerHTML = `<h3>Spa</h3> <p><strong>Phone number:</strong> 966-011-8131313</p> <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p> <p>Relax and enjoy our services in a calm environment.</p>`; } 
+btn.innerHTML = ''; 
+btn.appendChild(front); 
+btn.appendChild(back); 
+btn.addEventListener('click', () => { btn.classList.toggle('flipped'); }); 
+} 
+}); 
+</script> 
+</body> 
 </html>
