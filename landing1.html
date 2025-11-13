@@ -475,11 +475,11 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
     let bg = '';
 
     if (imgAlt === 'Pool') {
-        bg = 'pool2.jpg';
+        bg = './hotel/pool2.jpg';
     } else if (imgAlt === 'Fitness Center') {
-        bg = 'fitness.jpg';
+        bg = './hotel/fitness.jpg';
     } else if (imgAlt === 'Spa') {
-        bg = 'spa.jpg';
+        bg = './hotel/spa.jpg';
     }
 
     if (bg) {
@@ -487,6 +487,7 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
         btn.style.backgroundImage = `url('${bg}')`;
     }
 });
+
 
 
 
