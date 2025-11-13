@@ -457,28 +457,6 @@ document.querySelectorAll('.section-button').forEach(btn => {
     btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
 });
 
-// --- SIMPLE SERVICE BUTTONS ---
-document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
-    const imgAlt = btn.querySelector('img')?.alt || '';
-    let bg = '';
-
-    if (imgAlt === 'Pool') {
-        bg = './hotel/pool2.jpg';
-    } else if (imgAlt === 'Fitness Center') {
-        bg = './hotel/fitness.jpg';
-    } else if (imgAlt === 'Spa') {
-        bg = './hotel/spa.jpg';
-    }
-
-    if (bg) {
-        btn.innerHTML = ''; // eliminar contenido interno
-        btn.style.backgroundImage = `url('${bg}')`;
-    }
-});
-
-
-
-
 
 // --- LOGOS: IR A PÁGINA PRINCIPAL ---
 const ihgLogo = document.getElementById('ihgLogo');
