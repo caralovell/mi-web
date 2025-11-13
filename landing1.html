@@ -89,8 +89,19 @@ label { display: block; margin-top: 1rem; }
 .flip-card .flip-back h3 { color: #830051; font-family: 'Playfair Display', serif; } 
 
 /* --- Accessibility flip back --- */
-#accessibilityPage .flip-back { display: flex; flex-direction: column; gap: 1rem; justify-content: center; align-items: center; padding: 1rem; }
-#accessibilityPage .flip-back .section-button { width: 90%; height: 120px; }
+/* Ajustar botones de Accessibility */
+#accessibilityPage .section-button {
+    height: auto;        /* Permite que la altura se ajuste a la imagen */
+    min-height: 120px;   /* Altura mínima opcional */
+    overflow: hidden;
+}
+
+#accessibilityPage .section-button img {
+    width: 100%;
+    height: auto;       /* Mantener la proporción original de la imagen */
+    object-fit: contain; /* Evita recortes */
+}
+
 
 /* --- Survey button responsive position --- */
 #surveyButton { order: 99; } 
