@@ -34,8 +34,6 @@ footer { text-align: center; font-size: 0.8rem; color: #666; padding: 1rem 0 1.5
 /* --- PÁGINAS INTERNAS --- */ 
 .page { display: none; padding: 1rem; height: auto; min-height: 0; } 
 .page.active { display: block; } 
-.back-button { display: flex; align-items: center; gap: 8px; color: #830051; font-weight: 600; cursor: pointer; margin-bottom: 1rem; } 
-.back-button span { font-size: 1.5rem; line-height: 1; } 
 input, textarea, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; } 
 button { background: #7b2cbf; color: white; border: none; cursor: pointer; } 
 button:hover { background: #5a189a; } 
@@ -156,7 +154,6 @@ label { display: block; margin-top: 1rem; }
 
 <!-- ACCESSIBILITY PAGE --> 
 <div id="accessibilityPage" class="page"> 
-  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
   <h2>Accessibility</h2> 
   <div class="sections"> 
 
@@ -178,7 +175,6 @@ label { display: block; margin-top: 1rem; }
 
 <!-- CHECK-IN PAGE --> 
 <div id="checkinPage" class="page"> 
-<div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
 <h2>Online Check-in</h2> 
 <form> 
 <label>Full Name</label> 
@@ -193,7 +189,6 @@ label { display: block; margin-top: 1rem; }
 
 <!-- SERVICES PAGE --> 
 <div id="servicesPage" class="page"> 
-<div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
 <h2>Our Services</h2> 
 <div class="sections"> 
 <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external> 
@@ -213,7 +208,6 @@ label { display: block; margin-top: 1rem; }
 
 <!-- SURVEY PAGE --> 
 <div id="surveyPage" class="page"> 
-<div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
 <h2>Satisfaction Survey</h2> 
 <form id="surveyForm"> 
 <label><strong>Overall Experience</strong></label> 
