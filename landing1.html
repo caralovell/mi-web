@@ -1,16 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Crowne Plaza</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-<style>
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+<meta charset="UTF-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<title>Crowne Plaza</title> 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+<style> 
 /* --- RESET BOX SIZING --- */
 *, *::before, *::after { box-sizing: border-box; }
-body { font-family: 'Roboto', sans-serif; margin: 0; background-color: #f8f8f8; color: #333; }
-nav { background-color: #ffffff; display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 10; }
+
+body { 
+    font-family: 'Roboto', sans-serif; 
+    margin: 0; 
+    background-color: #f8f8f8; 
+    color: #333; 
+}
+
+nav { 
+    background-color: #ffffff; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0.6rem 1rem; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08); 
+    position: sticky; 
+    top: 0; 
+    z-index: 10; 
+} 
+
 nav img { height: 45px; }
+
 /* --- HERO SLIDER --- */
 .hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
 .slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
@@ -20,28 +39,36 @@ nav img { height: 45px; }
 .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; cursor: pointer; border-radius: 5px; z-index: 3; user-select: none; }
 .hero-arrow.left { left: 10px; }
 .hero-arrow.right { right: 10px; }
+
 /* --- SECTIONS --- */
 .sections { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }
 .section-button { position: relative; height: 180px; border-radius: 1rem; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; touch-action: manipulation; }
 .section-button:hover, .section-button.touching { transform: scale(1.03); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
 .section-button img { width: 100%; height: 100%; object-fit: cover; filter: brightness(65%); }
 .section-button span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+
 /* --- FOOTER --- */
 footer { text-align: center; font-size: 0.8rem; color: #666; padding: 1rem 0 1.5rem; }
+
 /* --- PÁGINAS INTERNAS --- */
 .page { display: none; padding: 1rem; height: auto; min-height: 0; }
 .page.active { display: block; }
+
 input, textarea, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; }
 button { background: #7b2cbf; color: white; border: none; cursor: pointer; }
 button:hover { background: #5a189a; }
+
 .rating { display: flex; gap: 10px; font-size: 1.8rem; margin: 0.5rem 0 1.5rem 0; cursor: pointer; }
 .rating span { transition: transform 0.2s, box-shadow 0.2s; padding: 5px; border-radius: 8px; }
 .rating span:hover { transform: scale(1.3); }
 .rating span.selected { box-shadow: 0 0 0 3px #830051 inset; }
+
 .number-rating { display: flex; gap: 6px; margin: 0.5rem 0 1.5rem 0; }
 .number-rating button { flex: 1; padding: 0.6rem 0; border-radius: 0.5rem; border: 1px solid #ccc; cursor: pointer; background-color: #c0c0c0; font-weight: 600; transition: background 0.2s, color 0.2s; color: #444; }
 .number-rating button.selected { background-color: #830051; color: #fff; }
+
 label { display: block; margin-top: 1rem; }
+
 /* --- MODALES --- */
 .modal, .confirm-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; min-height: 100vh; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; overflow-y: auto; }
 .modal-content, .confirm-modal-content { background: white; padding: 2rem 1.5rem 1.5rem; border-radius: 1rem; max-width: 450px; width: 90%; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; text-align: center; }
@@ -50,249 +77,262 @@ label { display: block; margin-top: 1rem; }
 .modal-close, .confirm-close { position: absolute; font-size: 1.5rem; cursor: pointer; color: #830051; font-weight: bold; }
 .modal-close { top: 15px; left: 15px; }
 .confirm-close { top: 10px; left: 10px; }
+
 /* --- MODALES RESPONSIVE PARA MÓVIL --- */
-@media (max-width: 600px) {
-.modal, .confirm-modal { align-items: flex-start; padding-top: 2rem; min-height: 100vh; }
-.modal-content, .confirm-modal-content { width: 95%; border-radius: 0.8rem; max-height: 85vh; }
+@media (max-width: 600px) { 
+    .modal, .confirm-modal { align-items: flex-start; padding-top: 2rem; min-height: 100vh; }
+    .modal-content, .confirm-modal-content { width: 95%; border-radius: 0.8rem; max-height: 85vh; }
 }
+
 /* --- RESPONSIVE --- */
-@media (min-width: 600px) {
-.hero { height: 500px; }
-.intro-text { font-size: 2rem; }
-.sections { grid-template-columns: 1fr 1fr; }
-.section-button { height: 220px; }
+@media (min-width: 600px) { 
+    .hero { height: 500px; } 
+    .intro-text { font-size: 2rem; } 
+    .sections { grid-template-columns: 1fr 1fr; } 
+    .section-button { height: 220px; } 
 }
-@media (min-width: 1024px) {
-.hero { height: 600px; }
-.intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; }
-.section-button { height: 260px; }
+@media (min-width: 1024px) { 
+    .hero { height: 600px; } 
+    .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; } 
+    .section-button { height: 260px; } 
 }
-.section-button:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+
+
+.section-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+
 /* --- Survey button responsive position --- */
-#surveyButton { order: 99; }
+#surveyButton { order: 99; } 
 @media(min-width:1024px){ #surveyButton { order: initial; } }
-/* Botones deshabilitados */
-button:disabled { background-color: #ccc !important; color: #666 !important; cursor: not-allowed; box-shadow: none; opacity: 0.6; }
+
+    /* Botones deshabilitados */
+button:disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
 /* Mensaje de validación */
-.validation-message { color: #d62828; font-weight: bold; margin-top: 0.5rem; display: none; }
-/* --- FLIPCARD STYLES --- */
-.flipcard { background: transparent; width: 100%; height: 220px; perspective: 1000px; border-radius: 1rem; }
-.flipcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; border-radius: 1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-.flipcard.flipped .flipcard-inner { transform: rotateY(180deg); }
-.flipcard-front, .flipcard-back { position: absolute; width: 100%; height: 100%; border-radius: 1rem; backface-visibility: hidden; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.flipcard-front img { width: 100%; height: 100%; object-fit: cover; filter: brightness(65%); }
-.flipcard-front span { position: absolute; color: #fff; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
-.flipcard-back { background-color: #fff; transform: rotateY(180deg); color: #333; padding: 1rem; box-sizing: border-box; }
-.flipcard-back h3 { margin-top: 0; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; }
-.flipcard-back p { margin: 0.3rem 0; }
-/* --- HERO SLIDER FADE + ZOOM --- */
-.slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
-/* --- SECTIONS FADE + SLIDE --- */
-.section-button { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
-.section-button.visible { opacity: 1; transform: translateY(0); }
-</style>
-</head>
-<body>
-<nav id="navbar">
-<img src="./hotel/IHG-Logo.png" alt="IHG Logo" id="ihgLogo">
-<img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo" id="crowneLogo">
-</nav>
-<!-- HOME PAGE -->
-<div id="homePage" class="page active">
-<div class="hero" id="hero">
-<div class="slider-track" id="sliderTrack">
-<img src="./hotel/hotel1.jpg" alt="Hotel 1">
-<img src="./hotel/hotel2.jpg" alt="Hotel 2">
-<img src="./hotel/hotel3.jpg" alt="Hotel 3">
-<img src="./hotel/hotel4.jpg" alt="Hotel 4">
-<img src="./hotel/hotel5.jpg" alt="Hotel 5">
-<img src="./hotel/hotel6.jpg" alt="Hotel 6">
+.validation-message {
+    color: #d62828;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+
+</style> 
+</head> 
+<body> 
+<nav id="navbar"> 
+<img src="./hotel/IHG-Logo.png" alt="IHG Logo" id="ihgLogo"> 
+<img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo" id="crowneLogo"> 
+</nav> 
+
+<!-- HOME PAGE --> 
+<div id="homePage" class="page active"> 
+<div class="hero" id="hero"> 
+<div class="slider-track" id="sliderTrack"> 
+<img src="./hotel/hotel1.jpg" alt="Hotel 1"> 
+<img src="./hotel/hotel2.jpg" alt="Hotel 2"> 
+<img src="./hotel/hotel3.jpg" alt="Hotel 3"> 
+<img src="./hotel/hotel4.jpg" alt="Hotel 4"> 
+<img src="./hotel/hotel5.jpg" alt="Hotel 5"> 
+<img src="./hotel/hotel6.jpg" alt="Hotel 6"> 
+</div> 
+<div class="hero-arrow left" id="prevSlide">‹</div> 
+<div class="hero-arrow right" id="nextSlide">›</div> 
+<p class="intro-text">Welcome to Riyadh</p> 
+</div> 
+
+<div class="sections"> 
+<a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" data-external> 
+<img src="./hotel/room.jpg" alt="Book a room"> 
+<span>Book a room</span> 
+</a> 
+<div class="section-button" onclick="navigateTo('checkinPage')"> 
+<img src="./hotel/crowne.jpg" alt="Check-in"> 
+<span>Check-in</span> 
+</div> 
+<a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" data-external> 
+<img src="./hotel/situm.jpg" alt="Map view"> 
+<span>Map view</span> 
+</a> 
+<div class="section-button" onclick="navigateTo('servicesPage')"> 
+<img src="./hotel/pool.jpg" alt="Services"> 
+<span>Services</span> 
+</div> 
+<a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" data-external> 
+<img src="./hotel/comfort.jpg" alt="Room comfort"> 
+<span>Room comfort</span> 
+</a> 
+<div class="section-button" onclick="navigateTo('accessibilityPage')"> 
+<img src="./hotel/access.jpg" alt="Accessibility"> 
+<span>Accessibility</span> 
+</div> 
+<a class="section-button" href="https://vega.imascono.com/" data-external> 
+<img src="./hotel/virtual.jpg" alt="Virtual assistant"> 
+<span>Virtual assistant</span> 
+</a> 
+<div class="section-button" id="surveyButton" onclick="navigateTo('surveyPage')"> 
+<img src="./hotel/reception.jpg" alt="Satisfaction survey"> 
+<span>Satisfaction survey</span> 
+</div> 
+</div> 
+</div> 
+
+<!-- ACCESSIBILITY PAGE --> 
+<div id="accessibilityPage" class="page"> 
+  <h2>Accessibility</h2> 
+  <div class="sections"> 
+
+    <!-- Visual accessibility button -->
+    <a class="section-button" href="https://www.navilens.com/es/" data-external>
+      <img src="./hotel/navilens.jpg" alt="Visual accessibility">
+      <span>Visual accessibility</span>
+    </a>
+
+    <!-- Acoustic accessibility button -->
+    <a class="section-button" href="https://www.visualfy.com/" data-external>
+      <img src="./hotel/visualfy.jpg" alt="Acoustic accessibility">
+      <span>Acoustic accessibility</span>
+    </a>
+
+  </div>
 </div>
-<div class="hero-arrow left" id="prevSlide">‹</div>
-<div class="hero-arrow right" id="nextSlide">›</div>
-<p class="intro-text">Welcome to Riyadh</p>
-</div>
-<div class="sections">
-<a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" data-external>
-<img src="./hotel/room.jpg" alt="Book a room">
-<span>Book a room</span>
-</a>
-<div class="section-button" onclick="navigateTo('checkinPage')">
-<img src="./hotel/crowne.jpg" alt="Check-in">
-<span>Check-in</span>
-</div>
-<a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" data-external>
-<img src="./hotel/situm.jpg" alt="Map view">
-<span>Map view</span>
-</a>
-<div class="section-button" onclick="navigateTo('servicesPage')">
-<img src="./hotel/pool.jpg" alt="Services">
-<span>Services</span>
-</div>
-<a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" data-external>
-<img src="./hotel/edit.jpg" alt="Room comfort">
-<span>Room comfort</span>
-</a>
-<div class="section-button" onclick="navigateTo('accessibilityPage')">
-<img src="./hotel/access.jpg" alt="Accessibility">
-<span>Accessibility</span>
-</div>
-<a class="section-button" href="https://vega.imascono.com/" data-external>
-<img src="./hotel/virtual.jpg" alt="Virtual assistant">
-<span>Virtual assistant</span>
-</a>
-<div class="section-button" id="surveyButton" onclick="navigateTo('surveyPage')">
-<img src="./hotel/reception.jpg" alt="Satisfaction survey">
-<span>Satisfaction survey</span>
-</div>
-</div>
-</div>
-<!-- ACCESSIBILITY PAGE -->
-<div id="accessibilityPage" class="page">
-<h2>Accessibility</h2>
-<div class="sections">
-<!-- Visual accessibility button -->
-<a class="section-button" href="https://www.navilens.com/es/" data-external>
-<img src="./hotel/navilens.jpg" alt="Visual accessibility">
-<span>Visual accessibility</span>
-</a>
-<!-- Acoustic accessibility button -->
-<a class="section-button" href="https://www.visualfy.com/" data-external>
-<img src="./hotel/visualfy.jpg" alt="Acoustic accessibility">
-<span>Acoustic accessibility</span>
-</a>
-</div>
-</div>
-<!-- CHECK-IN PAGE -->
-<div id="checkinPage" class="page">
-<h2>Online Check-in</h2>
-<form>
-<label>Full Name *</label>
-<input type="text" placeholder="e.g. John Doe" required>
-<label>Email *</label>
-<input type="email" placeholder="e.g. john@example.com" required>
-<label>Reservation Number *</label>
-<input type="text" placeholder="e.g. 123456" required>
+ 
+
+<!-- CHECK-IN PAGE --> 
+<div id="checkinPage" class="page"> 
+<h2>Online Check-in</h2> 
+<form> 
+<label>Full Name *</label> 
+<input type="text" placeholder="e.g. John Doe" required> 
+<label>Email *</label> 
+<input type="email" placeholder="e.g. john@example.com" required> 
+<label>Reservation Number *</label> 
+<input type="text" placeholder="e.g. 123456" required> 
 <button type="submit" style="background-color: #830051;" disabled>Confirm</button>
-</form>
-</div>
-<!-- SERVICES PAGE -->
-<div id="servicesPage" class="page">
-<h2>Our Services</h2>
-<div class="sections">
-<a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external>
-<img src="./hotel/food.jpg" alt="Dining"><span>Dining</span>
-</a>
-<!-- Flipcard: Pool -->
-<div class="flipcard">
-<div class="flipcard-inner">
-<div class="flipcard-front">
-<img src="./hotel/pool2.jpg" alt="Pool">
-<span>Pool</span>
-</div>
-<div class="flipcard-back">
-<h3 style="color:#830051;">Pool</h3>
-<p><strong>Location:</strong> Outdoor</p>
-<p><strong>Daily fee:</strong> 100 SAR</p>
-<p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>
-</div>
-</div>
-</div>
-<!-- Flipcard: Fitness Center -->
-<div class="flipcard">
-<div class="flipcard-inner">
-<div class="flipcard-front">
-<img src="./hotel/fitness.jpg" alt="Fitness Center">
-<span>Fitness Center</span>
-</div>
-<div class="flipcard-back">
-<h3 style="color:#830051;">Fitness Center</h3>
-<p><strong>Hours of operation:</strong> 7:15 AM - 7:00 AM</p>
-<p><strong>Average charge:</strong> 200 SAR</p>
-</div>
-</div>
-</div>
-<!-- Flipcard: Spa -->
-<div class="flipcard">
-<div class="flipcard-inner">
-<div class="flipcard-front">
-<img src="./hotel/spa.jpg" alt="Spa">
-<span>Spa</span>
-</div>
-<div class="flipcard-back">
-<h3 style="color:#830051;">Spa</h3>
-<p><strong>Phone number:</strong> 966-011-8131313</p>
-<p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- SURVEY PAGE -->
-<div id="surveyPage" class="page">
-<h2>Satisfaction Survey</h2>
-<form id="surveyForm">
-<label><strong>Overall Experience *</strong></label>
-<div class="rating">
-<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-</div>
-<label><strong>Reservation Process *</strong></label>
-<div class="rating">
-<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-</div>
-<label><strong>Staff *</strong></label>
-<div class="rating">
-<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-</div>
-<label><strong>Room *</strong></label>
-<div class="rating">
-<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-</div>
-<label><strong>Rate us *</strong></label>
-<div class="number-rating">
-<button type="button">1</button><button type="button">2</button><button type="button">3</button>
-<button type="button">4</button><button type="button">5</button><button type="button">6</button>
-<button type="button">7</button><button type="button">8</button><button type="button">9</button>
-<button type="button">10</button>
-</div>
-<label>Additional Comments</label>
-<textarea placeholder="Your comments..."></textarea>
+</form> 
+</div> 
+
+<!-- SERVICES PAGE --> 
+<div id="servicesPage" class="page"> 
+<h2>Our Services</h2> 
+<div class="sections"> 
+<a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external> 
+<img src="./hotel/food.jpg" alt="Dining"><span>Dining</span> 
+</a> 
+<div class="section-button"> 
+<img src="./hotel/pool2.jpg" alt="Pool"><span>Pool</span> 
+</div> 
+<div class="section-button"> 
+<img src="./hotel/fitness.jpg" alt="Fitness Center"><span>Fitness Center</span> 
+</div> 
+<div class="section-button"> 
+<img src="./hotel/spa.jpg" alt="Spa"><span>Spa</span> 
+</div> 
+</div> 
+</div> 
+
+<!-- SURVEY PAGE --> 
+<div id="surveyPage" class="page"> 
+<h2>Satisfaction Survey</h2> 
+<form id="surveyForm"> 
+<label><strong>Overall Experience *</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Reservation Process *</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Staff *</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Room *</strong></label> 
+<div class="rating"> 
+<span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span> 
+</div> 
+<label><strong>Rate us *</strong></label> 
+<div class="number-rating"> 
+<button type="button">1</button><button type="button">2</button><button type="button">3</button> 
+<button type="button">4</button><button type="button">5</button><button type="button">6</button> 
+<button type="button">7</button><button type="button">8</button><button type="button">9</button> 
+<button type="button">10</button> 
+</div> 
+<label>Additional Comments</label> 
+<textarea placeholder="Your comments..."></textarea> 
 <p class="validation-message" id="surveyValidation">You have to complete all the fields.</p>
 <button type="submit" style="background-color:#830051;" disabled>Send</button>
-</form>
-</div>
-<div id="confirmModal" class="confirm-modal">
-<div class="confirm-modal-content">
-<span class="confirm-close" onclick="closeConfirm()">&times;</span>
-<p id="confirmMessage"></p>
-</div>
-</div>
-<footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
+</form> 
+</div> 
+
+<div id="confirmModal" class="confirm-modal"> 
+<div class="confirm-modal-content"> 
+<span class="confirm-close" onclick="closeConfirm()">&times;</span> 
+<p id="confirmMessage"></p> 
+</div> 
+</div> 
+
+<footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer> 
+
 <script>
 // --- PAGES NAVIGATION ---
 const pages = document.querySelectorAll('.page');
 function navigateTo(id) {
-pages.forEach(p => p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-window.scrollTo({ top: 0, behavior: 'smooth' });
-history.pushState({ page: id }, "", "#" + id);
-// Reset forms and ratings
-document.querySelectorAll('form').forEach(f => {
-f.reset();
-f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
-});
-// Disable submit buttons again
-const checkinSubmit = document.querySelector('#checkinPage form button[type="submit"]');
-if(checkinSubmit) checkinSubmit.disabled = true;
-const surveySubmit = document.querySelector('#surveyForm button[type="submit"]');
-if(surveySubmit) surveySubmit.disabled = true;
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.pushState({ page: id }, "", "#" + id);
+
+    // Reset forms and ratings
+    document.querySelectorAll('form').forEach(f => {
+        f.reset();
+        f.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+    });
+
+    // Disable submit buttons again
+    const checkinSubmit = document.querySelector('#checkinPage form button[type="submit"]');
+    if(checkinSubmit) checkinSubmit.disabled = true;
+    const surveySubmit = document.querySelector('#surveyForm button[type="submit"]');
+    if(surveySubmit) surveySubmit.disabled = true;
 }
+
 // --- MODALES ---
-function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; navigateTo('homePage'); // <--- añadir esta línea }
-document.querySelectorAll('.modal').forEach(modal => { modal.addEventListener('click', e => { if(e.target === modal) closeModal(modal.id); }); });
-function showConfirm(msg){ document.getElementById('confirmMessage').textContent = msg; document.getElementById('confirmModal').style.display = 'flex'; }
-function closeConfirm(){ document.getElementById('confirmModal').style.display = 'none'; navigateTo('homePage'); // <--- añadir esta línea }
+function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.body.style.overflow = '';
+    navigateTo('homePage'); // <--- añadir esta línea
+}
+
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', e => {
+        if(e.target === modal) closeModal(modal.id);
+    });
+});
+
+function showConfirm(msg){
+    document.getElementById('confirmMessage').textContent = msg;
+    document.getElementById('confirmModal').style.display = 'flex';
+}
+
+function closeConfirm(){
+    document.getElementById('confirmModal').style.display = 'none';
+    navigateTo('homePage'); // <--- añadir esta línea
+}
+
 // --- HERO SLIDER ---
 const sliderTrack = document.getElementById('sliderTrack');
 let currentSlide = 0;
@@ -304,129 +344,150 @@ let startX, moveX;
 sliderTrack.addEventListener('touchstart', e => startX = e.touches[0].clientX);
 sliderTrack.addEventListener('touchmove', e => moveX = e.touches[0].clientX);
 sliderTrack.addEventListener('touchend', e => {
-if(startX-moveX>40) currentSlide=(currentSlide+1)%slides;
-else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides;
-updateSlide();
+    if(startX-moveX>40) currentSlide=(currentSlide+1)%slides;
+    else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides;
+    updateSlide();
 });
+
 // --- SURVEY RATINGS ---
 const surveyForm = document.getElementById('surveyForm');
 surveyForm.querySelectorAll('.rating').forEach(rating => {
-rating.querySelectorAll('span').forEach(emoji => {
-emoji.addEventListener('click', () => {
-const alreadySelected = emoji.classList.contains('selected');
-rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
-if(!alreadySelected) emoji.classList.add('selected');
-validateSurvey();
-});
-});
+    rating.querySelectorAll('span').forEach(emoji => {
+        emoji.addEventListener('click', () => {
+            const alreadySelected = emoji.classList.contains('selected');
+            rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
+            if(!alreadySelected) emoji.classList.add('selected');
+            validateSurvey();
+        });
+    });
 });
 surveyForm.querySelectorAll('.number-rating button').forEach(btn => {
-btn.addEventListener('click', () => {
-const alreadySelected = btn.classList.contains('selected');
-btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-if(!alreadySelected) btn.classList.add('selected');
-validateSurvey();
-});
+    btn.addEventListener('click', () => {
+        const alreadySelected = btn.classList.contains('selected');
+        btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+        if(!alreadySelected) btn.classList.add('selected');
+        validateSurvey();
+    });
 });
 const surveySubmit = surveyForm.querySelector('button[type="submit"]');
 surveySubmit.disabled = true;
 surveyForm.addEventListener('submit', e => {
-e.preventDefault();
-showConfirm('Survey submitted! Thank you.');
-surveyForm.reset();
-surveyForm.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
-surveySubmit.disabled = true;
+    e.preventDefault();
+    showConfirm('Survey submitted! Thank you.');
+    surveyForm.reset();
+    surveyForm.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+    surveySubmit.disabled = true;
 });
-function validateSurvey(){
-const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
-.every(r => r.querySelector('span.selected'));
-const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
-surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
+    function validateSurvey(){
+    const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
+                                  .every(r => r.querySelector('span.selected'));
+    const numberRatingSelected = surveyForm.querySelector('.number-rating button.selected') !== null;
+    surveySubmit.disabled = !(allRatingsSelected && numberRatingSelected);
 }
+
+
+
 // --- CHECK-IN FORM ---
 const checkinForm = document.querySelector('#checkinPage form');
 const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
 checkinSubmit.disabled = true;
+
 checkinForm.addEventListener('input', () => {
-const requiredFields = checkinForm.querySelectorAll('input[required]');
-const allFilled = Array.from(requiredFields).every(input => input.value.trim() !== '');
-checkinSubmit.disabled = !allFilled;
+    const requiredFields = checkinForm.querySelectorAll('input[required]');
+    const allFilled = Array.from(requiredFields).every(input => input.value.trim() !== '');
+    checkinSubmit.disabled = !allFilled;
 });
+
 checkinForm.addEventListener('submit', e => {
-e.preventDefault();
-showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
-checkinForm.reset();
-checkinSubmit.disabled = true;
+    e.preventDefault();
+    showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
+    checkinForm.reset();
+    checkinSubmit.disabled = true;
 });
+
+
 // --- NAVBAR CLICK SCROLL TOP ---
 document.getElementById('navbar').addEventListener('click', () => {
-window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
 // --- EXTERNAL LINKS ---
 document.querySelectorAll('a[data-external]').forEach(link => {
-link.addEventListener('click', e => {
-e.preventDefault();
-const url = link.getAttribute('href');
-history.pushState({ external: true, externalUrl: url }, "", "#external");
-window.location.href = url;
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const url = link.getAttribute('href');
+        history.pushState({ external: true, externalUrl: url }, "", "#external");
+        window.location.href = url;
+    });
 });
-});
+
 // --- HANDLE BACK/FORWARD ---
 window.addEventListener('popstate', event => {
-if(event.state){
-if(event.state.external){
-if(window.location.href.indexOf(event.state.externalUrl) === -1) window.location.href = event.state.externalUrl;
-} else if(event.state.page){
-pages.forEach(p => p.classList.remove('active'));
-document.getElementById(event.state.page).classList.add('active');
-window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-} else {
-pages.forEach(p => p.classList.remove('active'));
-document.getElementById('homePage').classList.add('active');
-history.replaceState({ page:'homePage' },"","#homePage");
-}
+    if(event.state){
+        if(event.state.external){
+            if(window.location.href.indexOf(event.state.externalUrl) === -1)
+                window.location.href = event.state.externalUrl;
+        } else if(event.state.page){
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById(event.state.page).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    } else {
+        pages.forEach(p => p.classList.remove('active'));
+        document.getElementById('homePage').classList.add('active');
+        history.replaceState({ page:'homePage' },"","#homePage");
+    }
 });
+
 // --- PAGESHOW: fix back/forward cache ---
 window.addEventListener('pageshow', event => {
-if(event.persisted){
-if(!location.hash || location.hash==="#external"){
-pages.forEach(p => p.classList.remove('active'));
-document.getElementById('homePage').classList.add('active');
-history.replaceState({ page:'homePage' },"","#homePage");
-}
-}
+    if(event.persisted){
+        if(!location.hash || location.hash==="#external"){
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            history.replaceState({ page:'homePage' },"","#homePage");
+        }
+    }
 });
+
 // --- HOVER EFFECT FOR TOUCH DEVICES ---
 document.querySelectorAll('.section-button').forEach(btn => {
-btn.addEventListener('touchstart', () => btn.classList.add('touching'));
-btn.addEventListener('touchend', () => btn.classList.remove('touching'));
-btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
+    btn.addEventListener('touchstart', () => btn.classList.add('touching'));
+    btn.addEventListener('touchend', () => btn.classList.remove('touching'));
+    btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
 });
+
+// --- SIMPLE SERVICE BUTTONS ---
+document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
+    const imgAlt = btn.querySelector('img')?.alt || '';
+    let bg = '';
+
+    if (imgAlt === 'Pool') {
+        bg = './hotel/pool2.jpg';
+    } else if (imgAlt === 'Fitness Center') {
+        bg = './hotel/fitness.jpg';
+    } else if (imgAlt === 'Spa') {
+        bg = './hotel/spa.jpg';
+    }
+
+    if (bg) {
+        btn.innerHTML = ''; // eliminar contenido interno
+        btn.style.backgroundImage = `url('${bg}')`;
+    }
+});
+
+
+
+
+
 // --- LOGOS: IR A PÁGINA PRINCIPAL ---
 const ihgLogo = document.getElementById('ihgLogo');
 const crowneLogo = document.getElementById('crowneLogo');
 [ihgLogo, crowneLogo].forEach(logo => {
-if(logo) logo.addEventListener('click', () => navigateTo('homePage'));
+    if(logo) logo.addEventListener('click', () => navigateTo('homePage'));
 });
-// --- FLIPCARD INTERACTION ---
-document.querySelectorAll('.flipcard').forEach(card => {
-card.addEventListener('click', () => {
-card.classList.toggle('flipped');
-});
-});
-function revealSections() {
-const sections = document.querySelectorAll('.section-button');
-const windowBottom = window.innerHeight;
-sections.forEach(sec => {
-const secTop = sec.getBoundingClientRect().top;
-if(secTop < windowBottom - 50){
-sec.classList.add('visible');
-}
-});
-}
-window.addEventListener('scroll', revealSections);
-window.addEventListener('load', revealSections);
+
 </script>
-</body>
+
+</body> 
 </html>
