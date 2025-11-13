@@ -99,6 +99,21 @@ label { display: block; margin-top: 1rem; }
   color: #830051;
   font-family: 'Playfair Display', serif;
 }
+
+    /* Ajuste flip-back para Accessibility */
+#accessibilityCard .flip-back {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+#accessibilityCard .flip-back .section-button {
+  width: 90%;
+  height: 120px;
+}
+
 </style> 
 </head> 
 <body> 
@@ -144,10 +159,23 @@ label { display: block; margin-top: 1rem; }
 <img src="./hotel/comfort.jpg" alt="Room comfort"> 
 <span>Room comfort</span> 
 </a> 
-<div class="section-button"> 
-<img src="./hotel/access.jpg" alt="Accessibility"> 
-<span>Accessibility</span> 
-</div> 
+<div class="section-button flip-card" id="accessibilityCard">
+  <div class="flip-front">
+    <img src="./hotel/access.jpg" alt="Accessibility">
+    <span>Accessibility</span>
+  </div>
+  <div class="flip-back">
+    <a class="section-button" href="https://www.navilens.com/es/" data-external>
+      <img src="./hotel/navilens.png" alt="Visual accessibility">
+      <span>Visual accessibility</span>
+    </a>
+    <a class="section-button" href="https://www.visualfy.com/" data-external>
+      <img src="./hotel/visualfy.png" alt="Acoustic accessibility">
+      <span>Acoustic accessibility</span>
+    </a>
+  </div>
+</div>
+
 <a class="section-button" href="https://vega.imascono.com/" data-external>
   <img src="./hotel/virtual.jpg" alt="Virtual assistant"> 
   <span>Virtual assistant</span> 
