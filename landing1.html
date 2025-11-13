@@ -196,6 +196,29 @@ button:disabled {
 .flipcard-back p {
   margin: 0.3rem 0;
 }
+/* --- HERO SLIDER FADE + ZOOM --- */
+.slider-track img {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0; /* invisibles por defecto */
+  transform: scale(1.05); /* ligero zoom */
+}
+
+.slider-track img.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- SECTIONS FADE + SLIDE --- */
+.section-button { 
+  opacity: 0; 
+  transform: translateY(20px); 
+  transition: all 0.6s ease; 
+}
+
+.section-button.visible { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
 
 
 
@@ -448,7 +471,14 @@ function closeConfirm(){
 const sliderTrack = document.getElementById('sliderTrack');
 let currentSlide = 0;
 const slides = sliderTrack.children.length;
-function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; }
+function updateSlide() {
+    for(let i=0; i<slides; i++){
+        sliderTrack.children[i].classList.remove('active');
+    }
+    sliderTrack.children[currentSlide].classList.add('active');
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
 document.getElementById('prevSlide').onclick = () => { currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
 document.getElementById('nextSlide').onclick = () => { currentSlide = (currentSlide+1)%slides; updateSlide(); }
 let startX, moveX;
@@ -582,6 +612,19 @@ document.querySelectorAll('.flipcard').forEach(card => {
     card.classList.toggle('flipped');
   });
 });
+function revealSections() {
+    const sections = document.querySelectorAll('.section-button');
+    const windowBottom = window.innerHeight;
+    sections.forEach(sec => {
+        const secTop = sec.getBoundingClientRect().top;
+        if(secTop < windowBottom - 50){ 
+            sec.classList.add('visible');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealSections);
+window.addEventListener('load', revealSections);
 
 
 </script>
