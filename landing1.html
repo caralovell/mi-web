@@ -410,11 +410,9 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
             back.innerHTML = `<h3>Pool</h3><p><strong>Location:</strong> Outdoor</p>
             <p><strong>Daily fee:</strong> 100 SAR</p>
             <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>`;
-        }
         } else if(imgAlt==='Fitness Center'){
             back.innerHTML = `<h3>Fitness Center</h3><p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p>
             <p><strong>Average charge:</strong> 200 SAR</p>`;
-        }
         } else if(imgAlt==='Spa'){
             back.innerHTML = `<h3>Spa</h3><p><strong>Phone number:</strong> 966-011-8131313</p>
             <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p>
@@ -426,6 +424,7 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
         btn.addEventListener('click', () => btn.classList.toggle('flipped'));
     }
 });
+
 </script>
 
 </body> 
