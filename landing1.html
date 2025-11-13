@@ -214,12 +214,11 @@ button:disabled {
 <h2>Online Check-in</h2> 
 <form> 
 <label>Full Name *</label> 
-<input type="text" placeholder="e.g. John Doe"> 
+<input type="text" placeholder="e.g. John Doe" required> 
 <label>Email *</label> 
-<input type="email" placeholder="e.g. john@example.com"> 
+<input type="email" placeholder="e.g. john@example.com" required> 
 <label>Reservation Number *</label> 
-<input type="text" placeholder="e.g. 123456"> 
-<p class="validation-message" id="checkinValidation">You have to complete all the fields.</p>
+<input type="text" placeholder="e.g. 123456" required> 
 <button type="submit" style="background-color: #830051;" disabled>Confirm</button>
 </form> 
 </div> 
@@ -394,12 +393,12 @@ surveyForm.addEventListener('submit', e => {
 const checkinForm = document.querySelector('#checkinPage form');
 const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
 checkinSubmit.disabled = true;
-checkinForm.addEventListener('input', () => {
-    const isValid = Array.from(checkinForm.querySelectorAll('input[required]'))
-                          .every(i => i.value.trim() !== '');
-    checkinSubmit.disabled = !isValid;
-});
 
+checkinForm.addEventListener('input', () => {
+    const requiredFields = checkinForm.querySelectorAll('input[required]');
+    const allFilled = Array.from(requiredFields).every(input => input.value.trim() !== '');
+    checkinSubmit.disabled = !allFilled;
+});
 
 checkinForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -407,6 +406,7 @@ checkinForm.addEventListener('submit', e => {
     checkinForm.reset();
     checkinSubmit.disabled = true;
 });
+
 
 // --- NAVBAR CLICK SCROLL TOP ---
 document.getElementById('navbar').addEventListener('click', () => {
