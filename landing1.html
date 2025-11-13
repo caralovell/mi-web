@@ -97,73 +97,22 @@ label { display: block; margin-top: 1rem; }
     .section-button { height: 260px; } 
 }
 
-/* --- FLIP CARD (FUNCIONAL) --- */
-.flip-card {
-  perspective: 1000px;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.flip-inner {
+/* --- SIMPLE SERVICE BUTTONS --- */
+.section-button {
   position: relative;
   width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
+  height: 200px;
   border-radius: 1rem;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.flip-card.flipped .flip-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-front,
-.flip-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 1rem;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-}
-
-.flip-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(65%);
-}
-
-.flip-front span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-}
-
-.flip-back {
-  background: #fff;
-  color: #333;
-  padding: 1rem;
-  transform: rotateY(180deg);
-  font-size: 0.9rem;
-  line-height: 1.4rem;
-}
-
-.flip-back h3 {
-  color: #830051;
-  font-family: 'Playfair Display', serif;
-  margin-top: 0.3rem;
-  margin-bottom: 0.5rem;
+.section-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -520,52 +469,25 @@ document.querySelectorAll('.section-button').forEach(btn => {
     btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
 });
 
-// --- CARD FLIP FOR SERVICES (FUNCIONAL) ---
+// --- SIMPLE SERVICE BUTTONS ---
 document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
     const imgAlt = btn.querySelector('img')?.alt || '';
-    if (['Pool', 'Fitness Center', 'Spa'].includes(imgAlt)) {
-        const originalContent = btn.innerHTML;
+    let bg = '';
 
-        btn.classList.add('flip-card');
-        btn.innerHTML = ''; // vaciamos
+    if (imgAlt === 'Pool') {
+        bg = 'pool2.jpg';
+    } else if (imgAlt === 'Fitness Center') {
+        bg = 'fitness.jpg';
+    } else if (imgAlt === 'Spa') {
+        bg = 'spa.jpg';
+    }
 
-        // contenedor interno con preserve-3d
-        const inner = document.createElement('div');
-        inner.className = 'flip-inner';
-
-        // cara frontal
-        const front = document.createElement('div');
-        front.className = 'flip-front';
-        front.innerHTML = originalContent;
-
-        // cara trasera
-        const back = document.createElement('div');
-        back.className = 'flip-back';
-        if (imgAlt === 'Pool') {
-            back.innerHTML = `<h3>Pool</h3>
-                <p><strong>Location:</strong> Outdoor</p>
-                <p><strong>Daily fee:</strong> 100 SAR</p>
-                <p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p>`;
-        } else if (imgAlt === 'Fitness Center') {
-            back.innerHTML = `<h3>Fitness Center</h3>
-                <p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p>
-                <p><strong>Average charge:</strong> 200 SAR</p>
-                <p>Refresh Your Day!</p>`;
-        } else if (imgAlt === 'Spa') {
-            back.innerHTML = `<h3>Spa</h3>
-                <p><strong>Phone number:</strong> 966-011-8131313</p>
-                <p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p>
-                <p>Relax and enjoy our services in a calm environment.</p>`;
-        }
-
-        inner.appendChild(front);
-        inner.appendChild(back);
-        btn.appendChild(inner);
-
-        // efecto flip al clic
-        btn.addEventListener('click', () => btn.classList.toggle('flipped'));
+    if (bg) {
+        btn.innerHTML = ''; // eliminar contenido interno
+        btn.style.backgroundImage = `url('${bg}')`;
     }
 });
+
 
 
 
