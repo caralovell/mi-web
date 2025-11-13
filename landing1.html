@@ -85,139 +85,8 @@ label { display: block; margin-top: 1rem; }
 </style>
 </head>
 <body>
-<nav id="navbar">
-  <img src="./hotel/IHG-Logo.png" alt="IHG Logo" id="ihgLogo">
-  <img src="./hotel/crowne-logo.jpg" alt="Crowne Plaza Logo" id="crowneLogo">
-</nav>
 
-<!-- HOME PAGE -->
-<div id="homePage" class="page active">
-  <div class="hero" id="hero">
-    <div class="slider-track" id="sliderTrack">
-      <img src="./hotel/hotel1.jpg" alt="Hotel 1">
-      <img src="./hotel/hotel2.jpg" alt="Hotel 2">
-      <img src="./hotel/hotel3.jpg" alt="Hotel 3">
-      <img src="./hotel/hotel4.jpg" alt="Hotel 4">
-      <img src="./hotel/hotel5.jpg" alt="Hotel 5">
-      <img src="./hotel/hotel6.jpg" alt="Hotel 6">
-    </div>
-    <div class="hero-arrow left" id="prevSlide">‹</div>
-    <div class="hero-arrow right" id="nextSlide">›</div>
-    <p class="intro-text">Welcome to Riyadh</p>
-  </div>
-  <div class="sections">
-    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/gb/en/riyadh/ruhit/hoteldetail/rooms" data-external>
-      <img src="./hotel/room.jpg" alt="Book a room">
-      <span>Book a room</span>
-    </a>
-    <div class="section-button" onclick="navigateTo('checkinPage')">
-      <img src="./hotel/crowne.jpg" alt="Check-in">
-      <span>Check-in</span>
-    </div>
-    <a class="section-button" href="https://maps.situm.com/Cara-hotel?lng=es&buildingid=19027&floorid=64456" data-external>
-      <img src="./hotel/situm.jpg" alt="Map view">
-      <span>Map view</span>
-    </a>
-    <div class="section-button" onclick="navigateTo('servicesPage')">
-      <img src="./hotel/pool.jpg" alt="Services">
-      <span>Services</span>
-    </div>
-    <a class="section-button" href="https://nescloud.net/sensordata/public_panel/EuZIUd0hD7uGkAuAoZhSyWaFxuWeGzWk" data-external>
-      <img src="./hotel/comfort.jpg" alt="Room comfort">
-      <span>Room comfort</span>
-    </a>
-    <div class="section-button">
-      <img src="./hotel/access.jpg" alt="Accessibility">
-      <span>Accessibility</span>
-    </div>
-    <div class="section-button">
-      <img src="./hotel/ai virtual.jpg" alt="Virtual assistant">
-      <span>Virtual assistant</span>
-    </div>
-    <div class="section-button" onclick="navigateTo('surveyPage')">
-      <img src="./hotel/reception.jpg" alt="Satisfaction survey">
-      <span>Satisfaction survey</span>
-    </div>
-  </div>
-</div>
-
-<!-- CHECK-IN PAGE -->
-<div id="checkinPage" class="page">
-  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div>
-  <h2>Online Check-in</h2>
-  <form novalidate>
-    <label>Full Name</label>
-    <input type="text" placeholder="e.g. John Doe">
-    <label>Email</label>
-    <input type="email" placeholder="e.g. john@example.com">
-    <label>Reservation Number</label>
-    <input type="text" placeholder="e.g. 123456">
-    <button type="submit" style="background-color: #830051;" disabled>Confirm</button>
-  </form>
-</div>
-
-<!-- SERVICES PAGE -->
-<div id="servicesPage" class="page">
-  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div>
-  <h2>Our Services</h2>
-  <div class="sections">
-    <a class="section-button" href="https://www.ihg.com/crowneplaza/hotels/us/en/riyadh/ruhit/hoteldetail/dining" data-external>
-      <img src="./hotel/food.jpg" alt="Dining"><span>Dining</span>
-    </a>
-    <div class="section-button">
-      <img src="./hotel/pool2.jpg" alt="Pool"><span>Pool</span>
-    </div>
-    <div class="section-button">
-      <img src="./hotel/fitness.jpg" alt="Fitness Center"><span>Fitness Center</span>
-    </div>
-    <div class="section-button">
-      <img src="./hotel/spa.jpg" alt="Spa"><span>Spa</span>
-    </div>
-  </div>
-</div>
-
-<!-- SURVEY PAGE -->
-<div id="surveyPage" class="page">
-  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div>
-  <h2>Satisfaction Survey</h2>
-  <form id="surveyForm" novalidate>
-    <label><strong>Overall Experience</strong></label>
-    <div class="rating">
-      <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-    </div>
-    <label><strong>Reservation Process</strong></label>
-    <div class="rating">
-      <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-    </div>
-    <label><strong>Staff</strong></label>
-    <div class="rating">
-      <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-    </div>
-    <label><strong>Room</strong></label>
-    <div class="rating">
-      <span>😡</span><span>😟</span><span>😐</span><span>🙂</span><span>😃</span>
-    </div>
-    <label><strong>Rate us</strong></label>
-    <div class="number-rating">
-      <button type="button">1</button><button type="button">2</button><button type="button">3</button>
-      <button type="button">4</button><button type="button">5</button><button type="button">6</button>
-      <button type="button">7</button><button type="button">8</button><button type="button">9</button>
-      <button type="button">10</button>
-    </div>
-    <label>Additional Comments</label>
-    <textarea placeholder="Your comments..."></textarea>
-    <button type="submit" style="background-color:#830051;" disabled>Send</button>
-  </form>
-</div>
-
-<div id="confirmModal" class="confirm-modal">
-  <div class="confirm-modal-content">
-    <span class="confirm-close" onclick="closeConfirm()">&times;</span>
-    <p id="confirmMessage"></p>
-  </div>
-</div>
-
-<footer>© 2025 Crowne Plaza Riyadh – Part of IHG Hotels & Resorts</footer>
+<!-- Tu contenido HTML aquí igual que lo tenías (nav, homePage, checkinPage, servicesPage, surveyPage, footer, modales) -->
 
 <script>
 // --- PAGES ---
@@ -236,88 +105,147 @@ function navigateTo(id) {
 // --- MODALS ---
 function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
 function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; }
-document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', e => e.target.closest('.modal').style.display='none'));
+document.querySelectorAll('.modal').forEach(modal => { modal.addEventListener('click', e => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } }); });
+function showConfirm(msg){ document.getElementById('confirmMessage').textContent=msg; document.getElementById('confirmModal').style.display='flex'; }
+function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; }
 
-// --- CONFIRM MODAL ---
-function showConfirm(msg){
-  const modal = document.getElementById('confirmModal');
-  document.getElementById('confirmMessage').textContent = msg;
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => closeConfirm(), 3000);
-}
-function closeConfirm(){ document.getElementById('confirmModal').style.display='none'; document.body.style.overflow=''; }
-
-// --- NAVBAR LOGOS ---
-document.getElementById('ihgLogo').addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
-document.getElementById('crowneLogo').addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
-
-// --- HERO SLIDER ---
+// --- SLIDER HERO ---
 const sliderTrack = document.getElementById('sliderTrack');
-const slides = sliderTrack.children.length;
 let currentSlide = 0;
-function updateSlide(){ sliderTrack.style.transform = `translateX(-${currentSlide*100}%)`; }
-document.getElementById('prevSlide').addEventListener('click', ()=>{ currentSlide=(currentSlide-1+slides)%slides; updateSlide(); });
-document.getElementById('nextSlide').addEventListener('click', ()=>{ currentSlide=(currentSlide+1)%slides; updateSlide(); });
-// --- touch ---
-let startX=0, moveX=0;
-sliderTrack.addEventListener('touchstart', e => { startX = e.touches[0].clientX; moveX = startX; });
-sliderTrack.addEventListener('touchmove', e => { moveX = e.touches[0].clientX; });
-sliderTrack.addEventListener('touchend', e => {
-  if(startX - moveX > 40) currentSlide = (currentSlide + 1) % slides;
-  else if(moveX - startX > 40) currentSlide = (currentSlide - 1 + slides) % slides;
+const slides = sliderTrack.children.length;
+function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; }
+document.getElementById('prevSlide').onclick = ()=>{ currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
+document.getElementById('nextSlide').onclick = ()=>{ currentSlide = (currentSlide+1)%slides; updateSlide(); }
+let startX, moveX;
+sliderTrack.addEventListener('touchstart', e=>startX=e.touches[0].clientX);
+sliderTrack.addEventListener('touchmove', e=>{ moveX=e.touches[0].clientX; });
+sliderTrack.addEventListener('touchend', e=>{
+  if(startX-moveX>40) currentSlide=(currentSlide+1)%slides;
+  else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides;
   updateSlide();
 });
 
-// --- FLIP CARDS ---
-document.querySelectorAll('.flip-card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    if(!card.classList.contains('flipping')){
-      card.classList.add('flipping');
-      card.classList.toggle('flipped');
-      setTimeout(()=>card.classList.remove('flipping'), 600);
-    }
-  });
-});
-
 // --- SURVEY RATINGS ---
-document.querySelectorAll('.rating').forEach(rating=>{
-  rating.querySelectorAll('span').forEach((star,i)=>{
-    star.addEventListener('click', ()=>{
-      rating.querySelectorAll('span').forEach(s=>s.classList.remove('selected'));
-      for(let j=0;j<=i;j++) rating.querySelectorAll('span')[j].classList.add('selected');
+document.querySelectorAll('.rating').forEach(rating => {
+  rating.querySelectorAll('span').forEach((emoji) => {
+    emoji.addEventListener('click', () => {
+      const alreadySelected = emoji.classList.contains('selected');
+      rating.querySelectorAll('span').forEach(e => e.classList.remove('selected'));
+      if (!alreadySelected) emoji.classList.add('selected');
     });
   });
 });
-
-// --- NUMBER RATING ---
-document.querySelectorAll('.number-rating').forEach(nrating=>{
-  nrating.querySelectorAll('button').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      nrating.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-    });
+document.querySelectorAll('.number-rating button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const alreadySelected = btn.classList.contains('selected');
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+    if (!alreadySelected) btn.classList.add('selected');
   });
 });
+const surveyForm = document.getElementById('surveyForm');
+surveyForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  showConfirm('Survey submitted! Thank you.');
+  e.target.reset();
+  document.querySelectorAll('.rating span, .number-rating button').forEach(el=>el.classList.remove('selected'));
+});
 
-// --- FORM VALIDATION ENABLE BUTTONS ---
-document.querySelectorAll('form').forEach(f=>{
-  const submitBtn = f.querySelector('button[type="submit"]');
-  f.addEventListener('input', ()=>{
-    const filled = [...f.querySelectorAll('input, textarea')].every(inp => inp.value.trim()!=="");
-    submitBtn.disabled = !filled;
-  });
-  f.addEventListener('submit', e=>{
+// --- CHECK-IN FORM ---
+const checkinForm = document.querySelector('#checkinPage form');
+checkinForm.addEventListener('submit', e => {
+  e.preventDefault();
+  showConfirm("Your check-in is complete, you may pick up your key from reception and enjoy your stay.");
+  e.target.reset();
+});
+const checkinSubmit = checkinForm.querySelector('button[type="submit"]');
+function validateCheckin() {
+  const inputs = checkinForm.querySelectorAll('input');
+  const isValid = Array.from(inputs).every(input => input.value.trim() !== "");
+  checkinSubmit.disabled = !isValid;
+}
+checkinForm.querySelectorAll('input').forEach(input => { input.addEventListener('input', validateCheckin); });
+
+// --- SURVEY VALIDATION ---
+const surveySubmit = surveyForm.querySelector('button[type="submit"]');
+function validateSurvey() {
+  const allRatingsSelected = Array.from(surveyForm.querySelectorAll('.rating'))
+    .every(rating => rating.querySelector('.selected'));
+  const numberSelected = surveyForm.querySelector('.number-rating .selected');
+  surveySubmit.disabled = !(allRatingsSelected && numberSelected);
+}
+surveyForm.querySelectorAll('.rating span, .number-rating button').forEach(el => { el.addEventListener('click', validateSurvey); });
+
+// --- NAVBAR CLICK SCROLL TOP ---
+document.getElementById('navbar').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+// --- EXTERNAL LINKS ---
+document.querySelectorAll('a[data-external]').forEach(link => {
+  link.addEventListener('click', (e) => {
     e.preventDefault();
-    showConfirm("Your form has been submitted!");
-    f.reset();
-    submitBtn.disabled=true;
-    f.querySelectorAll('.selected').forEach(el=>el.classList.remove('selected'));
+    const url = link.getAttribute('href');
+    history.pushState({ external: true, externalUrl: url }, "", "#external");
+    window.location.href = url;
   });
 });
 
-// --- HISTORY NAVIGATION ---
-window.onpopstate = e => { if(e.state && e.state.page) navigateTo(e.state.page); };
+// --- HANDLE BACK/FORWARD ---
+window.addEventListener('popstate', (event) => {
+  if(event.state){
+    if(event.state.external){
+      if(window.location.href.indexOf(event.state.externalUrl)===-1){
+        window.location.href = event.state.externalUrl;
+      }
+    } else if(event.state.page){
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(event.state.page).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  } else {
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById('homePage').classList.add('active');
+    history.replaceState({ page:'homePage' },"","#homePage");
+  }
+});
+
+// --- PAGESHOW CACHE FIX ---
+window.addEventListener('pageshow', (event) => {
+  if(event.persisted){
+    if(!location.hash || location.hash==="#external"){
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById('homePage').classList.add('active');
+      history.replaceState({ page:'homePage' },"","#homePage");
+    }
+  }
+});
+
+// --- HOVER TOUCH MÓVIL ---
+document.querySelectorAll('.section-button').forEach(btn => {
+  btn.addEventListener('touchstart', () => btn.classList.add('touching'));
+  btn.addEventListener('touchend', () => btn.classList.remove('touching'));
+  btn.addEventListener('touchcancel', () => btn.classList.remove('touching'));
+});
+
+// --- FLIP CARDS SERVICES ---
+document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
+  const imgAlt = btn.querySelector('img')?.alt || '';
+  if(['Pool','Fitness Center','Spa'].includes(imgAlt)){
+    btn.classList.add('flip-card');
+    const front = document.createElement('div'); front.className='flip-front'; front.innerHTML=btn.innerHTML;
+    const back = document.createElement('div'); back.className='flip-back';
+    if(imgAlt==='Pool'){
+      back.innerHTML=`<h3>Pool</h3><p><strong>Location:</strong> Outdoor</p><p><strong>Daily fee:</strong> 100 SAR</p><p><strong>Hours:</strong> 7:00 AM to 10:00 PM</p><p><strong>Features:</strong></p><ul><li>Children's pool</li><li>Heated pool</li><li>Pool side lounge chairs</li><li>Towel service</li><li>Umbrellas</li></ul>`;
+    } else if(imgAlt==='Fitness Center'){
+      back.innerHTML=`<h3>Fitness Center</h3><p><strong>Hours of operation:</strong> 7:15 AM - 7:00 PM</p><p><strong>Average charge:</strong> 200 SAR</p><p><strong>Features:</strong></p><ul><li>Elliptical machines</li><li>Free weights</li><li>Rower</li><li>Stationary bicycle</li><li>Treadmill</li><li>Onsite sports trainer</li></ul>`;
+    } else if(imgAlt==='Spa'){
+      back.innerHTML=`<h3>Spa</h3><p><strong>Phone number:</strong> 966-011-8131313</p><p><strong>Hours of operation:</strong> 7:00 AM - 10:00 PM</p><p>Relax and enjoy our services in a calm environment.</p>`;
+    }
+    btn.innerHTML=''; btn.appendChild(front); btn.appendChild(back);
+    function adjustFlipBackHeight(){ const vh=window.innerHeight; back.style.maxHeight=Math.min(vh*0.8,400)+'px'; }
+    adjustFlipBackHeight(); window.addEventListener('resize', adjustFlipBackHeight);
+    btn.addEventListener('click', e=>{ if(e.target.tagName.toLowerCase()!=='a') btn.classList.toggle('flipped'); });
+  }
+});
+
 </script>
 </body>
 </html>
