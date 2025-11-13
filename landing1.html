@@ -88,19 +88,27 @@ label { display: block; margin-top: 1rem; }
 .flip-card.flipped .flip-back { transform: rotateY(0deg); } 
 .flip-card .flip-back h3 { color: #830051; font-family: 'Playfair Display', serif; } 
 
-/* --- Accessibility flip back --- */
-/* Ajustar botones de Accessibility */
-#accessibilityPage .section-button {
-    height: auto;        /* Permite que la altura se ajuste a la imagen */
-    min-height: 120px;   /* Altura mínima opcional */
-    overflow: hidden;
-}
+<!-- ACCESSIBILITY PAGE --> 
+<div id="accessibilityPage" class="page"> 
+  <div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
+  <h2>Accessibility</h2> 
+  <div class="sections"> 
 
-#accessibilityPage .section-button img {
-    width: 100%;
-    height: auto;       /* Mantener la proporción original de la imagen */
-    object-fit: contain; /* Evita recortes */
-}
+    <!-- Visual accessibility button -->
+    <a class="section-button" href="https://www.navilens.com/es/" target="_blank" rel="noopener">
+      <img src="./hotel/navilens.png" alt="Visual accessibility">
+      <span>Visual accessibility</span>
+    </a>
+
+    <!-- Acoustic accessibility button -->
+    <a class="section-button" href="https://www.visualfy.com/" target="_blank" rel="noopener">
+      <img src="./hotel/visualfy.png" alt="Acoustic accessibility">
+      <span>Acoustic accessibility</span>
+    </a>
+
+  </div>
+</div>
+
 
 
 /* --- Survey button responsive position --- */
