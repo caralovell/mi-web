@@ -83,36 +83,18 @@ label { display: block; margin-top: 1rem; }
 .flip-card { perspective: 1000px; position: relative; } 
 .flip-card > div { width: 100%; height: 100%; backface-visibility: hidden; transition: transform 0.6s; position: absolute; top: 0; left: 0; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); } 
 .flip-card .flip-front { transform: rotateY(0deg); } 
-.flip-card .flip-back {
-    transform: rotateY(180deg);
-    background: #fff;
-    color: #333;
-    padding: 0.8rem; /* reduce un poco el padding */
-    overflow: hidden; /* no se podrá hacer scroll */
-    font-size: 0.85rem; /* reduce el tamaño de la fuente */
-    line-height: 1.2rem; /* para que entre más texto */
-}
+.flip-card .flip-back { transform: rotateY(180deg); background: #fff; color: #333; padding: 0.8rem; overflow: hidden; font-size: 0.85rem; line-height: 1.2rem; } 
 .flip-card.flipped .flip-front { transform: rotateY(-180deg); } 
 .flip-card.flipped .flip-back { transform: rotateY(0deg); } 
+.flip-card .flip-back h3 { color: #830051; font-family: 'Playfair Display', serif; } 
 
- .flip-card .flip-back h3 {
-  color: #830051;
-  font-family: 'Playfair Display', serif;
-}
+/* --- Accessibility flip back --- */
+#accessibilityPage .flip-back { display: flex; flex-direction: column; gap: 1rem; justify-content: center; align-items: center; padding: 1rem; }
+#accessibilityPage .flip-back .section-button { width: 90%; height: 120px; }
 
-    /* Ajuste flip-back para Accessibility */
-#accessibilityCard .flip-back {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-#accessibilityCard .flip-back .section-button {
-  width: 90%;
-  height: 120px;
-}
+/* --- Survey button responsive position --- */
+#surveyButton { order: 99; } 
+@media(min-width:1024px){ #surveyButton { order: initial; } }
 
 </style> 
 </head> 
@@ -159,33 +141,47 @@ label { display: block; margin-top: 1rem; }
 <img src="./hotel/comfort.jpg" alt="Room comfort"> 
 <span>Room comfort</span> 
 </a> 
-<div class="section-button flip-card" id="accessibilityCard">
-  <div class="flip-front">
-    <img src="./hotel/access.jpg" alt="Accessibility">
-    <span>Accessibility</span>
-  </div>
-  <div class="flip-back">
-    <a class="section-button" href="https://www.navilens.com/es/" data-external>
-      <img src="./hotel/navilens.png" alt="Visual accessibility">
-      <span>Visual accessibility</span>
-    </a>
-    <a class="section-button" href="https://www.visualfy.com/" data-external>
-      <img src="./hotel/visualfy.png" alt="Acoustic accessibility">
-      <span>Acoustic accessibility</span>
-    </a>
-  </div>
-</div>
-
-<a class="section-button" href="https://vega.imascono.com/" data-external>
-  <img src="./hotel/virtual.jpg" alt="Virtual assistant"> 
-  <span>Virtual assistant</span> 
-</a>
+<div class="section-button" onclick="navigateTo('accessibilityPage')"> 
+<img src="./hotel/access.jpg" alt="Accessibility"> 
+<span>Accessibility</span> 
 </div> 
-<div class="section-button" onclick="navigateTo('surveyPage')"> 
+<a class="section-button" href="https://vega.imascono.com/" data-external> 
+<img src="./hotel/virtual.jpg" alt="Virtual assistant"> 
+<span>Virtual assistant</span> 
+</a> 
+<div class="section-button" id="surveyButton" onclick="navigateTo('surveyPage')"> 
 <img src="./hotel/reception.jpg" alt="Satisfaction survey"> 
 <span>Satisfaction survey</span> 
 </div> 
 </div> 
+</div> 
+
+<!-- ACCESSIBILITY PAGE --> 
+<div id="accessibilityPage" class="page"> 
+<div class="back-button" onclick="navigateTo('homePage')"><span>←</span> Back</div> 
+<h2>Accessibility</h2> 
+<div class="sections"> 
+<div class="section-button flip-card">
+  <div class="flip-front">
+    <img src="./hotel/navilens.png" alt="Visual accessibility">
+    <span>Visual accessibility</span>
+  </div>
+  <div class="flip-back">
+    <h3>Visual accessibility</h3>
+    <p>Information about visual accessibility.</p>
+  </div>
+</div>
+<div class="section-button flip-card">
+  <div class="flip-front">
+    <img src="./hotel/visualfy.png" alt="Acoustic accessibility">
+    <span>Acoustic accessibility</span>
+  </div>
+  <div class="flip-back">
+    <h3>Acoustic accessibility</h3>
+    <p>Information about acoustic accessibility.</p>
+  </div>
+</div>
+</div>
 </div> 
 
 <!-- CHECK-IN PAGE --> 
@@ -453,6 +449,11 @@ document.querySelectorAll('#servicesPage .section-button').forEach(btn => {
         btn.appendChild(back); 
         btn.addEventListener('click', () => btn.classList.toggle('flipped'));
     }
+});
+
+    // --- FLIP CARD HANDLER ---
+document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
 });
 
 </script>
