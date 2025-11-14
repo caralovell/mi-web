@@ -31,14 +31,46 @@ nav {
 nav img { height: 45px; }
 
 /* --- HERO SLIDER --- */
-.hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
-.slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
+.hero {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;      /* centrado */
+  height: 180px;          /* igual que los botones */
+  border-radius: 40px;    /* igual que los botones */
+  overflow: hidden;
+  background-color: #f3f3f3; /* gris suave */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+    .hero-container {
+  width: 100%;
+  position: relative;
+  background-color: #f3f3f3; /* gris suave */
+  padding: 40px 0; /* espacio vertical elegante */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+    .hero-slider {
+  width: 100%;
+  max-width: 900px; /* ajusta según quieras */
+  overflow: hidden;
+  position: relative;
+}
+.slider-track {
+  display: flex;
+  gap: 20px; /* separación entre imágenes */
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease;
+}
 .slider-track img {
   width: 300px;
   height: 150px;
   object-fit: cover;
   border-radius: 40px;
   margin: 0 auto;
+    display: block;
 }
 
 .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
