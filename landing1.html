@@ -31,7 +31,12 @@ nav {
 nav img { height: 45px; }
 
 /* --- HERO SLIDER --- */
-.hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
+.hero {
+    border-radius: 1rem; /* igual que los botones */
+    overflow: hidden;     /* para que las imágenes respeten el borde */
+    max-width: 100%;      /* puedes ajustar a 100% o un ancho fijo si quieres */
+    margin: 0 auto;       /* centrado si se usa ancho menor al contenedor */
+}
 .slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
 .slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
 .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; }
