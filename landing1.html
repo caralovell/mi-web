@@ -196,6 +196,31 @@ button:disabled {
 .flipcard-back p {
   margin: 0.3rem 0;
 }
+    /* Slider dots */
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.slider-dots span {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.slider-dots span.active {
+  background-color: #830051; /* moradito Crowne */
+  transform: scale(1.2);
+}
+
 
 
 
@@ -218,6 +243,9 @@ button:disabled {
 <img src="./hotel/hotel5.jpg" alt="Hotel 5"> 
 <img src="./hotel/hotel6.jpg" alt="Hotel 6"> 
 </div> 
+    
+<div class="slider-dots" id="sliderDots"></div>
+    
 <div class="hero-arrow left" id="prevSlide">‹</div> 
 <div class="hero-arrow right" id="nextSlide">›</div> 
 <p class="intro-text">Welcome to Riyadh</p> 
@@ -445,20 +473,50 @@ function closeConfirm(){
 }
 
 // --- HERO SLIDER ---
-const sliderTrack = document.getElementById('sliderTrack');
+const sliderTrack = document.getElementById("sliderTrack");
+const slides = sliderTrack.children;
+const totalSlides = slides.length;
 let currentSlide = 0;
-const slides = sliderTrack.children.length;
-function updateSlide() { sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`; }
-document.getElementById('prevSlide').onclick = () => { currentSlide = (currentSlide-1+slides)%slides; updateSlide(); }
-document.getElementById('nextSlide').onclick = () => { currentSlide = (currentSlide+1)%slides; updateSlide(); }
-let startX, moveX;
-sliderTrack.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-sliderTrack.addEventListener('touchmove', e => moveX = e.touches[0].clientX);
-sliderTrack.addEventListener('touchend', e => {
-    if(startX-moveX>40) currentSlide=(currentSlide+1)%slides;
-    else if(moveX-startX>40) currentSlide=(currentSlide-1+slides)%slides;
-    updateSlide();
-});
+
+// Crear los dots dinámicamente
+const sliderDots = document.getElementById("sliderDots");
+
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement("span");
+  dot.dataset.index = i;
+  dot.addEventListener("click", () => {
+    currentSlide = i;
+    updateSlider();
+  });
+  sliderDots.appendChild(dot);
+}
+
+// Activar inicialmente el primer dot
+updateDots();
+
+function updateDots() {
+  const dots = sliderDots.children;
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].classList.toggle("active", i === currentSlide);
+  }
+}
+
+function updateSlider() {
+  sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+  updateDots();
+}
+
+// Lógica existente de flechas
+document.getElementById("nextSlide").onclick = () => {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateSlider();
+};
+
+document.getElementById("prevSlide").onclick = () => {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  updateSlider();
+};
+
 
 // --- SURVEY RATINGS ---
 const surveyForm = document.getElementById('surveyForm');
