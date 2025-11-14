@@ -539,9 +539,11 @@ function updateDots() {
 }
 
 function updateSlider() {
-  sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-  updateDots();
+  const slideWidth = sliderTrack.clientWidth / totalSlides;
+  sliderTrack.style.transform = `translateX(-${currentSlide * sliderTrack.clientWidth}px)`;
+    updateDots();
 }
+
 
 // Lógica existente de flechas
 document.getElementById("nextSlide").onclick = () => {
